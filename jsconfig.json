@@ -1,0 +1,13 @@
+{
+	"compilerOptions": {
+		"target": "ES6",
+		"module": "ESNext",
+		"allowJs": true,
+		"baseUrl": ".",
+		"paths": {
+			"@/*": ["./src/*"]
+		}
+	},
+	"exclude": ["node_modules/"],
+	"include": ["src/**/*", "src/lib/api/blog.js", "src/api-lib/getGithubRepositories.js"]
+}

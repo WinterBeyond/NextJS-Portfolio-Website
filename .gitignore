@@ -1,0 +1,14 @@
+# Dependencies
+/node_modules
+
+# Build output
+/.next
+
+# Environment variables
+.env*.local
+
+# Sitemaps files
+sitemap*.xml
+
+# Robots file
+robots.txt
