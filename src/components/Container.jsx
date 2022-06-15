@@ -1,5 +1,6 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
+import { useState } from "react";
 
 import Navbar from "@/components/navigation/Navbar";
 import Footer from "@/components/Footer";
@@ -8,12 +9,15 @@ import constants from "@/constants/index";
 
 const Container = ({ children, ...metaData }) => {
 	const router = useRouter();
+	const [navOverlayOpen, setNavOverlayOpen] = useState(false);
 	const url = `${process.env.NEXT_PUBLIC_DOMAIN}${router.asPath}`;
 
 	const links = [
+		{ href: "/", label: "Home" },
 		{ href: "/about", label: "About" },
 		{ href: "/projects", label: "Projects" },
 		{ href: "/experience", label: "Experience" },
+		{ href: "/blog", label: "Blog" },
 		{ href: "/contact", label: "Contact" },
 	];
 
@@ -63,12 +67,19 @@ const Container = ({ children, ...metaData }) => {
 				<link rel="icon" href="/favicon.ico" />
 				<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 			</Head>
-			<main className="w-full">
-				<NavOverlay links={links}>
-					<Navbar links={links} />
-					{children}
-					<Footer />
-				</NavOverlay>
+			<main className="w-full selection:bg-blue-500/25 gradient-rainbow dark:bg-none">
+				<NavOverlay
+					links={links}
+					navOverlayOpen={navOverlayOpen}
+					setNavOverlayOpen={setNavOverlayOpen}
+				/>
+				{!navOverlayOpen && (
+					<>
+						<Navbar links={links} />
+						{children}
+						<Footer />
+					</>
+				)}
 			</main>
 		</>
 	);

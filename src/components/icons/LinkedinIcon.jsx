@@ -1,9 +1,11 @@
 import constants from "@/constants/index";
 
-const Linkedin = () => {
+const LinkedinIcon = () => {
 	return (
 		<a
 			href={constants.links.linkedin}
+			target="_blank"
+			rel="noopener noreferrer"
 			className="text-base font-normal text-blue-500 bg-white rounded-sm"
 		>
 			<svg
@@ -20,4 +22,4 @@ const Linkedin = () => {
 	);
 };
 
-export default Linkedin;
+export default LinkedinIcon;
