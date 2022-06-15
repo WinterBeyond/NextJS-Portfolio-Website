@@ -3,7 +3,7 @@ import Image from "next/image";
 
 const Hero = () => {
 	return (
-		<section className="flex flex-wrap lg:flex-row justify-center items-start overflow-hidden">
+		<section className="flex flex-wrap pb-14 lg:flex-row justify-center items-start overflow-hidden">
 			<div className="flex justify-center lg:hidden">
 				<div className="w-3/4">
 					<Image
@@ -26,7 +26,6 @@ const Hero = () => {
 					Innovator.
 				</h2>
 			</div>
-			{/* Image container */}
 			<div className="hidden lg:flex w-full md:w-1/2 -mr-40 mt-20">
 				<div className="w-3/4 ">
 					<Image
