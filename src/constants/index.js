@@ -3,6 +3,7 @@ const constants = {
 	realname: "Max Wiggedal",
 	email: "winterexodius@gmail.com",
 	position: "Full Stack Web Developer",
+	avatar: "/logo512.png",
 	projects: [
 		{
 			title: "NextJS Portfolio Website",
