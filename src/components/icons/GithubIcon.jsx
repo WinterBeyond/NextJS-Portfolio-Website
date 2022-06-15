@@ -6,7 +6,9 @@ const GithubIcon = ({ children, className }) => {
 			href={constants.links.github}
 			target="_blank"
 			rel="noopener noreferrer"
-			className={`text-base font-normal text-gray-800 dark:text-gray-200 ${className}`}
+			className={`text-base font-normal text-gray-800 dark:text-gray-200 ${
+				className ? className : ""
+			}`}
 		>
 			<svg
 				xmlns="https://www.w3.org/2000/svg"
