@@ -21,8 +21,8 @@
 	text-decoration-line: none;
 }
 
-.gradient-rainbow {
-	background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+.gradient-blue {
+	background: linear-gradient(-45deg, #03689f, #028ebf, #044793, #1f6eb4);
 	background-size: 400% 400%;
 	animation: Gradient 15s ease infinite;
 }
