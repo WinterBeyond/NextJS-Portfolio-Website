@@ -9,6 +9,8 @@ const GithubCard = ({ repository }) => {
 			</p>
 			<a
 				href={repository.clone_url}
+				target="_blank"
+				rel="noopener noreferrer"
 				className="font-semibold group flex flex-row space-x-2 w-full items-center"
 			>
 				<p>View Repository</p>
