@@ -10,12 +10,30 @@ const constants = {
 			timeStart: new Date("2022-06-14"),
 			timeEnd: new Date("2022-07-14"),
 			description: "",
+			current: {
+				image: {
+					path: "/logo512.png",
+					width: 1200,
+					height: 600,
+				},
+				classes: "",
+				href: "http://localhost:3000/",
+			},
 		},
 		{
 			title: "MongoDB Web Dashboard",
 			timeStart: new Date("2022-07-31"),
 			timeEnd: new Date("2022-08-31"),
 			description: "",
+			current: {
+				image: {
+					path: "/logo512.png",
+					width: 1200,
+					height: 600,
+				},
+				classes: "shadow-2xl sm:col-span-2",
+				href: "#",
+			},
 		},
 		{
 			title: "1st For Dogs",
@@ -24,10 +42,19 @@ const constants = {
 			description: "",
 		},
 		{
-			title: "Echelon Service",
+			title: "Echelon Service SSO",
 			timeStart: new Date("2017-01-01"),
 			timeEnd: new Date("2021-12-04"),
 			description: "",
+			current: {
+				image: {
+					path: "/logo512.png",
+					width: 1200,
+					height: 600,
+				},
+				classes: "object-cover sm:col-span-1",
+				href: "https://sso.echelonservice.net/",
+			},
 		},
 	],
 	experience: [
@@ -51,7 +78,8 @@ const constants = {
 	meta: {
 		siteName: "Max Wiggedal",
 		title: "Max Wiggedal - Full Stack Web Developer",
-		description: "",
+		description:
+			"Full Stack Web Developer with a passion for innovating and building meaningful applications.",
 		themeColor: "#3456c7",
 		image: "/logo512.png",
 	},
