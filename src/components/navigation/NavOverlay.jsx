@@ -36,10 +36,10 @@ const NavOverlay = ({ links, navOverlayOpen, setNavOverlayOpen }) => {
 	};
 
 	const transitionStyles = {
-		entering: { opacity: 1 },
+		entering: { opacity: 0, display: "flex" },
 		entered: { opacity: 1 },
-		exiting: { opacity: 0 },
-		exited: { opacity: 0, maxHeight: 0, zIndex: -1 },
+		exiting: { opacity: 0.5 },
+		exited: { opacity: 0, display: "none" },
 	};
 
 	return (
@@ -60,10 +60,6 @@ const NavOverlay = ({ links, navOverlayOpen, setNavOverlayOpen }) => {
 					>
 						<div
 							className={`flex flex-col items-center p-5 rounded-lg bg-white dark:bg-transparent`}
-							style={{
-								...defaultStyles,
-								...transitionStyles[state],
-							}}
 						>
 							<Position />
 							<div className="flex flex-row space-x-3 mt-2 justify-center text-center items-center">
