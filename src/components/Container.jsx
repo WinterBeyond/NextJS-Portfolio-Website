@@ -67,7 +67,7 @@ const Container = ({ children, ...metaData }) => {
 				<link rel="icon" href="/favicon.ico" />
 				<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 			</Head>
-			<main className="w-full selection:bg-blue-500/25 gradient-blue dark:bg-none">
+			<main className="w-full selection:bg-blue-500/25">
 				<NavOverlay
 					links={links}
 					navOverlayOpen={navOverlayOpen}

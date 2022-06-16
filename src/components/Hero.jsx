@@ -15,7 +15,7 @@ const Hero = () => {
 					/>
 				</div>
 			</div>
-			<div className="w-full md:w-1/2 mx-auto text-center md:text-left text-gray-200 lg:p-20">
+			<div className="w-full md:w-1/2 mx-auto text-center md:text-left text-gray-800 dark:text-gray-200 lg:p-20">
 				<h1 className="text-4xl md:text-8xl font-bold my-2 text-inherit">
 					{constants.realname}
 				</h1>
