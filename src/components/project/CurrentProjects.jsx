@@ -22,9 +22,9 @@ const CurrentProjects = () => {
 				{currentProjects.map((project, id) => {
 					return (
 						<a
-							href={project.current.href}
+							href={project.href}
 							className={`w-full block col-span-3 ${project.current.classes}`}
-							target={`${project.current.href !== "#" ? "_blank" : "_self"}`}
+							target={`${project.href !== "#" ? "_blank" : "_self"}`}
 							rel="noopener noreferrer"
 							key={project.title}
 						>
