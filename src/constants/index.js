@@ -1,7 +1,7 @@
 const constants = {
 	username: "WinterBeyond",
 	realname: "Max Wiggedal",
-	email: "winterexodius@gmail.com",
+	email: "contact@maxwiggedal.dev",
 	position: "Full Stack Web Developer",
 	avatar: "/logo512.png",
 	about: {
@@ -84,7 +84,7 @@ const constants = {
 		},
 		{
 			label: "CV",
-			href: "",
+			href: "/cv.pdf",
 		},
 	],
 	techStack: [
