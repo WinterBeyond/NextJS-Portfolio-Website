@@ -16,13 +16,11 @@ const Index = ({ repositories }) => {
 	);
 };
 
-export const getServerSideProps = async () => {
+export const getStaticProps = async () => {
 	const repositories = await getGithubRepositories(constants.username);
-
 	return {
-		props: {
-			repositories,
-		},
+		props: { repositories },
+		revalidate: 60,
 	};
 };
 
