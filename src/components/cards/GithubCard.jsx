@@ -5,7 +5,7 @@ const GithubCard = ({ repository }) => {
 				{repository.name.replace(/_|-/g, " ")}
 			</h1>
 			<p className="text-base font-normal my-4 text-gray-500">
-				{repository.description}
+				{repository.description || "No Description :("}
 			</p>
 			<a
 				href={repository.clone_url}
