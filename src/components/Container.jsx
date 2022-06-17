@@ -17,7 +17,6 @@ const Container = ({ children, ...metaData }) => {
 		{ href: "/about", label: "About" },
 		{ href: "/projects", label: "Projects" },
 		{ href: "/experience", label: "Experience" },
-		{ href: "/blog", label: "Blog" },
 		{ href: "/contact", label: "Contact" },
 	];
 

@@ -4,11 +4,21 @@ const constants = {
 	email: "winterexodius@gmail.com",
 	position: "Full Stack Web Developer",
 	avatar: "/logo512.png",
+	about: {
+		title:
+			"Full Stack Web Developer with a passion for innovating and building meaningful applications",
+		description: (
+			<>
+				I am a full stack developer focusing on back end development. I have a
+				passion for innovating and building meaningful applications.
+			</>
+		),
+	},
 	projects: [
 		{
 			title: "NextJS Portfolio Website",
-			timeStart: new Date("2022-06-14"),
-			timeEnd: new Date("2022-07-14"),
+			image: "/logo512.png",
+			href: "https://maxwiggedal.dev/",
 			description: "",
 			current: {
 				image: {
@@ -17,13 +27,12 @@ const constants = {
 					height: 600,
 				},
 				classes: "",
-				href: "http://localhost:3000/",
 			},
 		},
 		{
 			title: "MongoDB Web Dashboard",
-			timeStart: new Date("2022-07-31"),
-			timeEnd: new Date("2022-08-31"),
+			image: "/logo512.png",
+			href: "#",
 			description: "",
 			current: {
 				image: {
@@ -32,19 +41,18 @@ const constants = {
 					height: 600,
 				},
 				classes: "shadow-2xl sm:col-span-2",
-				href: "#",
 			},
 		},
 		{
 			title: "1st For Dogs",
-			timeStart: new Date("2022-05-01"),
-			timeEnd: new Date("2022-07-10"),
+			image: "/logo512.png",
+			href: "#",
 			description: "",
 		},
 		{
 			title: "Echelon Service SSO",
-			timeStart: new Date("2017-01-01"),
-			timeEnd: new Date("2021-12-04"),
+			image: "/logo512.png",
+			href: "https://sso.echelonservice.net/",
 			description: "",
 			current: {
 				image: {
@@ -53,7 +61,6 @@ const constants = {
 					height: 600,
 				},
 				classes: "object-cover sm:col-span-1",
-				href: "https://sso.echelonservice.net/",
 			},
 		},
 	],
@@ -63,18 +70,57 @@ const constants = {
 			company: "Northwood Studios",
 			companyLink: "http://northwoodstudios.org/",
 			timespan: "2019 - Present",
-			description: "",
+			description: "I am working on internal tools, APIs, and systems.",
 		},
 	],
-	about: {
-		title: "",
-		description: ``,
-	},
-	links: {
-		linkedin: "https://linkedin.com/in/max-wiggedal",
-		github: "https://github.com/WinterBeyond",
-		cv: "",
-	},
+	links: [
+		{
+			label: "LinkedIn",
+			href: "https://linkedin.com/in/max-wiggedal",
+		},
+		{
+			label: "GitHub",
+			href: "https://github.com/WinterBeyond",
+		},
+		{
+			label: "CV",
+			href: "",
+		},
+	],
+	techStack: [
+		{
+			label: "JavaScript",
+			image: "/javascript.png",
+		},
+		{
+			label: "TypeScript",
+			image: "/typescript.png",
+		},
+		{
+			label: "NodeJS",
+			image: "/nodejs.png",
+		},
+		{
+			label: "React",
+			image: "/react.png",
+		},
+		{
+			label: "C#",
+			image: "/csharp.png",
+		},
+		{
+			label: "Git",
+			image: "/git.png",
+		},
+		{
+			label: "MySQL",
+			image: "/mysql.png",
+		},
+		{
+			label: "MongoDB",
+			image: "/mongodb.png",
+		},
+	],
 	meta: {
 		siteName: "Max Wiggedal",
 		title: "Max Wiggedal - Full Stack Web Developer",
