@@ -90,35 +90,40 @@ const constants = {
 	techStack: [
 		{
 			label: "JavaScript",
-			image: "/javascript.png",
+			image: "/languages/javascript.png",
 		},
 		{
 			label: "TypeScript",
-			image: "/typescript.png",
+			image: "/languages/typescript.png",
 		},
 		{
 			label: "NodeJS",
-			image: "/nodejs.png",
+			image: "/languages/nodejs.svg",
 		},
 		{
 			label: "React",
-			image: "/react.png",
+			image: "/languages/react.png",
+		},
+		{
+			label: "NextJS",
+			image: "/languages/nextjs-black.svg",
+			darkImage: "/languages/nextjs-white.svg",
 		},
 		{
 			label: "C#",
-			image: "/csharp.png",
+			image: "/languages/csharp.png",
 		},
 		{
 			label: "Git",
-			image: "/git.png",
-		},
-		{
-			label: "MySQL",
-			image: "/mysql.png",
+			image: "/languages/git.png",
 		},
 		{
 			label: "MongoDB",
-			image: "/mongodb.png",
+			image: "/languages/mongodb.png",
+		},
+		{
+			label: "MySQL",
+			image: "/languages/mysql.png",
 		},
 	],
 	meta: {

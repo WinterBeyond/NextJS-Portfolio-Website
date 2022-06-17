@@ -1,8 +1,11 @@
 import constants from "@/constants/index";
 import Link from "next/link";
 import Image from "next/image";
+import { useTheme } from "next-themes";
 
 const AboutCard = () => {
+	const { theme } = useTheme();
+
 	return (
 		<>
 			<div className="max-w-6xl mx-auto h-48">
@@ -98,7 +101,11 @@ const AboutCard = () => {
 								return (
 									<div className="mx-4 my-4" key={tech.label}>
 										<Image
-											src={tech.image}
+											src={
+												theme === "light"
+													? tech.image
+													: tech.darkImage ?? tech.image
+											}
 											alt={tech.label}
 											width={80}
 											height={80}
