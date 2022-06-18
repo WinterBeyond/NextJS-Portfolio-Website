@@ -23,14 +23,14 @@ const CurrentProjects = () => {
 					return (
 						<a
 							href={project.href}
-							className={`w-full block col-span-3 ${project.current.classes}`}
+							className={`w-full block col-span-3 h-min shadow-2xl ${project.current.classes}`}
 							target={`${project.href !== "#" ? "_blank" : "_self"}`}
 							rel="noopener noreferrer"
 							key={project.title}
 						>
 							<div className="relative overflow-hidden">
 								<Image
-									src={project.current.image.path}
+									src={project.image}
 									alt={project.title}
 									width={project.current.image.width}
 									height={project.current.image.height}

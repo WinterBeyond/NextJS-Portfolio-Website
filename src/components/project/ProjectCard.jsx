@@ -9,7 +9,7 @@ const ProjectCard = ({ title, link, image, number }) => {
 			className="w-full block shadow-2xl"
 		>
 			<div className="relative overflow-hidden">
-				<div className="relative h-72 object-cover">
+				<div className="relative mx-1 h-72 shadow-2xl">
 					<Image
 						src={image}
 						alt={title}

@@ -9,20 +9,20 @@ const constants = {
 			"Full Stack Web Developer with a passion for innovating and building meaningful applications",
 		description: (
 			<>
-				I am a full stack developer focusing on back end development. I have a
-				passion for innovating and building meaningful applications.
+				Well-qualified Full Stack Developer familiar with a wide range of
+				programming utilities and languages. Knowledgeable of backend and
+				frontend development requirements. Handles any part of the process with
+				ease. Collaborative team player with excellent technical abilities.
 			</>
 		),
 	},
 	projects: [
 		{
 			title: "NextJS Portfolio Website",
-			image: "/logo512.png",
+			image: "/projects/portfolio.png",
 			href: "https://maxwiggedal.dev/",
-			description: "",
 			current: {
 				image: {
-					path: "/logo512.png",
 					width: 1200,
 					height: 600,
 				},
@@ -33,34 +33,29 @@ const constants = {
 			title: "MongoDB Web Dashboard",
 			image: "/logo512.png",
 			href: "#",
-			description: "",
 			current: {
 				image: {
-					path: "/logo512.png",
 					width: 1200,
 					height: 600,
 				},
-				classes: "shadow-2xl sm:col-span-2",
+				classes: "sm:col-span-2",
 			},
 		},
 		{
 			title: "1st For Dogs",
-			image: "/logo512.png",
-			href: "#",
-			description: "",
+			image: "/projects/1stfordogs.png",
+			href: "https://1stfordogs.co.uk/",
 		},
 		{
 			title: "Echelon Service SSO",
-			image: "/logo512.png",
+			image: "/projects/echelonsso.png",
 			href: "https://sso.echelonservice.net/",
-			description: "",
 			current: {
 				image: {
-					path: "/logo512.png",
 					width: 1200,
 					height: 600,
 				},
-				classes: "object-cover sm:col-span-1",
+				classes: "sm:col-span-1",
 			},
 		},
 	],
