@@ -53,17 +53,17 @@ const ContactForm = () => {
 
 	return (
 		<section>
-			<div className="max-w-6xl mx-auto h-48 antialiased">
-				<h1 className=" text-5xl md:text-9xl font-bold py-20 text-center md:text-left">
+			<div className="max-w-6xl mx-auto">
+				<h1 className=" text-5xl md:text-9xl font-bold my-10 md:my-20 text-center md:text-left">
 					Contact
 				</h1>
 			</div>
 			<div className="relative z-10 rounded-md shadow-md p-4 md:p-10 lg:p-20 max-w-6xl mx-auto mb-20 -mt-4">
 				<div className="grid grid-cols-1 md:grid-cols-2 gap-8">
 					<div className="text-center md:text-left">
-						<h1 className="text-gray-800 dark:text-gray-200 font-semibold text-2xl">
+						<h2 className="text-gray-800 dark:text-gray-200 font-semibold text-2xl">
 							Get in touch, let&apos;s talk.
-						</h1>
+						</h2>
 						<p className="font-light text-base text-gray-800 dark:text-gray-200 mt-2">
 							Fill in your contact details and I will get back to you as soon as
 							possible!

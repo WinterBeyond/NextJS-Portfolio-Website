@@ -9,7 +9,7 @@ const ProjectCard = ({ title, link, image, number }) => {
 			className="w-full block shadow-2xl"
 		>
 			<div className="relative overflow-hidden">
-				<div className="h-72 object-cover">
+				<div className="relative h-72 object-cover">
 					<Image
 						src={image}
 						alt={title}
@@ -17,12 +17,12 @@ const ProjectCard = ({ title, link, image, number }) => {
 						className="transform hover:scale-125 transition duration-1000 ease-out object-cover h-full w-full"
 					/>
 				</div>
-				<h1 className="absolute top-10 left-10 text-gray-50 font-bold text-xl bg-red-500 rounded-md px-2">
+				<h2 className="absolute top-5 left-5 text-gray-50 font-bold text-xl bg-blue-500 rounded-md px-2">
 					{title}
-				</h1>
-				<h1 className="absolute bottom-10 left-10 text-gray-50 font-bold text-xl">
+				</h2>
+				<h2 className="absolute bottom-5 left-5 text-gray-50 font-bold text-xl">
 					0{number}
-				</h1>
+				</h2>
 			</div>
 		</a>
 	);

@@ -36,9 +36,9 @@ const CurrentProjects = () => {
 									height={project.current.image.height}
 									className="transform hover:scale-125 transition duration-1000 ease-out"
 								/>
-								<h1 className="absolute top-5 left-5 text-gray-200 font-bold text-sm lg:text-xl bg-blue-500 rounded-md px-2">
+								<h2 className="absolute top-5 left-5 text-gray-200 font-bold text-sm lg:text-xl bg-blue-500 rounded-md px-2">
 									{project.title}
-								</h1>
+								</h2>
 								<h2 className="absolute bottom-5 left-5 text-gray-200 font-bold text-xl">
 									0{id + 1}
 								</h2>

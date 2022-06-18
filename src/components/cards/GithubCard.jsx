@@ -1,9 +1,9 @@
 const GithubCard = ({ repository }) => {
 	return (
 		<div className="github-repository">
-			<h1 className="font-semibold text-xl dark:text-gray-200 text-gray-700">
+			<h2 className="font-semibold text-xl dark:text-gray-200 text-gray-700">
 				{repository.name.replace(/_|-/g, " ")}
-			</h1>
+			</h2>
 			<p className="text-base font-normal my-4 text-gray-500">
 				{repository.description || "No Description :("}
 			</p>

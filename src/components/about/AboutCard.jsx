@@ -1,15 +1,13 @@
 import constants from "@/constants/index";
 import Link from "next/link";
-import Image from "next/image";
-import { useTheme } from "next-themes";
+
+import TechStack from "@/components/about/TechStack";
 
 const AboutCard = () => {
-	const { theme } = useTheme();
-
 	return (
 		<>
-			<div className="max-w-6xl mx-auto h-48">
-				<h1 className="text-5xl md:text-9xl font-bold py-20 text-center md:text-left">
+			<div className="max-w-6xl mx-auto">
+				<h1 className="text-5xl md:text-9xl font-bold my-10 md:my-20 text-center md:text-left">
 					About Me
 				</h1>
 			</div>
@@ -27,9 +25,9 @@ const AboutCard = () => {
 				<div className="pt-20 grid grid-cols-1 md:grid-cols-3 max-w-6xl mx-auto gap-y-20 gap-x-20">
 					<div className="inline-flex flex-col">
 						<div>
-							<h1 className="text-xl font-semibold text-gray-700 dark:text-gray-200">
+							<h2 className="text-xl font-semibold text-gray-700 dark:text-gray-200">
 								Contact
-							</h1>
+							</h2>
 							<p className="text-lg text-gray-500 mt-4 dark:text-gray-300">
 								For any business enquiries{" "}
 								<Link href="/contact">
@@ -40,9 +38,9 @@ const AboutCard = () => {
 							</p>
 						</div>
 						<div className="mt-8">
-							<h1 className="text-xl font-semibold text-gray-700 dark:text-gray-200">
+							<h2 className="text-xl font-semibold text-gray-700 dark:text-gray-200">
 								Job Opportunities
-							</h1>
+							</h2>
 							<p className="text-lg text-gray-500 mt-4 dark:text-gray-300">
 								I am currently looking for a job, if you believe I am a good
 								candidate for your company check my{" "}
@@ -59,9 +57,9 @@ const AboutCard = () => {
 							</p>
 						</div>
 
-						<h1 className="text-xl font-semibold text-gray-700 mt-8 dark:text-gray-200">
+						<h2 className="text-xl font-semibold text-gray-700 mt-8 dark:text-gray-200">
 							Socials
-						</h1>
+						</h2>
 						<div className="mt-4 ml-4">
 							{constants.links
 								.filter((link) => link.label !== "CV")
@@ -93,27 +91,7 @@ const AboutCard = () => {
 							{constants.about.description}
 						</p>
 
-						<h1 className="bg-blue-500 text-3xl rounded-md px-2 py-1 my-6 inline-block font-bold text-gray-50">
-							Tech Stack
-						</h1>
-						<div className="flex flex-row flex-wrap">
-							{constants.techStack.map((tech) => {
-								return (
-									<div className="mx-4 my-4" key={tech.label}>
-										<Image
-											src={
-												theme === "light"
-													? tech.image
-													: tech.darkImage ?? tech.image
-											}
-											alt={tech.label}
-											width={80}
-											height={80}
-										/>
-									</div>
-								);
-							})}
-						</div>
+						<TechStack />
 					</div>
 				</div>
 			</div>

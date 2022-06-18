@@ -7,10 +7,10 @@ const ExperienceCard = ({
 }) => {
 	return (
 		<div className="relative experience-card border p-4 rounded-md shadow-xl z-10 mx-4">
-			<h1 className="absolute -top-10 md:-left-10 md:-top-10 text-4xl text-gray-300 font-bold dark:text-gray-600">
+			<h2 className="absolute -top-14 md:-left-10 text-4xl text-gray-300 font-bold dark:text-gray-600">
 				{timespan}
-			</h1>
-			<h1 className="font-semibold text-xl">{position}</h1>
+			</h2>
+			<h3 className="font-semibold text-xl">{position}</h3>
 			<a
 				href={companyLink}
 				target="_blank"
