@@ -1,11 +1,12 @@
+import type { AppProps } from "next/app";
 import { StrictMode, useEffect } from "react";
 import { ThemeProvider } from "next-themes";
 import { pageView } from "@/lib/gtag";
 import "@/styles/global.css";
 
-const Application = ({ Component, pageProps, router }) => {
+const Application = ({ Component, pageProps, router }: AppProps) => {
 	useEffect(() => {
-		const handleRouteChange = (url) => {
+		const handleRouteChange = (url: string) => {
 			pageView(url, document.title);
 		};
 

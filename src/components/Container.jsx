@@ -10,13 +10,14 @@ import constants from "@/constants/index";
 const Container = ({ children, ...metaData }) => {
 	const router = useRouter();
 	const [navOverlayOpen, setNavOverlayOpen] = useState(false);
-	const url = `${process.env.NEXT_PUBLIC_DOMAIN}${router.asPath}`;
+	const url = `${process.env.NEXT_PUBLIC_DOMAIN}${router.asPath.split("?")[0]}`;
 
 	const links = [
 		{ href: "/", label: "Home" },
 		{ href: "/about", label: "About" },
 		{ href: "/projects", label: "Projects" },
 		{ href: "/experience", label: "Experience" },
+		{ href: "/blog", label: "Blog" },
 		{ href: "/contact", label: "Contact" },
 	];
 
@@ -55,13 +56,19 @@ const Container = ({ children, ...metaData }) => {
 				<meta property="og:image" content={meta.image} />
 				<meta property="og:url" content={url} />
 				<meta property="og:locale" content="en_US" />
+				{meta.publishedTime && (
+					<meta
+						property="article:published_time"
+						content={meta.publishedTime}
+					/>
+				)}
 
 				<meta name="twitter:card" content="summary_large_image" />
 				<meta name="twitter:title" content={meta.title} />
 				<meta name="twitter:description" content={meta.description} />
 				<meta name="twitter:image" content={meta.image} />
 
-				<link rel="canonical" href={url} />
+				<link rel="canonical" href={url} key="canonical" />
 				<link rel="manifest" href="/manifest.json" />
 				<link rel="icon" href="/favicon.ico" />
 				<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
