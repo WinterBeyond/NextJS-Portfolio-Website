@@ -13,7 +13,7 @@ const TechStack = () => {
 			<div className="flex flex-row flex-wrap">
 				{constants.techStack.map((tech) => {
 					return (
-						<div className="mx-4 my-4" key={tech.label}>
+						<div className="mx-4 my-4" key={`tech-${tech.label}`}>
 							<Image
 								src={
 									theme === "light" ? tech.image : tech.darkImage ?? tech.image

@@ -47,7 +47,7 @@ const BlogPosts = ({ posts }: BlogPostsProps) => {
 							<div className="flex flex-col">
 								{popularBlogPosts.map((post, index) => (
 									<BlogCard
-										key={post._id}
+										key={`popular-post-${post._id}`}
 										post={post}
 										isFirst={index === 0}
 										heading="Popular Posts"
@@ -60,7 +60,7 @@ const BlogPosts = ({ posts }: BlogPostsProps) => {
 							<div className="flex flex-col">
 								{blogPosts.map((post, index) => (
 									<BlogCard
-										key={post._id}
+										key={`post-${post._id}`}
 										post={post}
 										isFirst={index === 0}
 										heading="All Posts"

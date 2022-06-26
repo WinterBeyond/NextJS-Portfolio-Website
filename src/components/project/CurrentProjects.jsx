@@ -26,7 +26,7 @@ const CurrentProjects = () => {
 							className={`w-full block col-span-3 h-min shadow-2xl ${project.current.classes}`}
 							target={`${project.href !== "#" ? "_blank" : "_self"}`}
 							rel="noopener noreferrer"
-							key={project.title}
+							key={`current-project-${id}`}
 						>
 							<div className="relative overflow-hidden">
 								<Image

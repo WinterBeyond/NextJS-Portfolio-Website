@@ -10,7 +10,7 @@ const ProjectGrid = () => {
 			<div className="grid grid-cols-1 md:grid-cols-2 gap-8 py-20 pb-40">
 				{constants.projects.map((project, id) => (
 					<ProjectCard
-						key={id}
+						key={`project-${id}`}
 						title={project.title}
 						link={project.href}
 						image={project.image}

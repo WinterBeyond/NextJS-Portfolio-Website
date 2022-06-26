@@ -29,7 +29,10 @@ const Repositories = ({ repositories }) => {
 			{repositories?.length > 0 && (
 				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto px-10 lg:-mt-10 gap-y-20">
 					{repositories.map((repository) => (
-						<GithubCard repository={repository} key={repository.id} />
+						<GithubCard
+							repository={repository}
+							key={`repository-${repository.id}`}
+						/>
 					))}
 				</div>
 			)}

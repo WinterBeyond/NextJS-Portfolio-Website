@@ -12,7 +12,7 @@ const ExperienceList = () => {
 			<div className="-mt-4">
 				<div className="grid grid-cols-1 max-w-xl mx-auto pt-20">
 					{constants.experience.map((exp, id) => (
-						<div key={id}>
+						<div key={`experience-${id}`}>
 							<ExperienceCard
 								position={exp.position}
 								description={exp.description}

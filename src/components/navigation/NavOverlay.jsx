@@ -70,7 +70,7 @@ const NavOverlay = ({ links, navOverlayOpen, setNavOverlayOpen }) => {
 							<div className="flex flex-col items-center mt-4">
 								{links.map((link) => {
 									return (
-										<Link href={link.href} key={link.label}>
+										<Link href={link.href} key={`nav-overlay-${link.label}`}>
 											<a
 												className={`text-xl hover:!text-blue-400 link-underline !bg-gradient-to-r from-sky-400 to-blue-600 ${
 													router.asPath.split("?")[0] === link.href

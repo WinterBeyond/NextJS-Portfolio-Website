@@ -67,7 +67,7 @@ const AboutCard = () => {
 									return (
 										<div
 											className="flex flex-row justify-start items-center"
-											key={link.label}
+											key={`social-${link.label}`}
 										>
 											<a
 												href={link.href}

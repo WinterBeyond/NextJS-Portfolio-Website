@@ -68,7 +68,7 @@ const Container = ({ children, ...metaData }) => {
 				<meta name="twitter:description" content={meta.description} />
 				<meta name="twitter:image" content={meta.image} />
 
-				<link rel="canonical" href={url} key="canonical" />
+				<link rel="canonical" href={url} />
 				<link rel="manifest" href="/manifest.json" />
 				<link rel="icon" href="/favicon.ico" />
 				<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
