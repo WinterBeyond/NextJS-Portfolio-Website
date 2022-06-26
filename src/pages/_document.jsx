@@ -15,8 +15,13 @@ const Document = () => {
 								__html: `
 									window.dataLayer = window.dataLayer || [];
 									function gtag(){window.dataLayer.push(arguments);}
+									gtag("set", "linker", {domains: ["${
+										process.env.NEXT_PUBLIC_DOMAIN.split("//")[1]
+									}"]});
 									gtag("js", new Date());
-									gtag("config", "${process.env.GOOGLE_ANALYTICS_ID}");
+									gtag("config", "${
+										process.env.GOOGLE_ANALYTICS_ID
+									}", {cookie_flags: "Max-Age=7200;SameSite=None;Secure"});
 								`,
 							}}
 						/>
