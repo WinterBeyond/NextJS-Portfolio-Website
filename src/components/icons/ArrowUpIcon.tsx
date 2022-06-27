@@ -1,6 +1,12 @@
 import Link from "next/link";
+import { ReactNode } from "react";
 
-const ArrowUpIcon = ({ children, href }) => {
+type ArrowUpIconProps = {
+	children?: ReactNode;
+	href: string;
+};
+
+const ArrowUpIcon = ({ children, href }: ArrowUpIconProps) => {
 	return (
 		<Link href={href}>
 			<a className="flex flex-row mb-10 px-8 py-4 rounded-md bg-gray-200 dark:bg-gray-900 hover:bg-gray-300 hover:dark:bg-gray-800 shadow-lg text-xl space-x-2 items-center">

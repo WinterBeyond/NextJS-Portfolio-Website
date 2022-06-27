@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 
 import constants from "@/constants/index";
 import fetcher from "@/lib/fetcher";
@@ -8,17 +8,23 @@ import LinkedinIcon from "@/components/icons/LinkedinIcon";
 import ErrorCard from "@/components/cards/ErrorCard";
 import SuccessCard from "@/components/cards/SuccessCard";
 
+type FormState = {
+	name: string;
+	email: string;
+	message: string;
+};
+
 const ContactForm = () => {
-	const [error, setError] = useState("");
-	const [success, setSuccess] = useState("");
-	const [isLoading, setLoading] = useState(false);
-	const [form, setForm] = useState({
+	const [error, setError] = useState<string>("");
+	const [success, setSuccess] = useState<string>("");
+	const [isLoading, setLoading] = useState<boolean>(false);
+	const [form, setForm] = useState<FormState>({
 		name: "",
 		email: "",
 		message: "",
 	});
 
-	const handleSubmit = async (e) => {
+	const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		setLoading(true);
 		setSuccess("");
@@ -38,14 +44,16 @@ const ContactForm = () => {
 
 			setForm({ name: "", email: "", message: "" });
 			setSuccess(data?.message);
-		} catch (error) {
+		} catch (error: any) {
 			setError(error?.message);
 		}
 
 		setLoading(false);
 	};
 
-	const handleChange = (e) => {
+	const handleChange = (
+		e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+	) => {
 		setForm((previousForm) => {
 			return { ...previousForm, [e.target.name]: e.target.value };
 		});
@@ -134,8 +142,7 @@ const ContactForm = () => {
 							Message
 						</label>
 						<textarea
-							rows="4"
-							type="text"
+							rows={4}
 							className="font-light rounded-md border focus:outline-none py-2 mt-2 px-1 mx-4 focus:ring-2 focus:border-none ring-blue-500"
 							name="message"
 							value={form.message}

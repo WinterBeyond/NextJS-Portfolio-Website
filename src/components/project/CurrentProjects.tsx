@@ -23,7 +23,7 @@ const CurrentProjects = () => {
 					return (
 						<a
 							href={project.href}
-							className={`w-full block col-span-3 h-min shadow-2xl ${project.current.classes}`}
+							className={`w-full block col-span-3 h-min shadow-2xl ${project.current?.classes}`}
 							target={`${project.href !== "#" ? "_blank" : "_self"}`}
 							rel="noopener noreferrer"
 							key={`current-project-${id}`}
@@ -32,8 +32,8 @@ const CurrentProjects = () => {
 								<Image
 									src={project.image}
 									alt={project.title}
-									width={project.current.image.width}
-									height={project.current.image.height}
+									width={project.current?.image.width}
+									height={project.current?.image.height}
 									className="transform hover:scale-125 transition duration-1000 ease-out"
 								/>
 								<h2 className="absolute top-5 left-5 text-gray-200 font-bold text-sm lg:text-xl bg-blue-500 rounded-md px-2">

@@ -1,4 +1,12 @@
-const NavOverlayButton = ({ navOverlayOpen, toggleNavOverlay }) => {
+type NavOverlayButtonProps = {
+	navOverlayOpen: boolean;
+	toggleNavOverlay: () => void;
+};
+
+const NavOverlayButton = ({
+	navOverlayOpen,
+	toggleNavOverlay,
+}: NavOverlayButtonProps) => {
 	return (
 		<button
 			className="md:hidden absolute top-0 right-0 z-30 w-10 h-10 m-1 rounded-lg bg-white dark:bg-transparent focus:outline-none"

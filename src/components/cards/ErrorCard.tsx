@@ -1,4 +1,8 @@
-const ErrorCard = ({ message }) => {
+type ErrorCardProps = {
+	message: string;
+};
+
+const ErrorCard = ({ message }: ErrorCardProps) => {
 	return (
 		<>
 			{message && (

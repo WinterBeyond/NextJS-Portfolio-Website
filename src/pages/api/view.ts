@@ -1,7 +1,9 @@
+import type { NextApiRequest, NextApiResponse } from "next";
+
 import getBlogPost from "@/lib/api/blog/getBlogPost";
 import updateBlogPost from "@/lib/api/blog/updateBlogPost";
 
-export const handler = async (req, res) => {
+export const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 	try {
 		if (req.method !== "POST")
 			return res

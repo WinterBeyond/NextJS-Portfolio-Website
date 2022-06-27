@@ -1,6 +1,8 @@
+import type { NextApiRequest, NextApiResponse } from "next";
+
 import sendContactWebhook from "@/lib/api/sendContactWebhook";
 
-export const handler = async (req, res) => {
+export const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 	try {
 		if (req.method !== "POST")
 			return res

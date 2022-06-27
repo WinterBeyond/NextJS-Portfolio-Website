@@ -1,6 +1,14 @@
+import { ReactNode } from "react";
+
 import constants from "@/constants/index";
 
-const GithubIcon = ({ children, className, size = "sm" }) => {
+type GithubIconProps = {
+	children?: ReactNode;
+	className?: string;
+	size?: string;
+};
+
+const GithubIcon = ({ children, className, size = "sm" }: GithubIconProps) => {
 	return (
 		<a
 			href={constants.links.find((link) => link.label === "GitHub")?.href}

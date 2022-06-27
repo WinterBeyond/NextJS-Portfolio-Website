@@ -2,7 +2,11 @@ import GithubCard from "@/components/cards/GithubCard";
 import GithubIcon from "@/components/icons/GithubIcon";
 import ErrorCard from "@/components/cards/ErrorCard";
 
-const Repositories = ({ repositories }) => {
+type RepositoriesProps = {
+	repositories: any[] | null;
+};
+
+const Repositories = ({ repositories }: RepositoriesProps) => {
 	return (
 		<section className="max-w-6xl mx-auto px-4 py-5 my-44 rounded-lg bg-white dark:bg-transparent">
 			<div className="flex flex-col md:flex-row justify-between items-center md:pt-20 mx-10">
@@ -16,7 +20,7 @@ const Repositories = ({ repositories }) => {
 			</div>
 
 			{/* Empty or null repository data */}
-			{!repositories?.length > 0 && (
+			{!repositories?.length && (
 				<ErrorCard
 					message={
 						!repositories
@@ -26,7 +30,7 @@ const Repositories = ({ repositories }) => {
 				/>
 			)}
 
-			{repositories?.length > 0 && (
+			{!!repositories?.length && (
 				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto px-10 lg:-mt-10 gap-y-20">
 					{repositories.map((repository) => (
 						<GithubCard

@@ -6,7 +6,11 @@ import LinkedinIcon from "@/components/icons/LinkedinIcon";
 import DarkModeToggle from "@/components/icons/DarkModeToggle";
 import Position from "@/components/Position";
 
-const Navbar = ({ links }) => {
+type NavbarProps = {
+	links: any[];
+};
+
+const Navbar = ({ links }: NavbarProps) => {
 	const router = useRouter();
 
 	return (

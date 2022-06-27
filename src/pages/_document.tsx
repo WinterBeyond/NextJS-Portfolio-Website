@@ -16,7 +16,7 @@ const Document = () => {
 									window.dataLayer = window.dataLayer || [];
 									function gtag(){window.dataLayer.push(arguments);}
 									gtag("set", "linker", {domains: ["${
-										process.env.NEXT_PUBLIC_DOMAIN.split("//")[1]
+										process.env.NEXT_PUBLIC_DOMAIN?.split("//")[1]
 									}"]});
 									gtag("js", new Date());
 									gtag("config", "${

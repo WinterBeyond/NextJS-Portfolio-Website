@@ -1,4 +1,8 @@
-const SuccessCard = ({ message }) => {
+type SuccessCardProps = {
+	message: string;
+};
+
+const SuccessCard = ({ message }: SuccessCardProps) => {
 	return (
 		<>
 			{message && (

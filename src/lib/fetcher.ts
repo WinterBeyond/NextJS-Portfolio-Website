@@ -1,4 +1,4 @@
-export const fetcher = async (url, init = {}) => {
+export const fetcher = async (url: string, init = {}) => {
 	try {
 		const response = await fetch(url, init);
 

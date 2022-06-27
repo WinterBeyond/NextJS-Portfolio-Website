@@ -1,10 +1,18 @@
+type ExperienceCardProps = {
+	position: string;
+	company: string;
+	companyLink: string;
+	timespan: string;
+	description: string;
+};
+
 const ExperienceCard = ({
 	position,
 	company,
 	companyLink,
 	timespan,
 	description,
-}) => {
+}: ExperienceCardProps) => {
 	return (
 		<div className="relative experience-card border p-4 rounded-md shadow-xl z-10 mx-4">
 			<h2 className="absolute -top-14 md:-left-10 text-4xl text-gray-300 font-bold dark:text-gray-600">

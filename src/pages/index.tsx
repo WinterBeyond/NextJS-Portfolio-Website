@@ -6,7 +6,11 @@ import Hero from "@/components/Hero";
 import CurrentProjects from "@/components/project/CurrentProjects";
 import Repositories from "@/components/Repositories";
 
-const Index = ({ repositories }) => {
+type IndexProps = {
+	repositories: any[] | null;
+};
+
+const Index = ({ repositories }: IndexProps) => {
 	return (
 		<Container>
 			<Hero />

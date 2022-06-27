@@ -1,8 +1,9 @@
-import BlogCard from "@/components/blog/BlogCard";
-import ErrorCard from "@/components/cards/ErrorCard";
+import { useEffect, useState } from "react";
 
 import Post from "@/lib/api/database/models/post";
-import { useEffect, useState } from "react";
+
+import BlogCard from "@/components/blog/BlogCard";
+import ErrorCard from "@/components/cards/ErrorCard";
 
 type BlogPostsProps = {
 	posts?: Post[];

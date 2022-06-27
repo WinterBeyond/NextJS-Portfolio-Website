@@ -1,6 +1,13 @@
 import Image from "next/image";
 
-const ProjectCard = ({ title, link, image, number }) => {
+type ProjectCardProps = {
+	title: string;
+	link: string;
+	image: string;
+	number: number;
+}
+
+const ProjectCard = ({ title, link, image, number }: ProjectCardProps) => {
 	return (
 		<a
 			href={link}

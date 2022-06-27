@@ -1,6 +1,10 @@
 import useTimeAgo from "@/hooks/useTimeAgo";
 
-const GithubCard = ({ repository }) => {
+type GithubCardProps = {
+	repository: any;
+};
+
+const GithubCard = ({ repository }: GithubCardProps) => {
 	const timeAgo = useTimeAgo({ date: repository.lastCommit.author.date });
 
 	return (

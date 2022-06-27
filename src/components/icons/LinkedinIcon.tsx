@@ -1,6 +1,10 @@
 import constants from "@/constants/index";
 
-const LinkedinIcon = ({ size = "sm" }) => {
+type LinkedinIconProps = {
+	size?: string;
+};
+
+const LinkedinIcon = ({ size = "sm" }: LinkedinIconProps) => {
 	return (
 		<a
 			href={constants.links.find((link) => link.label === "LinkedIn")?.href}

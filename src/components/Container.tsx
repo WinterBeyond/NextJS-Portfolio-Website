@@ -1,15 +1,30 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { ReactNode, useState } from "react";
 
 import Navbar from "@/components/navigation/Navbar";
 import Footer from "@/components/Footer";
 import NavOverlay from "./navigation/NavOverlay";
 import constants from "@/constants/index";
 
-const Container = ({ children, ...metaData }) => {
+interface ContainerProps extends MetaData {
+	children: ReactNode;
+}
+
+type MetaData = {
+	siteName?: string;
+	title?: string;
+	description?: string;
+	themeColor?: string;
+	image?: string;
+	type?: string;
+	robots?: string;
+	publishedTime?: string;
+};
+
+const Container = ({ children, ...metaData }: ContainerProps) => {
 	const router = useRouter();
-	const [navOverlayOpen, setNavOverlayOpen] = useState(false);
+	const [navOverlayOpen, setNavOverlayOpen] = useState<boolean>(false);
 	const url = `${process.env.NEXT_PUBLIC_DOMAIN}${router.asPath.split("?")[0]}`;
 
 	const links = [
@@ -21,7 +36,7 @@ const Container = ({ children, ...metaData }) => {
 		{ href: "/contact", label: "Contact" },
 	];
 
-	const meta = {
+	const meta: MetaData = {
 		siteName: constants.meta.siteName,
 		title: constants.meta.title,
 		description: constants.meta.description,

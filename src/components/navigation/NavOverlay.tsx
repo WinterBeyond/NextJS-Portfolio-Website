@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { Dispatch, SetStateAction, useEffect } from "react";
 import { Transition } from "react-transition-group";
 
 import NavOverlayButton from "@/components/navigation/NavOverlayButton";
@@ -9,7 +9,17 @@ import DarkModeToggle from "@/components/icons/DarkModeToggle";
 import GithubIcon from "@/components/icons/GithubIcon";
 import LinkedinIcon from "@/components/icons/LinkedinIcon";
 
-const NavOverlay = ({ links, navOverlayOpen, setNavOverlayOpen }) => {
+type NavOverlayProps = {
+	links: any[];
+	navOverlayOpen: boolean;
+	setNavOverlayOpen: Dispatch<SetStateAction<boolean>>;
+};
+
+const NavOverlay = ({
+	links,
+	navOverlayOpen,
+	setNavOverlayOpen,
+}: NavOverlayProps) => {
 	const router = useRouter();
 
 	const toggleNavOverlay = () => {
@@ -40,6 +50,7 @@ const NavOverlay = ({ links, navOverlayOpen, setNavOverlayOpen }) => {
 		entered: { opacity: 1 },
 		exiting: { opacity: 0.5 },
 		exited: { opacity: 0, display: "none" },
+		unmounted: { display: "none" },
 	};
 
 	return (

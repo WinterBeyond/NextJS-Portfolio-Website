@@ -1,7 +1,14 @@
 import fetcher from "@/lib/fetcher";
 
-export const sendContactWebhook = async (name, email, message) => {
+export const sendContactWebhook = async (
+	name: string,
+	email: string,
+	message: string
+) => {
 	try {
+		if (!process.env.CONTACT_DISCORD_WEBHOOK)
+			throw new Error("Contact webhook is not specified!");
+
 		await fetcher(process.env.CONTACT_DISCORD_WEBHOOK, {
 			method: "POST",
 			headers: {

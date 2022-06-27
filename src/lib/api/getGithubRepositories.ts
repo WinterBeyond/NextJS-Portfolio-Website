@@ -1,8 +1,8 @@
 import fetcher from "@/lib/fetcher";
 
 export const getGithubRepositories = async (
-	username,
-	includePrivate = false
+	username: string,
+	includePrivate: boolean = false
 ) => {
 	try {
 		const accessToken = process.env.GITHUB_ACCESS_TOKEN;
@@ -16,13 +16,13 @@ export const getGithubRepositories = async (
 			  }
 			: {};
 
-		const repositories = (
+		const repositories: any[] = (
 			await fetcher(
 				`https://api.github.com/search/repositories?q=user:${username}+sort:author-date-asc`,
 				body
 			)
 		).items
-			.filter((repo) => includePrivate || !repo.private)
+			.filter((repo: any) => includePrivate || !repo.private)
 			.splice(0, 6);
 
 		return await Promise.all(

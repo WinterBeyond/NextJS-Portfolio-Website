@@ -2,7 +2,7 @@ import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 
 const DarkModeToggle = () => {
-	const [initialized, setInitialized] = useState(false);
+	const [initialized, setInitialized] = useState<boolean>(false);
 	const { theme, setTheme } = useTheme();
 
 	useEffect(() => {
