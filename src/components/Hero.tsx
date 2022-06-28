@@ -1,5 +1,6 @@
 import constants from "@/constants/index";
 import Image from "next/image";
+import TypeAnimation from "@/components/TypeAnimation";
 
 const Hero = () => {
 	return (
@@ -19,12 +20,13 @@ const Hero = () => {
 				<h1 className="text-4xl md:text-8xl font-bold my-2 text-inherit">
 					{constants.realname}
 				</h1>
-				<h2 className="text-3xl md:text-7xl font-bold my-2 text-inherit">
-					Developer.
-				</h2>
-				<h2 className="text-3xl md:text-7xl font-bold my-2 text-inherit">
-					Innovator.
-				</h2>
+				<TypeAnimation
+					textList={["Developer.", "Innovator.", "Tech Enthusiast."]}
+					typeSpeed={100}
+					eraseSpeed={150}
+					wrapper="h2"
+					className="text-3xl md:text-7xl font-bold my-2 text-inherit"
+				/>
 			</div>
 			<div className="hidden lg:flex w-full md:w-1/2 -mr-40 mt-20">
 				<div className="w-3/4 ">

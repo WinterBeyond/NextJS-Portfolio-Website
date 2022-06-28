@@ -20,3 +20,14 @@
 	background-position: 0 100%;
 	text-decoration-line: none;
 }
+
+.cursor-typing::after {
+	content: "|";
+	animation: blink 1.1s infinite;
+}
+
+@keyframes blink {
+	50% {
+		opacity: 0;
+	}
+}
