@@ -96,7 +96,27 @@ export default function LandingPage() {
 			>
 				<ProjectGrid />
 			</Section>
-			<Section heading="Responsive DataTable" description="">
+			<Section
+				heading="Responsive DataTable"
+				description={
+					<>
+						<span>
+							A React component I built that supports pagination and fetching
+							data from an API. The example below is simply displaying sample
+							data of pokemons.
+						</span>
+						<br />
+						<br />
+						<Link
+							href="https://github.com/WinterBeyond/NextJS-Portfolio-Website/blob/main/src/components/DataTable.tsx"
+							target="_blank"
+							className="bg-neutral-900 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-30 border border-neutral-700 py-2 px-2 rounded-lg text-blue-500 hover:text-blue-600"
+						>
+							View DataTable Code
+						</Link>
+					</>
+				}
+			>
 				<PokedexDataTable />
 			</Section>
 			<Section
