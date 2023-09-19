@@ -127,10 +127,14 @@ export default function DataTable<T>({
 		(key: string, value: string) => {
 			const newSearchParams = new URLSearchParams(searchParams);
 			if (!value && newSearchParams.has(key)) newSearchParams.delete(key);
-			else newSearchParams.set(key, value);
+			else {
+				if (key !== pageParamKey && newSearchParams.has(pageParamKey))
+					newSearchParams.delete(pageParamKey);
+				newSearchParams.set(key, value);
+			}
 			return newSearchParams;
 		},
-		[searchParams]
+		[searchParams, pageParamKey]
 	);
 
 	const handleSearch = useCallback(
