@@ -7,6 +7,14 @@
 	animation: blink 1.1s infinite;
 }
 
+.ltr {
+	direction: ltr;
+}
+
+.rtl {
+	direction: rtl;
+}
+
 @keyframes blink {
 	50% {
 		opacity: 0;

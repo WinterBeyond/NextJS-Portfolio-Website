@@ -7,7 +7,7 @@ type ExperienceProps = {
 export default function Experience({ experience }: ExperienceProps) {
 	return (
 		<div
-			className={`flex group/experience bg-neutral-900 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-30 border ${
+			className={`flex group/experience ltr bg-neutral-900 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-30 border ${
 				experience.endDate ? "border-neutral-700" : "border-blue-800"
 			} rounded-xl p-3 gap-x-5`}
 			tabIndex={0}

@@ -65,7 +65,9 @@ export default function Section({
 					{description && (
 						<p
 							className={`text-justify text-gray-200 text-xl max-w-3xl ${
-								center ? "" : "lg:group-even/section:ml-auto"
+								center
+									? ""
+									: "lg:group-even/section:text-right lg:group-even/section:ml-auto"
 							} font-semibold`}
 							tabIndex={0}
 						>
