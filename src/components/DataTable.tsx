@@ -205,7 +205,7 @@ export default function DataTable<T>({
                         </button>
                         <input
                             placeholder="Search"
-                            className="bg-neutral-700 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-30 border-2 border-neutral-800 focus:border-blue-500 p-2 rounded-lg text-gray-800 dark:text-gray-200 outline-none"
+                            className="bg-neutral-700 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-30 border-2 border-neutral-800 focus:border-indigo-500 p-2 rounded-lg text-gray-800 dark:text-gray-200 outline-none"
                             defaultValue={search}
                             disabled={loading}
                             onChange={handleSearch}

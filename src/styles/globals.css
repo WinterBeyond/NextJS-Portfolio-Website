@@ -2,21 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+    overscroll-behavior: none;
+}
+
 .cursor-typing::after {
-	content: "|";
-	animation: blink 1.1s infinite;
+    content: "|";
+    animation: blink 1.1s infinite;
 }
 
 .ltr {
-	direction: ltr;
+    direction: ltr;
 }
 
 .rtl {
-	direction: rtl;
+    direction: rtl;
 }
 
 @keyframes blink {
-	50% {
-		opacity: 0;
-	}
+    50% {
+        opacity: 0;
+    }
 }

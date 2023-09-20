@@ -76,7 +76,7 @@ export function Pagination({
                         <button
                             className={`text-gray-200 py-1 px-3 rounded-full ${
                                 pageNumber === currentPage
-                                    ? "bg-blue-500 hover:bg-blue-600"
+                                    ? "bg-indigo-500 hover:bg-indigo-600"
                                     : "bg-neutral-700 hover:bg-neutral-800"
                             }`}
                             onClick={() => onPageChange(pageNumber as number)}
