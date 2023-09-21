@@ -1,5 +1,3 @@
-"use client";
-
 import { usePagination, DOTS } from "@/hooks/usePagination";
 import {
     faChevronLeft,
