@@ -13,7 +13,8 @@ export default async function getSpotifyAccessToken(code: string) {
 			},
 			body: new URLSearchParams({
 				code: code,
-				redirect_uri: process.env.SPOTIFY_OAUTH_REDIRECT_URI?.toString() ?? "",
+				redirect_uri:
+					process.env.SPOTIFY_OAUTH_REDIRECT_URI?.toString() ?? "",
 				grant_type: "authorization_code",
 			}),
 		});

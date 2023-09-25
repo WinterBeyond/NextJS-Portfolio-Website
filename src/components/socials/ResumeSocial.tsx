@@ -5,7 +5,7 @@ import Tooltip from "@/components/Tooltip";
 export default function ResumeSocial() {
 	return (
 		<Link
-			className="relative group/social"
+			className="group/social relative"
 			href="/cv.pdf"
 			target="_blank"
 			aria-label="Resume"

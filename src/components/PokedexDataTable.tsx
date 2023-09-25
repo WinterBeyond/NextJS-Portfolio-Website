@@ -16,7 +16,7 @@ export default function PokedexDataTable() {
 					label: "Pokemon",
 					renderCell: (pokemon) => {
 						return (
-							<div className="flex justify-center items-center">
+							<div className="flex items-center justify-center">
 								<Image
 									src={pokemon.imageUrl}
 									alt={`Image of ${pokemon.name}`}
@@ -32,12 +32,20 @@ export default function PokedexDataTable() {
 					label: "Abilities",
 					renderCell: (pokemon) => {
 						if (pokemon.abilities.length === 0)
-							return <span className="text-red-500">No abilities!</span>;
+							return (
+								<span className="text-red-500">
+									No abilities!
+								</span>
+							);
 
 						return (
 							<ul>
 								{pokemon.abilities.map((ability) => (
-									<li key={`pokemon-${pokemon.name}-${ability}`}>{ability}</li>
+									<li
+										key={`pokemon-${pokemon.name}-${ability}`}
+									>
+										{ability}
+									</li>
 								))}
 							</ul>
 						);

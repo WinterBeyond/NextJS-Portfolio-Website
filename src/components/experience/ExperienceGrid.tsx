@@ -5,7 +5,7 @@ export default function ExperienceGrid() {
 	const experiences = getExperiences();
 
 	return (
-		<div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-5 rtl">
+		<div className="rtl grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
 			{experiences
 				.sort((experience) => (experience.endDate ? -1 : 1))
 				.map((experience) => (

@@ -10,9 +10,9 @@ export default async function SpotifySongGrid() {
 	}
 
 	return (
-		<div className="grid grid-cols-1 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-5">
+		<div className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
 			{hasError ? (
-				<span className="text-lg text-red-500 font-bold">
+				<span className="text-lg font-bold text-red-500">
 					Unable to fetch songs!
 				</span>
 			) : (

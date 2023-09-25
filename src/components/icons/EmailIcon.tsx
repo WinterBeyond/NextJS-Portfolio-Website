@@ -2,7 +2,7 @@ export default function EmailIcon() {
 	return (
 		<svg
 			fill="currentColor"
-			className="w-9 h-9 text-white hover:opacity-80"
+			className="h-9 w-9 text-white hover:opacity-80"
 			viewBox="0 0 20 20"
 		>
 			<path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />

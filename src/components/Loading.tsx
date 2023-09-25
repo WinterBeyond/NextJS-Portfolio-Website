@@ -21,7 +21,7 @@ export default function Loading({ active, size = "sm" }: LoadingProps) {
 	};
 
 	return (
-		<div className="flex gap-2 justify-center items-center">
+		<div className="flex items-center justify-center gap-2">
 			<FontAwesomeIcon
 				icon={faCircle}
 				fade={active}

@@ -66,7 +66,7 @@ export default function SpotifySong({ song }: SpotifySongProps) {
 
 	return (
 		<Link
-			className="flex group/song items-center justify-center bg-neutral-900 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-30 border border-neutral-700 hover:border-green-500 rounded-xl p-3 gap-x-5 hover:z-50"
+			className="group/song flex items-center justify-center gap-x-5 rounded-xl border border-neutral-700 bg-neutral-900 bg-opacity-30 bg-clip-padding p-3 backdrop-blur-lg backdrop-filter hover:z-50 hover:border-green-500"
 			href={`https://open.spotify.com/track/${song.id}`}
 			target="_blank"
 		>
@@ -79,27 +79,32 @@ export default function SpotifySong({ song }: SpotifySongProps) {
 					height={60}
 				/>
 			)}
-			<div className="flex justify-between w-full">
+			<div className="flex w-full justify-between">
 				<div className="flex flex-col">
-					<label className="text-white group-hover/song:text-green-500 font-bold">
+					<label className="font-bold text-white group-hover/song:text-green-500">
 						{song.name}
 					</label>
-					<span className="text-gray-200 text-sm font-semibold">
+					<span className="text-sm font-semibold text-gray-200">
 						{listFormat.format(song.artists)}
 					</span>
 				</div>
 				<button
-					className="relative group/audiopreview"
+					className="group/audiopreview relative"
 					onClick={(e) => togglePreviewAudio(e)}
 					aria-label={`${
-						audioState?.paused ? "Play Audio Preview" : "Pause Audio Preview"
+						audioState?.paused
+							? "Play Audio Preview"
+							: "Pause Audio Preview"
 					} for ${song.name}`}
 				>
-					{audioState && (audioState.paused ? <PlayIcon /> : <PauseIcon />)}
+					{audioState &&
+						(audioState.paused ? <PlayIcon /> : <PauseIcon />)}
 					<Tooltip
 						visibleClass="group-hover/audiopreview:block"
 						text={
-							audioState?.paused ? "Play Audio Preview" : "Pause Audio Preview"
+							audioState?.paused
+								? "Play Audio Preview"
+								: "Pause Audio Preview"
 						}
 					/>
 				</button>

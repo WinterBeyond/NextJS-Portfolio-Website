@@ -5,7 +5,7 @@ import Tooltip from "@/components/Tooltip";
 export default function EmailSocial() {
 	return (
 		<Link
-			className="relative group/social"
+			className="group/social relative"
 			href="mailto:contact@maxwiggedal.dev"
 			aria-label="Email"
 		>

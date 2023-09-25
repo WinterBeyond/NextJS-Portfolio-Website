@@ -39,7 +39,10 @@ export default function useFetcher<T>(
 
 				updateFetcherState("loading", true);
 
-				const data = await fetcher<T>(url, { ...options, signal: abortSignal });
+				const data = await fetcher<T>(url, {
+					...options,
+					signal: abortSignal,
+				});
 
 				updateFetcherState("error", undefined);
 				updateFetcherState("data", data);

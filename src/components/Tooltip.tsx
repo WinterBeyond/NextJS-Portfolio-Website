@@ -6,9 +6,9 @@ type TooltipProps = {
 export default function Toolip({ visibleClass, text }: TooltipProps) {
 	return (
 		<div
-			className={`tooltip absolute bottom-10 shadow-dark ${visibleClass} hidden p-2 bg-neutral-900 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-10 border border-neutral-700 text-white rounded-lg font-bold w-max z-50`}
+			className={`tooltip shadow-dark absolute bottom-10 ${visibleClass} z-50 hidden w-max rounded-lg border border-neutral-700 bg-neutral-900 bg-opacity-10 bg-clip-padding p-2 font-bold text-white backdrop-blur-lg backdrop-filter`}
 		>
-			<p className="select-none leading-none text-sm">{text}</p>
+			<p className="select-none text-sm leading-none">{text}</p>
 		</div>
 	);
 }

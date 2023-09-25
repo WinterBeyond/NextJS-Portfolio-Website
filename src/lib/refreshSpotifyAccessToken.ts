@@ -20,4 +20,4 @@ export default async function refreshSpotifyAccessToken() {
 	} catch (error) {
 		throw error;
 	}
-};
+}

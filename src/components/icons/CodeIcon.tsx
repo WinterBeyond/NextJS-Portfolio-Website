@@ -4,7 +4,7 @@ export default function CodeIcon() {
 			fill="none"
 			viewBox="0 0 24 24"
 			stroke="currentColor"
-			className="h-6 w-6 inline-block mr-2"
+			className="mr-2 inline-block h-6 w-6"
 		>
 			<path
 				strokeLinecap="round"

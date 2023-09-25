@@ -58,7 +58,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
 			<head />
 			<GoogleAnalytics />
 			<body className="bg-gradient-to-br from-gray-800 to-black">
-				<main className="flex flex-col max-w-7xl p-5 mx-auto my-28 gap-48">
+				<main className="mx-auto my-28 flex max-w-7xl flex-col gap-48 p-5">
 					{children}
 					<Footer />
 				</main>

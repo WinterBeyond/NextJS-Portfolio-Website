@@ -5,13 +5,16 @@ import Tooltip from "@/components/Tooltip";
 export default function GithubSocial() {
 	return (
 		<Link
-			className="relative group/social"
+			className="group/social relative"
 			href="https://github.com/WinterBeyond/"
 			target="_blank"
 			aria-label="Github"
 		>
 			<GithubIcon />
-			<Tooltip visibleClass="group-hover/social:block" text="WinterBeyond" />
+			<Tooltip
+				visibleClass="group-hover/social:block"
+				text="WinterBeyond"
+			/>
 		</Link>
 	);
 }

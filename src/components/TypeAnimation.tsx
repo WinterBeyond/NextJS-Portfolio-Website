@@ -90,7 +90,10 @@ export default function TypeAnimation({
 			// Delete one character from the text
 			setCurrentSequence((oldSequence) => ({
 				...oldSequence,
-				text: oldSequence.text.substring(0, oldSequence.text.length - 1),
+				text: oldSequence.text.substring(
+					0,
+					oldSequence.text.length - 1
+				),
 			}));
 		};
 

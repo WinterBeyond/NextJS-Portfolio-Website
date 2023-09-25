@@ -17,12 +17,14 @@ export default function Section({
 }: SectionProps) {
 	return (
 		<section
-			className={`flex ${center ? "" : "group/section lg:even:justify-end"}`}
+			className={`flex ${
+				center ? "" : "group/section lg:even:justify-end"
+			}`}
 		>
 			<div
 				className={`flex ${
-					center ? "justify-center items-center" : ""
-				} flex-col gap-y-4 w-full`}
+					center ? "items-center justify-center" : ""
+				} w-full flex-col gap-y-4`}
 			>
 				<div
 					className={`flex flex-col gap-y-4 ${
@@ -36,7 +38,7 @@ export default function Section({
 									<h1
 										className={`${
 											center ? "text-center" : ""
-										} text-white text-6xl font-bold hidden md:block`}
+										} hidden text-6xl font-bold text-white md:block`}
 										tabIndex={0}
 									>
 										{heading}
@@ -44,7 +46,7 @@ export default function Section({
 									<h1
 										className={`${
 											center ? "text-center" : ""
-										} text-white text-6xl font-bold md:hidden`}
+										} text-6xl font-bold text-white md:hidden`}
 										tabIndex={0}
 									>
 										{shortHeading}
@@ -54,7 +56,7 @@ export default function Section({
 								<h2
 									className={`${
 										center ? "text-center" : ""
-									} text-white text-6xl font-bold`}
+									} text-6xl font-bold text-white`}
 									tabIndex={0}
 								>
 									{heading}
@@ -64,10 +66,10 @@ export default function Section({
 					)}
 					{description && (
 						<p
-							className={`text-justify text-gray-200 text-xl max-w-3xl ${
+							className={`max-w-3xl text-justify text-xl text-gray-200 ${
 								center
 									? ""
-									: "lg:group-even/section:text-right lg:group-even/section:ml-auto"
+									: "lg:group-even/section:ml-auto lg:group-even/section:text-right"
 							} font-semibold`}
 							tabIndex={0}
 						>

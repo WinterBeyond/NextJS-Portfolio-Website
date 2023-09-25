@@ -106,7 +106,7 @@ export default function DataTable<T>({
 			if (data) {
 				if (typeof column.booleanLabel.true === "string")
 					data = (
-						<span className="bg-green-500 text-white font-semibold px-2 py-0.5 rounded-xl text-xs">
+						<span className="rounded-xl bg-green-500 px-2 py-0.5 text-xs font-semibold text-white">
 							{column.booleanLabel.true}
 						</span>
 					);
@@ -114,7 +114,7 @@ export default function DataTable<T>({
 			} else {
 				if (typeof column.booleanLabel.false === "string")
 					data = (
-						<span className="bg-red-500 text-white font-semibold px-2 py-0.5 rounded-xl text-xs">
+						<span className="rounded-xl bg-red-500 px-2 py-0.5 text-xs font-semibold text-white">
 							{column.booleanLabel.false}
 						</span>
 					);
@@ -155,9 +155,12 @@ export default function DataTable<T>({
 	);
 
 	const handlePage = (newPage: number) => {
-		router.replace(`?${getNewSearchParams(pageParamKey, newPage.toString())}`, {
-			scroll: false,
-		});
+		router.replace(
+			`?${getNewSearchParams(pageParamKey, newPage.toString())}`,
+			{
+				scroll: false,
+			}
+		);
 	};
 
 	const handleSize = (e: ChangeEvent<HTMLSelectElement>) => {
@@ -178,25 +181,25 @@ export default function DataTable<T>({
 		<>
 			{initial ? (
 				<>
-					<div className="flex justify-center items-center">
+					<div className="flex items-center justify-center">
 						{loading && <Loading active={true} size="lg" />}
 					</div>
 				</>
 			) : (
 				<div
 					id={`table-container-${id}`}
-					className="flex flex-col w-full gap-4 bg-neutral-900 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-30 border border-neutral-700 text-white rounded-lg p-4"
+					className="flex w-full flex-col gap-4 rounded-lg border border-neutral-700 bg-neutral-900 bg-opacity-30 bg-clip-padding p-4 text-white backdrop-blur-lg backdrop-filter"
 				>
 					{title && (
-						<h4 className="text-3xl font-semibold text-center md:text-left">
+						<h4 className="text-center text-3xl font-semibold md:text-left">
 							{title}
 						</h4>
 					)}
-					<div className="flex flex-col md:flex-row items-center gap-2">
+					<div className="flex flex-col items-center gap-2 md:flex-row">
 						<button
 							onClick={() => sendRequest()}
 							disabled={loading}
-							className="flex bg-neutral-800 disabled:bg-neutral-700 py-1 px-2 rounded-lg items-center gap-2"
+							className="flex items-center gap-2 rounded-lg bg-neutral-800 px-2 py-1 disabled:bg-neutral-700"
 							aria-label="Refresh server list"
 						>
 							<FontAwesomeIcon icon={faRefresh} spin={loading} />
@@ -204,7 +207,7 @@ export default function DataTable<T>({
 						</button>
 						<input
 							placeholder="Search"
-							className="bg-neutral-700 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-30 border-2 border-neutral-800 focus:border-indigo-500 p-2 rounded-lg text-gray-800 dark:text-gray-200 outline-none"
+							className="rounded-lg border-2 border-neutral-800 bg-neutral-700 bg-opacity-30 bg-clip-padding p-2 text-gray-800 outline-none backdrop-blur-lg backdrop-filter focus:border-indigo-500 dark:text-gray-200"
 							defaultValue={search}
 							disabled={loading}
 							onChange={handleSearch}
@@ -213,7 +216,7 @@ export default function DataTable<T>({
 					<table
 						id={`table-${id}`}
 						key={`table-${id}`}
-						className="bg-neutral-800 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-30 rounded-lg"
+						className="rounded-lg bg-neutral-800 bg-opacity-30 bg-clip-padding backdrop-blur-lg backdrop-filter"
 						role="table"
 						summary="Punishments issued on the server"
 					>
@@ -223,16 +226,17 @@ export default function DataTable<T>({
 								<tr
 									key={`table-${id}-head-row-${idx}`}
 									role="row"
-									className="flex flex-col justify-start border-neutral-700 border-t py-4 first:pt-0 [&:nth-last-child(2)]:pb-0 xl:hidden"
+									className="flex flex-col justify-start border-t border-neutral-700 py-4 first:pt-0 xl:hidden [&:nth-last-child(2)]:pb-0"
 								>
 									{columns.map((columnData, idx2) => {
 										const data = row as any;
 										return (
 											<td
 												key={`table-${id}-head-${idx2}-${
-													columnData.field ?? columnData.label
+													columnData.field ??
+													columnData.label
 												}`}
-												className="flex gap-2 items-center py-1 px-4"
+												className="flex items-center gap-2 px-4 py-1"
 												role="cell"
 											>
 												{columnData.label && (
@@ -240,11 +244,15 @@ export default function DataTable<T>({
 														{columnData.label}:
 													</span>
 												)}
-												{columnData.renderCell?.(data) ??
+												{columnData.renderCell?.(
+													data
+												) ??
 													(columnData.field &&
 														getParsedFieldValue(
 															columnData,
-															data[columnData.field]
+															data[
+																columnData.field
+															]
 														))}
 											</td>
 										);
@@ -260,8 +268,10 @@ export default function DataTable<T>({
 							>
 								{columns.map((column) => (
 									<th
-										key={`table-${id}-head-${column.field ?? column.label}`}
-										className="py-2 px-4"
+										key={`table-${id}-head-${
+											column.field ?? column.label
+										}`}
+										className="px-4 py-2"
 										role="columnheader"
 										style={{
 											minWidth: column.minWidth,
@@ -281,24 +291,33 @@ export default function DataTable<T>({
 							className="hidden xl:contents"
 						>
 							{stateRows.entries.map((row, idx) => (
-								<tr key={`table-${id}-data-row-${idx}`} role="row">
+								<tr
+									key={`table-${id}-data-row-${idx}`}
+									role="row"
+								>
 									{columns.map((columnData, idx2) => {
 										const data = row as any;
 										return (
 											<td
 												key={`table-${id}-data-${idx2}`}
-												className="text-center py-2 px-4 border-neutral-700 border-t"
+												className="border-t border-neutral-700 px-4 py-2 text-center"
 												role="cell"
 												style={{
-													minWidth: columnData.minWidth,
-													maxWidth: columnData.maxWidth,
+													minWidth:
+														columnData.minWidth,
+													maxWidth:
+														columnData.maxWidth,
 												}}
 											>
-												{columnData.renderCell?.(data) ??
+												{columnData.renderCell?.(
+													data
+												) ??
 													(columnData.field &&
 														getParsedFieldValue(
 															columnData,
-															data[columnData.field]
+															data[
+																columnData.field
+															]
 														))}
 											</td>
 										);
@@ -307,12 +326,12 @@ export default function DataTable<T>({
 							))}
 						</tbody>
 					</table>
-					<div className="flex flex-col lg:flex-row gap-2 justify-center items-center">
+					<div className="flex flex-col items-center justify-center gap-2 lg:flex-row">
 						<select
 							defaultValue={size}
 							onChange={handleSize}
 							disabled={loading}
-							className="font-body bg-neutral-800 border-2 border-neutral-800 p-2 rounded-md text-gray-800 dark:text-gray-200"
+							className="rounded-md border-2 border-neutral-800 bg-neutral-800 p-2 font-body text-gray-800 dark:text-gray-200"
 							aria-label="Page size"
 						>
 							<option value={1}>1</option>
@@ -332,16 +351,21 @@ export default function DataTable<T>({
 									currentPage={page}
 									totalCount={stateRows.total}
 									pageSize={size}
-									onPageChange={(newPage) => handlePage(newPage)}
+									onPageChange={(newPage) =>
+										handlePage(newPage)
+									}
 									disabled={loading}
 								/>
 							</div>
 							{loading && <Loading active={true} size="lg" />}
-							{error && <p className="text-red-500">{error.message}</p>}
+							{error && (
+								<p className="text-red-500">{error.message}</p>
+							)}
 						</div>
 						<p>
 							Displaying {(page - 1) * size + 1} to{" "}
-							{(page - 1) * size + 1 + size - 1} of {stateRows.total} entries
+							{(page - 1) * size + 1 + size - 1} of{" "}
+							{stateRows.total} entries
 						</p>
 					</div>
 				</div>

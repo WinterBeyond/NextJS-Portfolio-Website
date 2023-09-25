@@ -4,7 +4,7 @@ export default function GithubIcon() {
 			viewBox="0 0 16 16"
 			version="1.1"
 			fill="currentColor"
-			className="w-8 h-8 text-white hover:opacity-75"
+			className="h-8 w-8 text-white hover:opacity-75"
 		>
 			<path
 				fillRule="evenodd"
