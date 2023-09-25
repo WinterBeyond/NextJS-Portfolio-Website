@@ -1,5 +1,3 @@
-export const revalidate = 3000;
-
 import Link from "next/link";
 import { Suspense } from "react";
 
@@ -119,7 +117,9 @@ export default function LandingPage() {
 					</>
 				}
 			>
-				<PokedexDataTable />
+				<Suspense fallback={<>Loading PokeDex...</>}>
+					<PokedexDataTable />
+				</Suspense>
 			</Section>
 			<Section
 				center

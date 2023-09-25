@@ -12,6 +12,9 @@ export default async function getTopMonthlySongs() {
 				headers: {
 					Authorization: `Bearer ${accessTokenData.access_token}`,
 				},
+				next: {
+					revalidate: 3000,
+				},
 			}
 		);
 

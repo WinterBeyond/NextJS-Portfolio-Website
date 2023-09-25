@@ -16,6 +16,9 @@ export default async function refreshSpotifyAccessToken() {
 				refresh_token:
 					process.env.SPOTIFY_OAUTH_REFRESH_TOKEN?.toString() ?? "",
 			}),
+			next: {
+				revalidate: 3000,
+			},
 		});
 	} catch (error) {
 		throw error;
