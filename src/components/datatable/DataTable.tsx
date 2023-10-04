@@ -10,17 +10,20 @@ import {
 } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import useFetcher from "@/hooks/useFetcher";
-import Loading from "./Loading";
+import Loading from "../Loading";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRefresh } from "@fortawesome/free-solid-svg-icons";
-import Pagination from "./Pagination";
+import Pagination from "../Pagination";
+import getParsedNumberOrDefault from "@/lib/getParsedNumberOrDefault";
+import DesktopDataTable from "./DesktopDataTable";
+import MobileDataTable from "./MobileDataTable";
 
 type Paginated<T> = {
 	entries: T[];
 	total: number;
 };
 
-type Column<T> = {
+export type Column<T> = {
 	field?: string;
 	label?: string;
 	booleanLabel?: {
@@ -42,18 +45,14 @@ type DataTableProps<T> = {
 	useParamsId?: boolean;
 };
 
-function getParsedNumberOrDefault(
-	str: string | null = "",
-	defaultValue: number,
-	minimumValue?: number
-) {
-	const parsedNumber = parseInt(str ?? "");
-	return isNaN(parsedNumber)
-		? defaultValue
-		: minimumValue && parsedNumber < minimumValue
-		? minimumValue
-		: parsedNumber;
-}
+type ParamUpdateKey = "page" | "size" | "search";
+
+export type IDataTable<T> = {
+	id: string;
+	summary: string;
+	columns: Column<T>[];
+	entries: T[];
+};
 
 export default function DataTable<T>({
 	id,
@@ -80,56 +79,27 @@ export default function DataTable<T>({
 	const size = getParsedNumberOrDefault(searchParams.get(sizeParamKey), 1, 1);
 	const search = searchParams.get(searchParamKey) || "";
 
-	const { initial, loading, data, error, sendRequest } = useFetcher<
-		Paginated<T>
-	>(
-		url
-			? `${url}?${new URLSearchParams({
-					page: page.toString(),
-					size: size.toString(),
-					search,
-			  })}`
-			: ""
-	);
+	const apiSearchParams = new URLSearchParams({
+		page: page.toString(),
+		size: size.toString(),
+		search,
+	});
+
+	const apiUrl = url ? `${url}?${apiSearchParams}` : "";
+
+	const { initial, loading, data, error, sendRequest } =
+		useFetcher<Paginated<T>>(apiUrl);
 
 	useEffect(() => {
 		if (data) setStateRows(data);
 	}, [data]);
-
-	const getParsedFieldValue = (column: Column<T>, data: any) => {
-		if (column.isDate) {
-			if (data instanceof Date) data = data.toLocaleString();
-			else data = new Date(data).toLocaleString();
-		}
-
-		if (column.booleanLabel && typeof data === "boolean") {
-			if (data) {
-				if (typeof column.booleanLabel.true === "string")
-					data = (
-						<span className="rounded-xl bg-green-500 px-2 py-0.5 text-xs font-semibold text-white">
-							{column.booleanLabel.true}
-						</span>
-					);
-				else data = column.booleanLabel.true;
-			} else {
-				if (typeof column.booleanLabel.false === "string")
-					data = (
-						<span className="rounded-xl bg-red-500 px-2 py-0.5 text-xs font-semibold text-white">
-							{column.booleanLabel.false}
-						</span>
-					);
-				else data = column.booleanLabel.false;
-			}
-		}
-
-		return data;
-	};
 
 	const getNewSearchParams = useCallback(
 		(key: string, value: string) => {
 			const newSearchParams = new URLSearchParams(searchParams);
 			if (!value && newSearchParams.has(key)) newSearchParams.delete(key);
 			else {
+				// If key is not page param & new search params has page param, then delete it as search/size update resets page to 1
 				if (key !== pageParamKey && newSearchParams.has(pageParamKey))
 					newSearchParams.delete(pageParamKey);
 				newSearchParams.set(key, value);
@@ -139,35 +109,34 @@ export default function DataTable<T>({
 		[searchParams, pageParamKey]
 	);
 
-	const handleSearch = useCallback(
-		(e: ChangeEvent<HTMLInputElement>) => {
-			clearTimeout(searchDebounceRef.current);
-			searchDebounceRef.current = setTimeout(() => {
-				router.replace(
-					`?${getNewSearchParams(searchParamKey, e.target.value)}`,
-					{
-						scroll: false,
-					}
-				);
-			}, 500);
-		},
-		[getNewSearchParams, router, searchParamKey]
-	);
+	const handleParamUpdate = (key: ParamUpdateKey, value: string) => {
+		const paramKey =
+			key === "page"
+				? pageParamKey
+				: key === "size"
+				? sizeParamKey
+				: searchParamKey;
 
-	const handlePage = (newPage: number) => {
-		router.replace(
-			`?${getNewSearchParams(pageParamKey, newPage.toString())}`,
-			{
-				scroll: false,
-			}
-		);
-	};
-
-	const handleSize = (e: ChangeEvent<HTMLSelectElement>) => {
-		router.replace(`?${getNewSearchParams(sizeParamKey, e.target.value)}`, {
+		router.replace(`?${getNewSearchParams(paramKey, value)}`, {
 			scroll: false,
 		});
 	};
+
+	const handleSearch = useCallback(
+		(e: ChangeEvent<HTMLInputElement>) => {
+			clearTimeout(searchDebounceRef.current);
+			searchDebounceRef.current = setTimeout(
+				() => handleParamUpdate("search", e.target.value),
+				500
+			);
+		},
+		[searchDebounceRef.current]
+	);
+
+	const handlePage = (newPage: number) =>
+		handleParamUpdate("page", newPage.toString());
+
+	const handleSize = (newSize: string) => handleParamUpdate("size", newSize);
 
 	useEffect(() => {
 		const abortController = new AbortController();
@@ -213,123 +182,22 @@ export default function DataTable<T>({
 							onChange={handleSearch}
 						/>
 					</div>
-					<table
-						id={`table-${id}`}
-						key={`table-${id}`}
-						className="rounded-lg bg-neutral-800 bg-opacity-30 bg-clip-padding backdrop-blur-lg backdrop-filter"
-						role="table"
+					<DesktopDataTable<T>
+						id={id}
+						columns={columns}
+						entries={stateRows.entries}
 						summary="Punishments issued on the server"
-					>
-						<thead key={`table-head-${id}`} role="rowgroup">
-							{/* MOBILE ONLY */}
-							{stateRows.entries.map((row, idx) => (
-								<tr
-									key={`table-${id}-head-row-${idx}`}
-									role="row"
-									className="flex flex-col justify-start border-t border-neutral-700 py-4 first:pt-0 xl:hidden [&:nth-last-child(2)]:pb-0"
-								>
-									{columns.map((columnData, idx2) => {
-										const data = row as any;
-										return (
-											<td
-												key={`table-${id}-head-${idx2}-${
-													columnData.field ??
-													columnData.label
-												}`}
-												className="flex items-center gap-2 px-4 py-1"
-												role="cell"
-											>
-												{columnData.label && (
-													<span className="font-semibold">
-														{columnData.label}:
-													</span>
-												)}
-												{columnData.renderCell?.(
-													data
-												) ??
-													(columnData.field &&
-														getParsedFieldValue(
-															columnData,
-															data[
-																columnData.field
-															]
-														))}
-											</td>
-										);
-									})}
-								</tr>
-							))}
-
-							{/* DESKTOP ONLY */}
-							<tr
-								key={`table-${id}-head-row`}
-								role="row"
-								className="hidden xl:contents"
-							>
-								{columns.map((column) => (
-									<th
-										key={`table-${id}-head-${
-											column.field ?? column.label
-										}`}
-										className="px-4 py-2"
-										role="columnheader"
-										style={{
-											minWidth: column.minWidth,
-											maxWidth: column.maxWidth,
-										}}
-									>
-										{column.label}
-									</th>
-								))}
-							</tr>
-						</thead>
-
-						{/* DESKTOP ONLY */}
-						<tbody
-							key={`table-${id}-data`}
-							role="rowgroup"
-							className="hidden xl:contents"
-						>
-							{stateRows.entries.map((row, idx) => (
-								<tr
-									key={`table-${id}-data-row-${idx}`}
-									role="row"
-								>
-									{columns.map((columnData, idx2) => {
-										const data = row as any;
-										return (
-											<td
-												key={`table-${id}-data-${idx2}`}
-												className="border-t border-neutral-700 px-4 py-2 text-center"
-												role="cell"
-												style={{
-													minWidth:
-														columnData.minWidth,
-													maxWidth:
-														columnData.maxWidth,
-												}}
-											>
-												{columnData.renderCell?.(
-													data
-												) ??
-													(columnData.field &&
-														getParsedFieldValue(
-															columnData,
-															data[
-																columnData.field
-															]
-														))}
-											</td>
-										);
-									})}
-								</tr>
-							))}
-						</tbody>
-					</table>
+					/>
+					<MobileDataTable<T>
+						id={id}
+						columns={columns}
+						entries={stateRows.entries}
+						summary="Punishments issued on the server"
+					/>
 					<div className="flex flex-col items-center justify-center gap-2 lg:flex-row">
 						<select
 							defaultValue={size}
-							onChange={handleSize}
+							onChange={(e) => handleSize(e.target.value)}
 							disabled={loading}
 							className="rounded-md border-2 border-neutral-800 bg-neutral-800 p-2 font-body text-gray-800 dark:text-gray-200"
 							aria-label="Page size"

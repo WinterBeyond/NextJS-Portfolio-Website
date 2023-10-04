@@ -1,18 +1,6 @@
+import getParsedNumberOrDefault from "@/lib/getParsedNumberOrDefault";
 import getPokemon from "@/lib/getPokemon";
 import { NextResponse, type NextRequest } from "next/server";
-
-function getParsedNumberOrDefault(
-	str: string | null = "",
-	defaultValue: number,
-	minimumValue?: number
-) {
-	const parsedNumber = parseInt(str ?? "");
-	return isNaN(parsedNumber)
-		? defaultValue
-		: minimumValue && parsedNumber < minimumValue
-		? minimumValue
-		: parsedNumber;
-}
 
 export async function GET(req: NextRequest) {
 	const pokemon = getPokemon();

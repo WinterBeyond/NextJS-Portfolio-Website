@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import DataTable from "./DataTable";
+import DataTable from "./datatable/DataTable";
 import Pokemon from "@/lib/models/pokemon";
 
 export default function PokedexDataTable() {
