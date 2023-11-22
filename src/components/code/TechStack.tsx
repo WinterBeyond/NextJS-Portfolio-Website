@@ -1,16 +1,11 @@
-type TechStackProps = {
-	tech: string;
-};
+import { Technology, TechnologyDetails } from "@/lib/models/technology";
 
-type Technology = {
-	[key: string]: {
-		label: string;
-		backgroundColor: string;
-	};
+type TechStackProps = {
+	tech: Technology;
 };
 
 export default function TechStack({ tech }: TechStackProps) {
-	const technologies: Technology = {
+	const technologies: TechnologyDetails = {
 		typescript: {
 			label: "TypeScript",
 			backgroundColor: "bg-blue-800",
