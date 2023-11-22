@@ -43,6 +43,7 @@ type DataTableProps<T> = {
 	columns: Column<T>[];
 	rows?: T[];
 	useParamsId?: boolean;
+	summary?: string;
 };
 
 type ParamUpdateKey = "page" | "size" | "search";
@@ -61,6 +62,7 @@ export default function DataTable<T>({
 	columns,
 	rows = [],
 	useParamsId = true,
+	summary = "",
 }: DataTableProps<T>) {
 	const router = useRouter();
 	const searchParams = useSearchParams();
@@ -109,18 +111,21 @@ export default function DataTable<T>({
 		[searchParams, pageParamKey]
 	);
 
-	const handleParamUpdate = (key: ParamUpdateKey, value: string) => {
-		const paramKey =
-			key === "page"
-				? pageParamKey
-				: key === "size"
-				? sizeParamKey
-				: searchParamKey;
+	const handleParamUpdate = useCallback(
+		(key: ParamUpdateKey, value: string) => {
+			const paramKey =
+				key === "page"
+					? pageParamKey
+					: key === "size"
+					? sizeParamKey
+					: searchParamKey;
 
-		router.replace(`?${getNewSearchParams(paramKey, value)}`, {
-			scroll: false,
-		});
-	};
+			router.replace(`?${getNewSearchParams(paramKey, value)}`, {
+				scroll: false,
+			});
+		},
+		[router, getNewSearchParams, pageParamKey, sizeParamKey, searchParamKey]
+	);
 
 	const handleSearch = useCallback(
 		(e: ChangeEvent<HTMLInputElement>) => {
@@ -130,7 +135,7 @@ export default function DataTable<T>({
 				500
 			);
 		},
-		[searchDebounceRef.current]
+		[handleParamUpdate]
 	);
 
 	const handlePage = (newPage: number) =>
@@ -186,13 +191,13 @@ export default function DataTable<T>({
 						id={id}
 						columns={columns}
 						entries={stateRows.entries}
-						summary="Punishments issued on the server"
+						summary={summary}
 					/>
 					<MobileDataTable<T>
 						id={id}
 						columns={columns}
 						entries={stateRows.entries}
-						summary="Punishments issued on the server"
+						summary={summary}
 					/>
 					<div className="flex flex-col items-center justify-center gap-2 lg:flex-row">
 						<select

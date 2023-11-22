@@ -108,7 +108,7 @@ export default function LandingPage() {
 						<br />
 						<br />
 						<Link
-							href="https://github.com/WinterBeyond/NextJS-Portfolio-Website/blob/main/src/components/DataTable.tsx"
+							href="https://github.com/WinterBeyond/NextJS-Portfolio-Website/blob/main/src/components/datatable/DataTable.tsx"
 							target="_blank"
 							className="rounded-lg border border-neutral-700 bg-neutral-900 bg-opacity-30 bg-clip-padding px-2 py-2 text-indigo-500 backdrop-blur-lg backdrop-filter hover:text-indigo-600"
 						>

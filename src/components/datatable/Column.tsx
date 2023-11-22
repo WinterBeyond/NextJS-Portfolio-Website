@@ -8,7 +8,11 @@ type ColumnProps<T> = {
 };
 
 export default function Column<T>({ isMobile, column, entry }: ColumnProps<T>) {
-	const getParsedFieldValue = (column: Column<T>, data: unknown) => {
+	const getParsedFieldValue = () => {
+		let data = entry as any;
+		if (column.field)
+			for (const field of column.field.split(".")) data = data[field];
+
 		if (
 			column.isDate &&
 			(data instanceof Date ||
@@ -40,10 +44,8 @@ export default function Column<T>({ isMobile, column, entry }: ColumnProps<T>) {
 		return data as ReactNode;
 	};
 
-	const cell =
-		column.renderCell?.(entry) ??
-		(column.field &&
-			getParsedFieldValue(column, (entry as any)[column.field]));
+	const cellValue =
+		column.renderCell?.(entry) ?? (column.field && getParsedFieldValue());
 
 	if (isMobile)
 		return (
@@ -51,7 +53,7 @@ export default function Column<T>({ isMobile, column, entry }: ColumnProps<T>) {
 				{column.label && (
 					<span className="font-semibold">{column.label}:</span>
 				)}
-				{cell}
+				{cellValue}
 			</td>
 		);
 
@@ -64,7 +66,7 @@ export default function Column<T>({ isMobile, column, entry }: ColumnProps<T>) {
 				maxWidth: column.maxWidth,
 			}}
 		>
-			{cell}
+			{cellValue}
 		</td>
 	);
 }
