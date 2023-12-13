@@ -68,4 +68,5 @@ jobs:
             source ~/.bashrc
             tar -xzvf ~/maxwiggedal.dev/app.tar.gz -C ~/maxwiggedal.dev
             cd ~/maxwiggedal.dev
+            npm install
             pm2 restart ecosystem.config.js
