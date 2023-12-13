@@ -15,11 +15,7 @@ module.exports = {
 			watch: false,
 			max_memory_restart: "1G",
 			env: env_shared,
-			env_production: {
-				NEXT_PUBLIC_GA_TRACKING_ID:
-					process.env.NEXT_PUBLIC_GA_TRACKING_ID,
-				...env_shared,
-			},
+			env_production: env_shared,
 		},
 	],
 };
