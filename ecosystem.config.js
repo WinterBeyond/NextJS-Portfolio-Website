@@ -10,17 +10,13 @@ module.exports = {
 		{
 			name: "personal-portfolio",
 			script: "npm start",
-			args: ["-- -p", process.env.PORT || "3000"],
+			args: ["-- -p 3020"],
 			instances: 1,
 			autorestart: true,
 			watch: false,
 			max_memory_restart: "1G",
-			env: {
-				NODE_ENV: "development",
-				...env_shared,
-			},
+			env: env_shared,
 			env_production: {
-				NODE_ENV: "production",
 				NEXT_PUBLIC_GA_TRACKING_ID:
 					process.env.NEXT_PUBLIC_GA_TRACKING_ID,
 				...env_shared,

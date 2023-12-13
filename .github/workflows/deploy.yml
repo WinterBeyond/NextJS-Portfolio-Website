@@ -21,6 +21,10 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
+      - name: Create Environment File
+        run: |
+          echo "NEXT_PUBLIC_GA_TRACKING_ID=${{ secrets.NEXT_PUBLIC_GA_TRACKING_ID }}" >> .env
+
       - name: Build Application
         run: npm run build
 
@@ -60,12 +64,10 @@ jobs:
           key: ${{ secrets.VPS_SSH_KEY }}
           script: |
             ssh-keyscan -H ${{ secrets.VPS_HOST }} >> ~/.ssh/known_hosts
-            echo "export PORT=${{ secrets.PORT }}" >> ~/.bashrc
-            echo "export SPOTIFY_OAUTH_CLIENT_ID=${{ secrets.SPOTIFY_OAUTH_CLIENT_ID }}" >> ~/.bashrc
-            echo "export SPOTIFY_OAUTH_SECRET=${{ secrets.SPOTIFY_OAUTH_SECRET }}" >> ~/.bashrc
-            echo "export SPOTIFY_OAUTH_REDIRECT_URI=${{ secrets.SPOTIFY_OAUTH_REDIRECT_URI }}" >> ~/.bashrc
-            echo "export SPOTIFY_OAUTH_REFRESH_TOKEN=${{ secrets.SPOTIFY_OAUTH_REFRESH_TOKEN }}" >> ~/.bashrc
-            echo "export NEXT_PUBLIC_GA_TRACKING_ID=${{ secrets.NEXT_PUBLIC_GA_TRACKING_ID }}" >> ~/.bashrc
+            echo "SPOTIFY_OAUTH_CLIENT_ID=${{ secrets.SPOTIFY_OAUTH_CLIENT_ID }}" >> ~/maxwiggedal.dev/.env
+            echo "SPOTIFY_OAUTH_SECRET=${{ secrets.SPOTIFY_OAUTH_SECRET }}" >> ~/maxwiggedal.dev/.env
+            echo "SPOTIFY_OAUTH_REDIRECT_URI=${{ secrets.SPOTIFY_OAUTH_REDIRECT_URI }}" >> ~/maxwiggedal.dev/.env
+            echo "SPOTIFY_OAUTH_REFRESH_TOKEN=${{ secrets.SPOTIFY_OAUTH_REFRESH_TOKEN }}" >> ~/maxwiggedal.dev/.env
             source ~/.bashrc
             tar -xzvf ~/maxwiggedal.dev/app.tar.gz -C ~/maxwiggedal.dev
             cd ~/maxwiggedal.dev
