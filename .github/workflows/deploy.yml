@@ -39,9 +39,9 @@ jobs:
 
     steps:
       - name: Download Artifacts
-          uses: actions/download-artifact@v3
-          with:
-            name: app
+        uses: actions/download-artifact@v3
+        with:
+          name: app
 
       - name: SSH into VPS and Deploy
         uses: appleboy/ssh-action@master
