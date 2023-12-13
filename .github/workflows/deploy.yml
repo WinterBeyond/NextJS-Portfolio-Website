@@ -60,6 +60,7 @@ jobs:
           key: ${{ secrets.VPS_SSH_KEY }}
           script: |
             ssh-keyscan -H ${{ secrets.VPS_HOST }} >> ~/.ssh/known_hosts
+            echo "export PORT=${{ secrets.PORT }}" >> ~/.bashrc
             echo "export SPOTIFY_OAUTH_CLIENT_ID=${{ secrets.SPOTIFY_OAUTH_CLIENT_ID }}" >> ~/.bashrc
             echo "export SPOTIFY_OAUTH_SECRET=${{ secrets.SPOTIFY_OAUTH_SECRET }}" >> ~/.bashrc
             echo "export SPOTIFY_OAUTH_REDIRECT_URI=${{ secrets.SPOTIFY_OAUTH_REDIRECT_URI }}" >> ~/.bashrc
