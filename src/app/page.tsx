@@ -9,6 +9,8 @@ import SpotifySongGrid from "@/components/spotify/SpotifySongGrid";
 import TypeAnimation from "@/components/TypeAnimation";
 import TechStack from "@/components/code/TechStack";
 import PokedexDataTable from "@/components/PokedexDataTable";
+import ErrorBoundary from "@/components/ErrorBoundary";
+import Loading from "@/components/Loading";
 
 export default function LandingPage() {
 	const getAge = () => {
@@ -135,9 +137,17 @@ export default function LandingPage() {
 					</>
 				}
 			>
-				<Suspense fallback={<>Loading songs...</>}>
-					<SpotifySongGrid />
-				</Suspense>
+				<ErrorBoundary
+					fallback={
+						<span className="text-lg font-bold text-red-500">
+							Unable to fetch songs!
+						</span>
+					}
+				>
+					<Suspense fallback={<Loading active />}>
+						<SpotifySongGrid />
+					</Suspense>
+				</ErrorBoundary>
 			</Section>
 		</>
 	);

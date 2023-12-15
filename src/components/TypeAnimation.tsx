@@ -28,7 +28,6 @@ export default function TypeAnimation({
 	eraseSpeed = 300,
 	repeat = Infinity,
 }: TypeAnimationProps) {
-	const [display, setDisplay] = useState(false);
 	const [currentSequence, setCurrentSequence] = useState<Sequence>({
 		text: "",
 		index: 0,
@@ -37,8 +36,6 @@ export default function TypeAnimation({
 	});
 
 	if (cursor) className = `${className} cursor-typing`.trim();
-
-	useEffect(() => setDisplay(true), []);
 
 	useEffect(() => {
 		const sequenceText = textList[currentSequence.index];
@@ -111,7 +108,5 @@ export default function TypeAnimation({
 		return () => clearTimeout(sequenceTimeout);
 	}, [typeSpeed, eraseSpeed, textList, repeat, currentSequence]);
 
-	return display
-		? createElement(wrapper, { className }, currentSequence.text)
-		: null;
+	return createElement(wrapper, { className }, currentSequence.text);
 }

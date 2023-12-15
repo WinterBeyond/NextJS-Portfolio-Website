@@ -19,17 +19,13 @@ export default async function fetcher<T>(
 	url: string,
 	options: RequestOptions = {}
 ): Promise<T> {
-	try {
-		const response = await fetch(url, options);
+	const response = await fetch(url, options);
 
-		let data;
-		if (response.headers.get("Content-Type")?.includes("application/json"))
-			data = await response.json();
-		else data = await response.text();
+	let data;
+	if (response.headers.get("Content-Type")?.includes("application/json"))
+		data = await response.json();
+	else data = await response.text();
 
-		if (!response.ok) throw new Error(data?.message ?? response.statusText);
-		return data as T;
-	} catch (error) {
-		throw error;
-	}
+	if (!response.ok) throw new Error(data?.message ?? response.statusText);
+	return data as T;
 }

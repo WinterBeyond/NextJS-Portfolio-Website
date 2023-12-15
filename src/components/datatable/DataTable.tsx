@@ -67,7 +67,6 @@ export default function DataTable<T>({
 	const router = useRouter();
 	const searchParams = useSearchParams();
 	const searchDebounceRef = useRef<NodeJS.Timeout>();
-	const [display, setDisplay] = useState(false);
 	const [stateRows, setStateRows] = useState<Paginated<T>>({
 		entries: rows,
 		total: rows.length,
@@ -92,8 +91,6 @@ export default function DataTable<T>({
 
 	const { initial, loading, data, error, sendRequest } =
 		useFetcher<Paginated<T>>(apiUrl);
-
-	useEffect(() => setDisplay(true), []);
 
 	useEffect(() => {
 		if (data) setStateRows(data);
@@ -153,8 +150,6 @@ export default function DataTable<T>({
 			abortController.abort();
 		};
 	}, [sendRequest, page, size, search]);
-
-	if (!display) return null;
 
 	return (
 		<>
