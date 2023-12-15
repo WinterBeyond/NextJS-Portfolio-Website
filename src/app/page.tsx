@@ -117,9 +117,7 @@ export default function LandingPage() {
 					</>
 				}
 			>
-				<Suspense fallback={<>Loading PokeDex...</>}>
-					<PokedexDataTable />
-				</Suspense>
+				<PokedexDataTable />
 			</Section>
 			<Section
 				center

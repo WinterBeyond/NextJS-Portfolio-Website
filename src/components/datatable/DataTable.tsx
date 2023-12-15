@@ -120,8 +120,8 @@ export default function DataTable<T>({
 				key === "page"
 					? pageParamKey
 					: key === "size"
-					  ? sizeParamKey
-					  : searchParamKey;
+						? sizeParamKey
+						: searchParamKey;
 
 			router.replace(`?${getNewSearchParams(paramKey, value)}`, {
 				scroll: false,

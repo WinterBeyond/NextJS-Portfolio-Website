@@ -3,6 +3,14 @@ import getSpotifyAccessToken from "@/lib/getSpotifyAccessToken";
 import { type NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
+	if (process.env.NODE_ENV !== "development")
+		return NextResponse.json(
+			{ message: "This API endpoint is only available in development!" },
+			{
+				status: 403,
+			}
+		);
+
 	const state = generateRandomString(16);
 	const scope = "user-top-read";
 
