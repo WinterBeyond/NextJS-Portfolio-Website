@@ -1,6 +1,7 @@
 "use client";
 
 import {
+	CharacterNamesToUnicodes,
 	CharacterTuple,
 	CharacterUnicode,
 	MAX_HEIGHT,
@@ -18,7 +19,7 @@ export default function ValorantChatPage() {
 	const [isStretched, setIsStretched] = useState(false);
 	const [height, setHeight] = useState(MAX_HEIGHT);
 	const [selectedCharacter, setSelectedCharacter] =
-		useState<CharacterUnicode>("█");
+		useState<CharacterUnicode>(CharacterNamesToUnicodes.White);
 
 	useEffect(() => {
 		setGrid(generateGridTemplate(isStretched));
@@ -96,7 +97,7 @@ export default function ValorantChatPage() {
 	};
 
 	return (
-		<div className="flex h-screen w-full flex-col items-center justify-center gap-8 p-32">
+		<div className="flex h-screen w-full flex-col items-center justify-center gap-8 p-32 xl:px-80">
 			<div className="flex flex-col gap-6 text-white">
 				<div className="text-center">
 					<h1 className="text-4xl font-bold sm:text-2xl">
