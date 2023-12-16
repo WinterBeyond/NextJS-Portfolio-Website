@@ -11,19 +11,16 @@ import {
 	generateGridTemplate,
 	generateText,
 } from "@/lib/ascii";
-import { useEffect, useState } from "react";
+import Link from "next/link";
+import { useState } from "react";
 
 export default function ValorantChatPage() {
-	const [grid, setGrid] = useState(generateGridTemplate());
+	const [grid, setGrid] = useState(generateGridTemplate(MAX_HEIGHT));
 	const [isMouseDown, setIsMouseDown] = useState(false);
 	const [isStretched, setIsStretched] = useState(false);
 	const [height, setHeight] = useState(MAX_HEIGHT);
 	const [selectedCharacter, setSelectedCharacter] =
 		useState<CharacterUnicode>(CharacterNamesToUnicodes.White);
-
-	useEffect(() => {
-		setGrid(generateGridTemplate(isStretched));
-	}, [isStretched]);
 
 	const width = isStretched ? STRETCHED_MAX_WIDTH : MAX_WIDTH;
 
@@ -104,6 +101,16 @@ export default function ValorantChatPage() {
 		<div className="flex h-screen w-full flex-col items-center justify-center gap-8 p-32 xl:px-80">
 			<div className="flex flex-col gap-6 text-white">
 				<div className="text-center">
+					<p className="text-sm text-gray-300">
+						Created By:{" "}
+						<Link
+							className="text-blue-300 underline"
+							href="https://tracker.gg/valorant/profile/riot/WinterBeyond%23DEV/overview"
+							target="_blank"
+						>
+							WinterBeyond#DEV
+						</Link>
+					</p>
 					<h1 className="text-4xl font-bold sm:text-2xl">
 						Valorant Chat ASCII Art
 					</h1>
@@ -114,9 +121,14 @@ export default function ValorantChatPage() {
 				<div className="hidden flex-col items-center gap-2 lg:flex">
 					<select
 						className="w-full rounded-md border border-gray-500 bg-neutral-600 px-4 py-2 text-base focus:border-blue-500"
-						onChange={(e) =>
-							setIsStretched(e.target.value === "stretched")
-						}
+						onChange={(e) => {
+							const newIsStretched =
+								e.target.value === "stretched";
+							setIsStretched(newIsStretched);
+							setGrid(
+								generateGridTemplate(height, newIsStretched)
+							);
+						}}
 					>
 						<option value="fullhd">Full HD (16:9)</option>
 						<option value="stretched">Stretched (4:3)</option>
@@ -158,7 +170,9 @@ export default function ValorantChatPage() {
 					</button>
 					<button
 						className="rounded-lg bg-red-500 p-2 text-lg hover:bg-red-600"
-						onClick={() => setGrid(generateGridTemplate())}
+						onClick={() =>
+							setGrid(generateGridTemplate(height, isStretched))
+						}
 					>
 						Reset
 					</button>
@@ -185,12 +199,13 @@ export default function ValorantChatPage() {
 					style={{
 						gridTemplateRows: `repeat(${height}, 1fr)`,
 						gridTemplateColumns: `repeat(${width}, 1fr)`,
+						maxHeight: `${height * 4}rem`,
 					}}
 				>
 					{grid.map((characterUnicode, index) => (
 						<button
 							key={`grid-unicode-${index}`}
-							className="border text-xl hover:border-4 hover:border-red-500"
+							className="max-w-16 max-h-16 border text-xl hover:border-4 hover:border-red-500"
 							style={{
 								background:
 									getBackgroundColorFromUnicode(
