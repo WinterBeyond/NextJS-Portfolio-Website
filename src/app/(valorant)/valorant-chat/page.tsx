@@ -36,9 +36,13 @@ export default function ValorantChatPage() {
 			case "█":
 				return "white";
 			case "▀":
-				return "linear-gradient(to bottom, black 50%, white 50%)";
-			case "▄":
 				return "linear-gradient(to bottom, white 50%, black 50%)";
+			case "▄":
+				return "linear-gradient(to top, white 50%, black 50%)";
+			case "▌":
+				return "linear-gradient(to right, white 50%, black 50%)";
+			case "▐":
+				return "linear-gradient(to left, white 50%, black 50%)";
 			default:
 				return "transparent";
 		}

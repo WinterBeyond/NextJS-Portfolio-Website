@@ -1,5 +1,5 @@
-export type CharacterName = "Gray" | "White" | "White Top" | "White Bottom";
-export type CharacterUnicode = "░" | "█" | "▀" | "▄";
+export type CharacterName = "Gray" | "White" | "White Top" | "White Bottom" | "White Left" | "White Right";
+export type CharacterUnicode = "░" | "█" | "▀" | "▄" | "▌" | "▐";
 export type CharacterNameToUnicode = Record<CharacterName, CharacterUnicode>;
 export type CharacterUnicodeToName = Record<CharacterUnicode, CharacterName>;
 export type Grid = CharacterUnicode[];
@@ -9,13 +9,17 @@ export const CharacterNamesToUnicodes: CharacterNameToUnicode = {
 	White: "█",
 	"White Top": "▀",
 	"White Bottom": "▄",
+	"White Left": "▌",
+	"White Right": "▐",
 };
 
 export const CharacterUnicodesToNames: CharacterUnicodeToName = {
 	"░": "Gray",
 	"█": "White",
 	"▀": "White Top",
-	"▄": "White Bottom"
+	"▄": "White Bottom",
+	"▌": "White Left",
+	"▐": "White Right",
 };
 
 export const CharacterTuple: [CharacterName, CharacterUnicode][] = [
@@ -23,6 +27,8 @@ export const CharacterTuple: [CharacterName, CharacterUnicode][] = [
 	[CharacterUnicodesToNames["█"], CharacterNamesToUnicodes.White],
 	[CharacterUnicodesToNames["▀"], CharacterNamesToUnicodes["White Top"]],
 	[CharacterUnicodesToNames["▄"], CharacterNamesToUnicodes["White Bottom"]],
+	[CharacterUnicodesToNames["▌"], CharacterNamesToUnicodes["White Left"]],
+	[CharacterUnicodesToNames["▐"], CharacterNamesToUnicodes["White Right"]],
 ];
 
 export const MAX_HEIGHT = 13;
