@@ -82,7 +82,7 @@ export default function ValorantChatPage() {
 						Click/Drag to create ASCII art for Valorant chat!
 					</p>
 				</div>
-				<div className="flex items-center gap-2">
+				<div className="hidden items-center gap-2 lg:flex">
 					<button
 						className="rounded-lg bg-blue-600 p-2 text-lg hover:bg-blue-700"
 						onClick={copyText}
@@ -103,7 +103,7 @@ export default function ValorantChatPage() {
 					</button>
 				</div>
 			</div>
-			<div className="flex h-full w-full gap-4">
+			<div className="hidden h-full w-full gap-4 lg:flex">
 				<aside className="flex flex-col gap-2">
 					{CharacterTuple.map((character) => (
 						<button
@@ -120,7 +120,7 @@ export default function ValorantChatPage() {
 					))}
 				</aside>
 				<div
-					className="hidden w-full lg:grid"
+					className="grid w-full"
 					style={{
 						gridTemplateRows: `repeat(${height}, 1fr)`,
 						gridTemplateColumns: `repeat(${width}, 1fr)`,
