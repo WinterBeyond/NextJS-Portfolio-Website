@@ -3,14 +3,14 @@
 import {
 	CharacterTuple,
 	CharacterUnicode,
-	CharacterUnicodesToNames,
 	MAX_HEIGHT,
 	MAX_WIDTH,
 	STRETCHED_MAX_WIDTH,
+	generateGridRow,
 	generateGridTemplate,
 	generateText,
 } from "@/lib/ascii";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function ValorantChatPage() {
 	const [grid, setGrid] = useState(generateGridTemplate());
@@ -19,6 +19,10 @@ export default function ValorantChatPage() {
 	const [height, setHeight] = useState(MAX_HEIGHT);
 	const [selectedCharacter, setSelectedCharacter] =
 		useState<CharacterUnicode>("█");
+
+	useEffect(() => {
+		setGrid(generateGridTemplate(isStretched));
+	}, [isStretched]);
 
 	const width = isStretched ? STRETCHED_MAX_WIDTH : MAX_WIDTH;
 
@@ -71,16 +75,68 @@ export default function ValorantChatPage() {
 		anchorElement.click();
 	};
 
+	const increaseHeight = () => {
+		if (height >= MAX_HEIGHT) return;
+
+		setHeight((prev) => prev + 1);
+		setGrid((prevGrid) => [...prevGrid, ...generateGridRow(isStretched)]);
+	};
+
+	const decreaseHeight = () => {
+		if (height <= 1) return;
+
+		setHeight((prev) => prev - 1);
+		setGrid((prevGrid) =>
+			prevGrid.slice(
+				0,
+				prevGrid.length -
+					(isStretched ? STRETCHED_MAX_WIDTH : MAX_WIDTH)
+			)
+		);
+	};
+
 	return (
 		<div className="flex h-screen w-full flex-col items-center justify-center gap-8 p-32">
-			<div className="flex flex-col gap-4 text-center text-white">
-				<div>
+			<div className="flex flex-col gap-6 text-white">
+				<div className="text-center">
 					<h1 className="text-4xl font-bold sm:text-2xl">
 						Valorant Chat ASCII Art
 					</h1>
 					<p className="text-base">
 						Click/Drag to create ASCII art for Valorant chat!
 					</p>
+				</div>
+				<div className="hidden flex-col items-center gap-2 lg:flex">
+					<select
+						className="w-full rounded-md border border-gray-500 bg-neutral-600 px-4 py-2 text-base focus:border-blue-500"
+						onChange={(e) =>
+							setIsStretched(e.target.value === "stretched")
+						}
+					>
+						<option value="fullhd">Full HD (16:9)</option>
+						<option value="stretched">Stretched (4:3)</option>
+					</select>
+					<div className="flex items-center gap-2">
+						<p className="text-lg font-semibold">
+							Height: {height}
+						</p>
+						<button
+							className={`rounded-lg bg-neutral-600 p-2 text-sm hover:bg-neutral-700 ${
+								height <= 1 && "opacity-50"
+							}`}
+							onClick={decreaseHeight}
+						>
+							-1
+						</button>
+						<button
+							className={`rounded-lg bg-neutral-600 p-2 text-sm hover:bg-neutral-700 ${
+								height >= MAX_HEIGHT && "opacity-50"
+							}`}
+							onClick={increaseHeight}
+						>
+							+1
+						</button>
+					</div>
 				</div>
 				<div className="hidden items-center gap-2 lg:flex">
 					<button

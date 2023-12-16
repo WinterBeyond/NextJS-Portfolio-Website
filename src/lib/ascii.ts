@@ -28,8 +28,12 @@ export const CharacterTuple: [CharacterName, CharacterUnicode][] = [
 export const MAX_HEIGHT = 13;
 export const MAX_WIDTH = 26, STRETCHED_MAX_WIDTH = 27;
 
-export function generateGridTemplate(): Grid {
-	return new Array(MAX_HEIGHT * MAX_WIDTH).fill("░");
+export function generateGridTemplate(isStretched = false): Grid {
+	return new Array(MAX_HEIGHT * (isStretched ? STRETCHED_MAX_WIDTH : MAX_WIDTH)).fill("░");
+}
+
+export function generateGridRow(isStretched = false): Grid {
+	return new Array(isStretched ? STRETCHED_MAX_WIDTH : MAX_WIDTH).fill("░");
 }
 
 export function generateText(grid: Grid, isStretched = false): string {
