@@ -9,15 +9,18 @@ import {
 	STRETCHED_MAX_WIDTH,
 	generateGridRow,
 	generateGridTemplate,
+	generateGridTemplateFromClipboard,
 	generateText,
 } from "@/lib/ascii";
 import Link from "next/link";
-import { useState } from "react";
+import { useRef, useState, useCallback } from "react";
 
 export default function ValorantChatPage() {
 	const [grid, setGrid] = useState(generateGridTemplate(MAX_HEIGHT));
 	const [isMouseDown, setIsMouseDown] = useState(false);
 	const [isStretched, setIsStretched] = useState(false);
+	const [promptText, setPromptText] = useState("");
+	const promptTextModalRef = useRef<HTMLDialogElement>(null);
 	const [height, setHeight] = useState(MAX_HEIGHT);
 	const [selectedCharacter, setSelectedCharacter] =
 		useState<CharacterUnicode>(CharacterNamesToUnicodes.White);
@@ -76,6 +79,28 @@ export default function ValorantChatPage() {
 		anchorElement.download = "valorant-ascii-art.txt";
 		anchorElement.click();
 	};
+
+	const loadClipboardContent = useCallback(
+		async (isModal: boolean) => {
+			try {
+				const text = isModal
+					? promptText
+					: await navigator.clipboard.readText();
+
+				if (!text) return;
+
+				promptTextModalRef.current?.close();
+				setPromptText("");
+				setGrid(
+					generateGridTemplateFromClipboard(text, height, isStretched)
+				);
+			} catch (error) {
+				console.error(error);
+				promptTextModalRef.current?.showModal();
+			}
+		},
+		[height, isStretched, promptText]
+	);
 
 	const increaseHeight = () => {
 		if (height >= MAX_HEIGHT) return;
@@ -169,6 +194,12 @@ export default function ValorantChatPage() {
 						Download Text
 					</button>
 					<button
+						className="rounded-lg bg-gray-200 p-2 text-lg text-black hover:bg-gray-300"
+						onClick={() => loadClipboardContent(false)}
+					>
+						Load Clipboard
+					</button>
+					<button
 						className="rounded-lg bg-red-500 p-2 text-lg hover:bg-red-600"
 						onClick={() =>
 							setGrid(generateGridTemplate(height, isStretched))
@@ -222,6 +253,32 @@ export default function ValorantChatPage() {
 			<p className="font-bold text-red-500 lg:hidden">
 				Sorry, Canvas is only available on desktop!
 			</p>
+			<dialog ref={promptTextModalRef} className="w-1/4 bg-transparent">
+				<div className="hidden flex-col gap-2 rounded-lg bg-neutral-800 p-4 lg:flex">
+					<textarea
+						className="h-80 resize-none rounded-lg border border-gray-500 bg-neutral-600 px-4 py-2 text-base text-white outline-none focus:border-blue-500"
+						value={promptText}
+						onChange={(e) => setPromptText(e.target.value)}
+					/>
+					<div className="flex items-center justify-center gap-2">
+						<button
+							className="rounded-lg bg-gray-200 px-4 py-2 text-lg text-black hover:bg-gray-300"
+							onClick={() => loadClipboardContent(true)}
+						>
+							Load Clipboard
+						</button>
+						<button
+							className="rounded-lg bg-red-500 px-4 py-2 text-lg text-white hover:bg-red-600"
+							onClick={() => {
+								promptTextModalRef.current?.close();
+								setPromptText("");
+							}}
+						>
+							Cancel
+						</button>
+					</div>
+				</div>
+			</dialog>
 		</div>
 	);
 }

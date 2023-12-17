@@ -38,6 +38,17 @@ export function generateGridTemplate(height: number, isStretched = false): Grid 
 	return new Array(height * (isStretched ? STRETCHED_MAX_WIDTH : MAX_WIDTH)).fill("░");
 }
 
+export function generateGridTemplateFromClipboard(text: string, height: number, isStretched = false): Grid {
+	text = text.replace(/\s/g, "");
+	const grid = new Array(height * (isStretched ? STRETCHED_MAX_WIDTH : MAX_WIDTH)).fill("░");
+	for (let i = 0, len = text.length; i < len; i++) {
+		if (i >= grid.length) break;
+		if (Object.keys(CharacterUnicodesToNames).includes(text[i]))
+			grid[i] = text[i];
+	}
+	return grid;
+}
+
 export function generateGridRow(isStretched = false): Grid {
 	return generateGridTemplate(1, isStretched);
 }
