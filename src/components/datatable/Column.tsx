@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
-import { Column } from "./DataTable";
+import { type Column } from "./DataTable";
+import ClientDate from "../ClientDate";
 
 type ColumnProps<T> = {
 	isMobile?: boolean;
@@ -19,7 +20,7 @@ export default function Column<T>({ isMobile, column, entry }: ColumnProps<T>) {
 				typeof data === "string" ||
 				typeof data === "number")
 		)
-			data = new Date(data).toLocaleString();
+			data = <ClientDate date={data} />;
 
 		if (column.booleanLabel && typeof data === "boolean") {
 			if (data) {

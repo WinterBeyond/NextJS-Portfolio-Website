@@ -1,4 +1,5 @@
 import ExperienceInterface from "@/lib/models/experience";
+import ClientDate from "../ClientDate";
 
 type ExperienceProps = {
 	experience: ExperienceInterface;
@@ -14,15 +15,27 @@ export default function Experience({ experience }: ExperienceProps) {
 		>
 			<div>
 				<p className="text-sm font-semibold uppercase text-gray-400">
-					{experience.startDate.toLocaleString("default", {
-						month: "long",
-						year: "numeric",
-					})}{" "}
+					<ClientDate
+						date={experience.startDate}
+						mode="date"
+						options={{
+							month: "long",
+							year: "numeric",
+						}}
+					/>{" "}
 					-{" "}
-					{experience.endDate?.toLocaleString("default", {
-						month: "long",
-						year: "numeric",
-					}) ?? "PRESENT"}
+					{experience.endDate ? (
+						<ClientDate
+							date={experience.endDate}
+							mode="date"
+							options={{
+								month: "long",
+								year: "numeric",
+							}}
+						/>
+					) : (
+						"PRESENT"
+					)}
 				</p>
 				<label className="text-2xl font-bold text-white">
 					{experience.position}

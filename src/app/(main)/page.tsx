@@ -11,13 +11,9 @@ import TechStack from "@/components/code/TechStack";
 import PokedexDataTable from "@/components/PokedexDataTable";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import Loading from "@/components/Loading";
+import Age from "@/components/Age";
 
 export default function LandingPage() {
-	const getAge = () => {
-		const ageDate = new Date(Date.now() - new Date(2003, 1, 15).getTime());
-		return Math.abs(ageDate.getUTCFullYear() - 1970);
-	};
-
 	return (
 		<>
 			<Section
@@ -40,7 +36,7 @@ export default function LandingPage() {
 				}
 				description={
 					<>
-						I am a {getAge()} year old{" "}
+						I am a <Age /> year old{" "}
 						<span className="bg-gradient-to-r from-emerald-500 to-lime-600 bg-clip-text text-transparent">
 							Software Engineer
 						</span>{" "}

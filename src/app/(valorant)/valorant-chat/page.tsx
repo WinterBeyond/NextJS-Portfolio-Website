@@ -232,6 +232,7 @@ export default function ValorantChatPage() {
 						gridTemplateColumns: `repeat(${width}, 1fr)`,
 						maxHeight: `${height * 4}rem`,
 					}}
+					onMouseLeave={handleMouseUp}
 				>
 					{grid.map((characterUnicode, index) => (
 						<button
