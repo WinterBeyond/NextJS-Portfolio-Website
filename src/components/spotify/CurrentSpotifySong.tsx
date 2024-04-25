@@ -1,0 +1,51 @@
+"use client";
+
+import { useSpotifySongContext } from "@/providers/SpotifySongProvider";
+import SpotifySong from "./SpotifySong";
+import { useEffect, useMemo, useState } from "react";
+import { cn } from "@/lib/common";
+
+export default function CurrentSpotifySong() {
+	const [isInitial, setIsInitial] = useState(false);
+	const [isInactive, setIsInactive] = useState(false);
+	const { currentSong } = useSpotifySongContext();
+
+	const isPaused = useMemo(
+		() => !!currentSong?.state.paused,
+		[currentSong?.state.paused]
+	);
+
+	useEffect(() => {
+		if (!currentSong) return;
+		if (!isInitial && !isPaused) {
+			setIsInitial(true);
+			setIsInactive(false);
+		}
+	}, [currentSong, isInitial, isPaused]);
+
+	useEffect(() => {
+		let timeout: NodeJS.Timeout;
+		if (isPaused)
+			timeout = setTimeout(() => {
+				setIsInitial(false);
+				setIsInactive(true);
+			}, 10_000);
+
+		return () => {
+			clearTimeout(timeout);
+		};
+	}, [isPaused]);
+
+	return (
+		<div
+			className={cn(
+				"fixed bottom-10 left-1/2 z-20 w-full max-w-5xl -translate-x-1/2 transform text-white",
+				isInitial && "slide-up",
+				isInactive && "slide-down",
+				!currentSong && "pointer-events-none opacity-0"
+			)}
+		>
+			<SpotifySong song={currentSong} extended />
+		</div>
+	);
+}

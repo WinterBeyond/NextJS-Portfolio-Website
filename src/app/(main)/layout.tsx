@@ -6,6 +6,8 @@ import GoogleAnalytics from "@/components/GoogleAnalytics";
 
 import { config as fontawesomeConfig } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
+import SpotifySongProvider from "@/providers/SpotifySongProvider";
+import CurrentSpotifySong from "@/components/spotify/CurrentSpotifySong";
 fontawesomeConfig.autoAddCss = false;
 
 const title = "Max Wiggedal - Full Stack Web Developer";
@@ -57,12 +59,15 @@ export default function RootLayout({ children }: RootLayoutProps) {
 		<html lang="en">
 			<head />
 			<GoogleAnalytics />
-			<body className="bg-gradient-to-br from-gray-800 to-black">
-				<main className="mx-auto my-28 flex max-w-7xl flex-col gap-48 p-5">
-					{children}
-					<Footer />
-				</main>
-			</body>
+			<SpotifySongProvider>
+				<body className="bg-gradient-to-br from-gray-800 to-black">
+					<main className="mx-auto my-28 flex max-w-7xl flex-col gap-48 p-5">
+						{children}
+						<CurrentSpotifySong />
+						<Footer />
+					</main>
+				</body>
+			</SpotifySongProvider>
 		</html>
 	);
 }

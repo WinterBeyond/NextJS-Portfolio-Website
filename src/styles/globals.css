@@ -19,6 +19,34 @@
 	direction: rtl;
 }
 
+.slide-up {
+	animation: slide-up 2.5s ease-out forwards;
+}
+
+.slide-down {
+	animation: slide-down 2.5s ease-out forwards;
+}
+
+@keyframes slide-up {
+	0% {
+		transform: translateX(-50%) translateY(100%);
+		opacity: 100;
+	}
+	100% {
+		transform: translateX(-50%) translateY(0);
+	}
+}
+
+@keyframes slide-down {
+	0% {
+		transform: translateX(-50%) translateY(0);
+	}
+	100% {
+		transform: translateX(-50%) translateY(100%);
+		opacity: 0;
+	}
+}
+
 @keyframes blink {
 	50% {
 		opacity: 0;

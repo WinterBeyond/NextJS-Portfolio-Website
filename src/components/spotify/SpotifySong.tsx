@@ -1,6 +1,6 @@
 "use client";
 
-import { MouseEvent, useEffect, useState } from "react";
+import { MouseEvent, useCallback, useEffect, useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -8,106 +8,160 @@ import Song from "@/lib/models/song";
 import PauseIcon from "@/components/icons/PauseIcon";
 import PlayIcon from "@/components/icons/PlayIcon";
 import Tooltip from "@/components/Tooltip";
+import { useSpotifySongContext } from "@/providers/SpotifySongProvider";
+import { cn } from "@/lib/common";
 
 type SpotifySongProps = {
-	song: Song;
+	song?: Song;
+	extended?: boolean;
 };
 
-type AudioState = {
-	audio?: HTMLAudioElement;
-	paused: boolean;
-};
+function formatTime(timeInSeconds: number): string {
+	const minutes = Math.floor(timeInSeconds / 60);
+	const seconds = Math.floor(timeInSeconds % 60);
+	return `${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
+}
 
-export default function SpotifySong({ song }: SpotifySongProps) {
-	const [audioState, setAudioState] = useState<AudioState>();
-	const listFormat = new Intl.ListFormat();
+const listFormat = new Intl.ListFormat();
 
-	const onAudioPlay = () => {
-		setAudioState((previousAudioState) => ({
-			...previousAudioState,
-			paused: false,
-		}));
-	};
+export default function SpotifySong({ song, extended }: SpotifySongProps) {
+	const { songs, registerSong, currentSong, timePlayed, setCurrentSongId } =
+		useSpotifySongContext();
 
-	const onAudioPause = () => {
-		setAudioState((previousAudioState) => ({
-			...previousAudioState,
-			paused: true,
-		}));
-	};
+	const togglePreviewAudio = useCallback(
+		(e: MouseEvent<HTMLButtonElement>) => {
+			e.preventDefault();
+
+			const statefulSong = songs.find((s) => s.id === song?.id);
+
+			// Song is not registered
+			if (!statefulSong || !statefulSong.state.audio) return;
+
+			// Playback is not ready yet
+			if (statefulSong.state.audio.readyState < 3) return;
+
+			// Another or no song is playing
+			if (song?.id !== currentSong?.id) {
+				try {
+					currentSong?.state.audio?.pause();
+				} catch {
+					// Ignore
+				}
+
+				setCurrentSongId?.(song?.id);
+			} else {
+				if (currentSong?.state.paused) currentSong?.state.audio?.play();
+				else currentSong?.state.audio?.pause();
+			}
+		},
+		[
+			songs,
+			currentSong?.id,
+			currentSong?.state.paused,
+			currentSong?.state.audio,
+			setCurrentSongId,
+			song,
+		]
+	);
 
 	useEffect(() => {
-		const audio = new Audio(song.previewUrl);
+		if (extended || !song) return;
+		registerSong?.(song);
+	}, [registerSong, song, extended]);
 
-		setAudioState({
-			audio,
-			paused: true,
-		});
-
-		audio.addEventListener("play", onAudioPlay);
-		audio.addEventListener("pause", onAudioPause);
-
-		return () => {
-			audio.removeEventListener("play", onAudioPlay);
-			audio.removeEventListener("pause", onAudioPause);
-		};
-	}, [song.previewUrl]);
-
-	const togglePreviewAudio = (e: MouseEvent<HTMLButtonElement>) => {
-		e.preventDefault();
-
-		try {
-			if (audioState?.paused) audioState?.audio?.play();
-			else audioState?.audio?.pause();
-		} catch (error) {
-			console.error(error);
-		}
-	};
+	const isPaused = useMemo(
+		() => currentSong?.id !== song?.id || currentSong?.state.paused,
+		[currentSong?.id, currentSong?.state.paused, song?.id]
+	);
 
 	return (
 		<Link
-			className="group/song flex items-center justify-center gap-x-5 rounded-xl border border-neutral-700 bg-neutral-900 bg-opacity-30 bg-clip-padding p-3 backdrop-blur-lg backdrop-filter hover:z-50 hover:border-green-500"
-			href={`https://open.spotify.com/track/${song.id}`}
+			className={cn(
+				"group/song flex flex-col justify-center rounded-xl border border-neutral-700 bg-neutral-900 bg-opacity-30 bg-clip-padding p-3 backdrop-blur-lg backdrop-filter hover:z-50 hover:border-green-500",
+				extended && "w-full gap-y-4"
+			)}
+			href={`https://open.spotify.com/track/${song?.id}`}
 			target="_blank"
 		>
-			{song.image && (
-				<Image
-					src={song.image}
-					alt={`${song.name} preview`}
-					className="rounded-xl"
-					width={60}
-					height={60}
-				/>
+			{extended && (
+				<h4 className="text-lg font-bold">
+					Currently {currentSong?.state.paused ? "Idling" : "Playing"}
+				</h4>
 			)}
-			<div className="flex w-full justify-between">
-				<div className="flex flex-col">
-					<label className="font-bold text-white group-hover/song:text-green-500">
-						{song.name}
-					</label>
-					<span className="text-sm font-semibold text-gray-200">
-						{listFormat.format(song.artists)}
-					</span>
-				</div>
-				<button
-					className="group/audiopreview relative"
-					onClick={(e) => togglePreviewAudio(e)}
-					aria-label={`${
-						audioState?.paused
-							? "Play Audio Preview"
-							: "Pause Audio Preview"
-					} for ${song.name}`}
+			<div className="flex items-center justify-center gap-x-5">
+				{song?.image && (
+					<Image
+						src={song.image}
+						alt={`${song.name} preview`}
+						className="rounded-xl"
+						width={60}
+						height={60}
+					/>
+				)}
+				<div
+					className={cn(
+						"flex w-full justify-between",
+						extended && "items-center gap-x-8"
+					)}
 				>
-					{audioState &&
-						(audioState.paused ? <PlayIcon /> : <PauseIcon />)}
-					<Tooltip
-						visibleClass="group-hover/audiopreview:block"
-						text={
-							audioState?.paused
+					<div className="flex flex-col">
+						<label className="font-bold text-white group-hover/song:text-green-500">
+							{song?.name}
+						</label>
+						<span className="text-sm font-semibold text-gray-200">
+							{listFormat.format(song?.artists ?? [])}
+						</span>
+					</div>
+					{extended && (
+						<div className="flex items-center gap-2">
+							<span className="text-gray-400">
+								{formatTime(
+									currentSong?.state.audio?.currentTime ?? 0
+								)}
+							</span>
+							<div
+								className="h-1 w-96 bg-gray-200"
+								key={`playback-time-${song?.id}`}
+							>
+								<div
+									className={cn(
+										"h-1 bg-green-500",
+										(timePlayed?.[song?.id ?? ""] ?? 0) <
+											1 &&
+											"transition-all duration-1000 ease-linear"
+									)}
+									style={{
+										width: `${timePlayed?.[song?.id ?? ""] ?? 0}%`,
+									}}
+								/>
+							</div>
+							<span className="text-gray-400">
+								{formatTime(
+									currentSong?.state.audio?.duration ?? 0
+								)}
+							</span>
+						</div>
+					)}
+					<button
+						className="group/audiopreview relative"
+						onClick={togglePreviewAudio}
+						aria-label={`${
+							isPaused
 								? "Play Audio Preview"
 								: "Pause Audio Preview"
-						}
-					/>
-				</button>
+						} for ${song?.name}`}
+					>
+						{isPaused ? <PlayIcon /> : <PauseIcon />}
+						<Tooltip
+							visibleClass="group-hover/audiopreview:block"
+							text={
+								isPaused
+									? "Play Audio Preview"
+									: "Pause Audio Preview"
+							}
+						/>
+					</button>
+				</div>
 			</div>
 		</Link>
 	);
