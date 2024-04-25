@@ -102,7 +102,7 @@ export default function SpotifySong({ song, extended }: SpotifySongProps) {
 					className={cn(
 						"flex w-full justify-between",
 						extended &&
-							"flex-col items-center justify-center gap-x-8 gap-y-4 text-center md:flex-row md:justify-between"
+							"flex-col items-center justify-center gap-x-8 gap-y-4 text-center md:flex-row md:justify-between md:text-left"
 					)}
 				>
 					<div className="flex flex-col">
