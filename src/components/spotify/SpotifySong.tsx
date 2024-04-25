@@ -127,7 +127,7 @@ export default function SpotifySong({ song, extended }: SpotifySongProps) {
 								<div
 									className={cn(
 										"h-1 bg-green-500",
-										(timePlayed?.[song?.id ?? ""] ?? 0) <
+										(timePlayed?.[song?.id ?? ""] ?? 0) >=
 											1 &&
 											"transition-all duration-1000 ease-linear"
 									)}

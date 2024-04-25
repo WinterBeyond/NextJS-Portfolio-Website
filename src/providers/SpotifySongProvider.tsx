@@ -74,7 +74,9 @@ export default function SpotifySongProvider({
 
 		setTimePlayed((previousTimePlayed) => ({
 			...previousTimePlayed,
-			[currentSong.id]: (audio.currentTime / audio.duration) * 100,
+			[currentSong.id]: Math.round(
+				(audio.currentTime / (audio.duration - 1)) * 100
+			),
 		}));
 	}, [currentSong]);
 
