@@ -83,12 +83,12 @@ export default function SpotifySong({ song, extended }: SpotifySongProps) {
 			href={`https://open.spotify.com/track/${song?.id}`}
 			target="_blank"
 		>
-			{extended && (
-				<h4 className="text-lg font-bold">
-					Currently {currentSong?.state.paused ? "Idling" : "Playing"}
-				</h4>
-			)}
-			<div className="flex items-center justify-center gap-x-5">
+			<div
+				className={cn(
+					"flex items-center justify-center gap-x-5",
+					extended && "flex-col md:flex-row"
+				)}
+			>
 				{song?.image && (
 					<Image
 						src={song.image}
@@ -101,7 +101,8 @@ export default function SpotifySong({ song, extended }: SpotifySongProps) {
 				<div
 					className={cn(
 						"flex w-full justify-between",
-						extended && "items-center gap-x-8"
+						extended &&
+							"flex-col items-center justify-center gap-x-8 gap-y-4 text-center md:flex-row md:justify-between"
 					)}
 				>
 					<div className="flex flex-col">
@@ -120,7 +121,7 @@ export default function SpotifySong({ song, extended }: SpotifySongProps) {
 								)}
 							</span>
 							<div
-								className="h-1 w-96 bg-gray-200"
+								className="h-1 w-48 bg-gray-200 md:w-96"
 								key={`playback-time-${song?.id}`}
 							>
 								<div

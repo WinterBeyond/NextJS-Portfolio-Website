@@ -39,7 +39,7 @@ export default function CurrentSpotifySong() {
 	return (
 		<div
 			className={cn(
-				"fixed bottom-10 left-1/2 z-20 w-full max-w-5xl -translate-x-1/2 transform text-white",
+				"fixed bottom-0 left-1/2 z-20 w-full max-w-5xl -translate-x-1/2 transform text-white md:bottom-10",
 				isInitial && "slide-up",
 				isInactive && "slide-down",
 				!currentSong && "pointer-events-none opacity-0"
