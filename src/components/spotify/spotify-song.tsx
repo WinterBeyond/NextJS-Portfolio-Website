@@ -125,12 +125,12 @@ export default function SpotifySong({ song, extended }: SpotifySongProps) {
                 {formatTime(currentSong?.state.audio?.currentTime ?? 0)}
               </span>
               <div
-                className="h-1 w-48 bg-gray-200 md:w-96"
+                className="h-1 w-48 rounded-md bg-gray-200 md:w-96"
                 key={`playback-time-${song?.id}`}
               >
                 <div
                   className={cn(
-                    "h-1 bg-green-500",
+                    "h-1 rounded-md bg-green-500",
                     (timePlayed?.[song?.id ?? ""] ?? 0) >= 1 &&
                       "transition-all duration-1000 ease-linear",
                   )}
