@@ -23,7 +23,6 @@ jobs:
 
       - name: Create Environment File
         run: |
-          echo "NEXT_PUBLIC_GA_TRACKING_ID=${{ secrets.NEXT_PUBLIC_GA_TRACKING_ID }}" >> .env
           echo "SPOTIFY_OAUTH_CLIENT_ID=${{ secrets.SPOTIFY_OAUTH_CLIENT_ID }}" >> .env
           echo "SPOTIFY_OAUTH_SECRET=${{ secrets.SPOTIFY_OAUTH_SECRET }}" >> .env
           echo "SPOTIFY_OAUTH_REDIRECT_URI=${{ secrets.SPOTIFY_OAUTH_REDIRECT_URI }}" >> .env

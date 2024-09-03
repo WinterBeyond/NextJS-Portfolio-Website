@@ -6,7 +6,7 @@ const SpotifySong = dynamic(() => import("@/components/spotify/spotify-song"), {
 });
 
 export default async function SpotifySongGrid() {
-  const songs = await getTopMonthlySongs();
+  const songs = await getTopMonthlySongs(12);
 
   return (
     <div className="grid gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
