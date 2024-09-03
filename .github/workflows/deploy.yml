@@ -68,11 +68,10 @@ jobs:
           key: ${{ secrets.VPS_SSH_KEY }}
           script: |
             ssh-keyscan -H ${{ secrets.VPS_HOST }} >> ~/.ssh/known_hosts
-            echo "NEXT_PUBLIC_GA_TRACKING_ID=${{ secrets.NEXT_PUBLIC_GA_TRACKING_ID }}" >> ~/maxwiggedal.dev/.env
-            echo "SPOTIFY_OAUTH_CLIENT_ID=${{ secrets.SPOTIFY_OAUTH_CLIENT_ID }}" >> ~/maxwiggedal.dev/.env
-            echo "SPOTIFY_OAUTH_SECRET=${{ secrets.SPOTIFY_OAUTH_SECRET }}" >> ~/maxwiggedal.dev/.env
-            echo "SPOTIFY_OAUTH_REDIRECT_URI=${{ secrets.SPOTIFY_OAUTH_REDIRECT_URI }}" >> ~/maxwiggedal.dev/.env
-            echo "SPOTIFY_OAUTH_REFRESH_TOKEN=${{ secrets.SPOTIFY_OAUTH_REFRESH_TOKEN }}" >> ~/maxwiggedal.dev/.env
+            sed -i 's/^SPOTIFY_OAUTH_CLIENT_ID=.*/SPOTIFY_OAUTH_CLIENT_ID=${{ secrets.SPOTIFY_OAUTH_CLIENT_ID }}/' ~/maxwiggedal.dev/.env || echo "SPOTIFY_OAUTH_CLIENT_ID=${{ secrets.SPOTIFY_OAUTH_CLIENT_ID }}" >> ~/maxwiggedal.dev/.env
+            sed -i 's/^SPOTIFY_OAUTH_SECRET=.*/SPOTIFY_OAUTH_SECRET=${{ secrets.SPOTIFY_OAUTH_SECRET }}/' ~/maxwiggedal.dev/.env || echo "SPOTIFY_OAUTH_SECRET=${{ secrets.SPOTIFY_OAUTH_SECRET }}" >> ~/maxwiggedal.dev/.env
+            sed -i 's/^SPOTIFY_OAUTH_REDIRECT_URI=.*/SPOTIFY_OAUTH_REDIRECT_URI=${{ secrets.SPOTIFY_OAUTH_REDIRECT_URI }}/' ~/maxwiggedal.dev/.env || echo "SPOTIFY_OAUTH_REDIRECT_URI=${{ secrets.SPOTIFY_OAUTH_REDIRECT_URI }}" >> ~/maxwiggedal.dev/.env
+            sed -i 's/^SPOTIFY_OAUTH_REFRESH_TOKEN=.*/SPOTIFY_OAUTH_REFRESH_TOKEN=${{ secrets.SPOTIFY_OAUTH_REFRESH_TOKEN }}/' ~/maxwiggedal.dev/.env || echo "SPOTIFY_OAUTH_REFRESH_TOKEN=${{ secrets.SPOTIFY_OAUTH_REFRESH_TOKEN }}" >> ~/maxwiggedal.dev/.env
             tar -xzvf ~/maxwiggedal.dev/app.tar.gz -C ~/maxwiggedal.dev
             cd ~/maxwiggedal.dev
             npm install

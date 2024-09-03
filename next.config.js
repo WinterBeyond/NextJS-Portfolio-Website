@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 const createJiti = require("jiti");
 const jiti = createJiti(__dirname);
 
