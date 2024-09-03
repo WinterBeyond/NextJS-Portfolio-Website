@@ -2,7 +2,7 @@ module.exports = {
   apps: [
     {
       name: "personal-portfolio",
-      script: "npm start",
+      script: "npm start -- -p 3020",
       instances: 1,
       autorestart: true,
       watch: false,
