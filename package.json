@@ -6,7 +6,10 @@
     "dev": "next dev --turbo",
     "build": "next build",
     "start": "next start",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "npm run cypress:run",
+    "cypress:open": "cypress open",
+    "cypress:run": "start-server-and-test dev http://localhost:3000 cypress:run:headless",
+    "cypress:run:headless": "cypress run",
     "lint": "next lint",
     "lint:fix": "prettier --write './src/**/*.{js,jsx,mjs,cjs,ts,tsx,json}'",
     "upgrade": "ncu -u -x eslint"
@@ -34,6 +37,7 @@
     "@typescript-eslint/eslint-plugin": "^8.4.0",
     "@typescript-eslint/parser": "^8.4.0",
     "autoprefixer": "^10.4.20",
+    "cypress": "^13.14.2",
     "eslint": "^8.57.0",
     "eslint-config-next": "^14.2.7",
     "eslint-config-prettier": "^9.1.0",
@@ -45,6 +49,7 @@
     "postcss": "^8.4.44",
     "prettier": "^3.3.3",
     "prettier-plugin-tailwindcss": "^0.6.6",
+    "start-server-and-test": "^2.0.5",
     "tailwindcss": "^3.4.10",
     "typescript": "^5.5.4"
   }
