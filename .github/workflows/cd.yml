@@ -1,9 +1,15 @@
-name: Deploy Application
+name: Deploy
 
 on:
-  push:
-    branches:
-      - main
+  release:
+    types: [published]
+
+env:
+  NODE_VERSION: "20"
+  SPOTIFY_OAUTH_CLIENT_ID: ${{ secrets.SPOTIFY_OAUTH_CLIENT_ID }}
+  SPOTIFY_OAUTH_SECRET: ${{ secrets.SPOTIFY_OAUTH_SECRET }}
+  SPOTIFY_OAUTH_REDIRECT_URI: ${{ secrets.SPOTIFY_OAUTH_REDIRECT_URI }}
+  SPOTIFY_OAUTH_REFRESH_TOKEN: ${{ secrets.SPOTIFY_OAUTH_REFRESH_TOKEN }}
 
 jobs:
   build:
@@ -16,17 +22,10 @@ jobs:
       - name: Setup NodeJS Environment
         uses: actions/setup-node@v3
         with:
-          node-version: '20'
+          node-version: ${{ env.NODE_VERSION }}
 
       - name: Install Dependencies
         run: npm install
-
-      - name: Create Environment File
-        run: |
-          echo "SPOTIFY_OAUTH_CLIENT_ID=${{ secrets.SPOTIFY_OAUTH_CLIENT_ID }}" >> .env
-          echo "SPOTIFY_OAUTH_SECRET=${{ secrets.SPOTIFY_OAUTH_SECRET }}" >> .env
-          echo "SPOTIFY_OAUTH_REDIRECT_URI=${{ secrets.SPOTIFY_OAUTH_REDIRECT_URI }}" >> .env
-          echo "SPOTIFY_OAUTH_REFRESH_TOKEN=${{ secrets.SPOTIFY_OAUTH_REFRESH_TOKEN }}" >> .env
 
       - name: Build Application
         run: npm run build

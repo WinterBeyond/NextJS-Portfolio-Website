@@ -6,6 +6,7 @@
     "dev": "next dev --turbo",
     "build": "next build",
     "start": "next start",
+    "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "next lint",
     "lint:fix": "prettier --write './src/**/*.{js,jsx,mjs,cjs,ts,tsx,json}'",
     "upgrade": "ncu -u -x eslint"
