@@ -1,6 +1,6 @@
 {
   "name": "personal-portfolio",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "private": true,
   "scripts": {
     "dev": "next dev --turbo",
@@ -12,7 +12,7 @@
     "cypress:run:headless": "cypress run",
     "lint": "next lint",
     "lint:fix": "prettier --write './src/**/*.{js,jsx,mjs,cjs,ts,tsx,json}'",
-    "upgrade": "ncu -u -x eslint"
+    "upgrade": "ncu -u -x eslint,cmdk && npm install"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.1.0",
@@ -22,7 +22,7 @@
     "clsx": "^2.1.1",
     "cmdk": "^0.2.1",
     "jiti": "^1.21.6",
-    "next": "^14.2.7",
+    "next": "^14.2.8",
     "next-themes": "^0.3.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
@@ -31,7 +31,7 @@
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
-    "@types/node": "^22.5.2",
+    "@types/node": "^22.5.4",
     "@types/react": "^18.3.5",
     "@types/react-dom": "^18.3.0",
     "@typescript-eslint/eslint-plugin": "^8.4.0",
@@ -39,14 +39,14 @@
     "autoprefixer": "^10.4.20",
     "cypress": "^13.14.2",
     "eslint": "^8.57.0",
-    "eslint-config-next": "^14.2.7",
+    "eslint-config-next": "^14.2.8",
     "eslint-config-prettier": "^9.1.0",
     "eslint-import-resolver-typescript": "^3.6.3",
     "eslint-plugin-import": "^2.30.0",
     "eslint-plugin-prettier": "^5.2.1",
-    "eslint-plugin-react": "^7.35.1",
+    "eslint-plugin-react": "^7.35.2",
     "eslint-plugin-tailwindcss": "^3.17.4",
-    "postcss": "^8.4.44",
+    "postcss": "^8.4.45",
     "prettier": "^3.3.3",
     "prettier-plugin-tailwindcss": "^0.6.6",
     "start-server-and-test": "^2.0.5",
