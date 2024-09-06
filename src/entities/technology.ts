@@ -1,13 +1,19 @@
 export type Technology =
   | "typescript"
   | "javascript"
+  | "nodejs"
   | "csharp"
   | "java"
   | "react"
   | "mongodb"
   | "mysql"
+  | "postgresql"
   | "redis"
-  | "tailwind";
+  | "tailwind"
+  | "linux"
+  | "nginx"
+  | "docker"
+  | "kubernetes";
 
 export type TechnologyDetails = {
   tech: Technology;

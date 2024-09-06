@@ -10,7 +10,7 @@ export default async function TechStack({ techs }: TechStackProps) {
   const techDetails = await getTechnologyDetails(techs);
 
   return (
-    <div className="flex flex-wrap gap-3">
+    <div className="flex max-w-3xl flex-wrap gap-3">
       {techDetails.map((techDetail) => (
         <TechDetails
           key={`tech-stack-${techDetail.tech}`}
