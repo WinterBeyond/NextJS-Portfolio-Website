@@ -1,73 +1,15 @@
 import { ReactNode } from "react";
 import Footer from "@/components/footer";
-import { Metadata } from "next";
 import SpotifySongProvider from "@/providers/spotify-song-provider";
 import CurrentSpotifySong from "@/components/spotify/current-spotify-song";
-import { sharedEnv } from "@/env/shared";
 import { Rubik as RubikFont } from "next/font/google";
 import { cn } from "@/lib/common";
+import { meta } from "@/constants/meta";
 import "@/styles/globals.css";
 
 const rubikFont = RubikFont({ subsets: ["latin"], variable: "--font-rubik" });
 
-const title = "Max Wiggedal - Full Stack Web Developer";
-const description =
-  "Full Stack Web Developer with a passion for innovating and building meaningful applications.";
-const url =
-  sharedEnv.NODE_ENV === "development"
-    ? "http://localhost:3000"
-    : "https://maxwiggedal.dev";
-
-export const metadata: Metadata = {
-  metadataBase: new URL(url),
-  title: {
-    template: `%s | ${title}`,
-    default: title,
-  },
-  applicationName: "Max Wiggedal",
-  description,
-  keywords: [
-    "software engineer",
-    "software developer",
-    "web developer",
-    "developer",
-    "engineer",
-    "fullstack",
-    "backend",
-    "frontend",
-    "react",
-    "next",
-    "node",
-    "typescript",
-    "javascript",
-    "mongodb",
-    "redis",
-    "restful",
-    "graphql",
-    "api",
-    "docker",
-    "linux",
-    "nginx",
-    "express",
-  ],
-  manifest: "/manifest.json",
-  openGraph: {
-    type: "website",
-    url,
-    title,
-    siteName: "Max Wiggedal",
-    description,
-    images: [
-      {
-        url: "/logo192.png",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary",
-    title,
-  },
-};
+export const metadata = meta;
 
 type RootLayoutProps = {
   children?: ReactNode;

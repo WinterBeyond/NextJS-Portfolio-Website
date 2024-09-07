@@ -5,5 +5,5 @@ export type Project = {
   name: string;
   link?: string;
   description: string;
-  techStack: Array<TechnologyDetails>;
+  techStack: Readonly<Array<TechnologyDetails>>;
 };
