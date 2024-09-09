@@ -22,8 +22,9 @@
       "@/*": ["./src/*"]
     }
   },
+  "types": ["jest", "node"],
   "include": ["next-env.d.ts", ".next/types/**/*.ts", "**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules"],
+  "exclude": ["node_modules", "cypress.config.ts", "cypress"],
   "ts-node": {
     "compilerOptions": {
       "module": "commonjs"
