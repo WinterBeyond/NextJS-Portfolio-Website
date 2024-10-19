@@ -1,12 +1,12 @@
 "use server";
 
-import fetcher from "@/lib/fetcher";
+import { Song } from "@/entities/song";
 import {
   SpotifyAccessTokenResponse,
   SpotifyTopSongsResponse,
 } from "@/entities/spotify";
-import { Song } from "@/entities/song";
 import { serverEnv } from "@/env/server";
+import fetcher from "@/lib/fetcher";
 
 function getSpotifyAuthorizationHeader() {
   return `Basic ${Buffer.from(

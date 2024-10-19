@@ -1,6 +1,7 @@
-import { type Experience } from "@/entities/experience";
-import ClientDate from "../client-date";
+import { Experience } from "@/entities/experience";
 import { cn } from "@/lib/common";
+
+import ClientDate from "../client-date";
 
 type ExperienceCardProps = {
   experience: Experience;

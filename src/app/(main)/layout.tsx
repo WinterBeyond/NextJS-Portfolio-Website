@@ -1,11 +1,13 @@
+import "@/styles/globals.css";
+
+import { Rubik as RubikFont } from "next/font/google";
 import { ReactNode } from "react";
+
 import Footer from "@/components/footer";
 import CurrentSpotifySong from "@/components/spotify/current-spotify-song";
-import { Rubik as RubikFont } from "next/font/google";
-import { cn } from "@/lib/common";
 import { meta } from "@/constants/meta";
-import "@/styles/globals.css";
 import Providers from "@/contexts/providers";
+import { cn } from "@/lib/common";
 
 const rubikFont = RubikFont({ subsets: ["latin"], variable: "--font-rubik" });
 

@@ -1,9 +1,8 @@
-import { getTopMonthlySongs } from "@/data-layer/spotify";
 import dynamic from "next/dynamic";
 
-const SpotifySong = dynamic(() => import("@/components/spotify/spotify-song"), {
-  ssr: false,
-});
+import { getTopMonthlySongs } from "@/data-layer/spotify";
+
+const SpotifySong = dynamic(() => import("@/components/spotify/spotify-song"));
 
 export default async function SpotifySongGrid() {
   try {

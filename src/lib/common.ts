@@ -1,6 +1,7 @@
-import { clsx, type ClassValue } from "clsx";
+import { ClassValue, clsx } from "clsx";
 import crypto from "crypto";
 import { extendTailwindMerge } from "tailwind-merge";
+
 import { withFluid } from "@fluid-tailwind/tailwind-merge";
 
 const twMerge = extendTailwindMerge({}, withFluid);

@@ -1,5 +1,6 @@
-import { sharedEnv } from "@/env/shared";
 import { Metadata } from "next";
+
+import { sharedEnv } from "@/env/shared";
 
 const title = "Max Wiggedal - Software Engineer";
 const description =

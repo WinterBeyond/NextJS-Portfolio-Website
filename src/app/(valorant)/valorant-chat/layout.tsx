@@ -1,9 +1,11 @@
-import { ReactNode } from "react";
-import { Rubik as RubikFont } from "next/font/google";
-import { Metadata } from "next";
 import "@/styles/globals.css";
-import { cn } from "@/lib/common";
+
+import { Metadata } from "next";
+import { Rubik as RubikFont } from "next/font/google";
+import { ReactNode } from "react";
+
 import { sharedEnv } from "@/env/shared";
+import { cn } from "@/lib/common";
 
 const rubikFont = RubikFont({ subsets: ["latin"], variable: "--font-rubik" });
 

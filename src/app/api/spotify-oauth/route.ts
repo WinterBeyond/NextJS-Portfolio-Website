@@ -1,9 +1,10 @@
+import { NextRequest, NextResponse } from "next/server";
+
 import { getSpotifyAccessToken } from "@/data-layer/spotify";
 import { serverEnv } from "@/env/server";
 import { sharedEnv } from "@/env/shared";
 import { generateRandomString } from "@/lib/common";
 import { HttpError } from "@/lib/fetcher";
-import { type NextRequest, NextResponse } from "next/server";
 
 const OAUTH_SCOPE = "user-top-read";
 

@@ -1,6 +1,7 @@
 import { getTechnologyDetails } from "@/data-layer/technology";
-import TechDetails from "./tech-details";
 import { Technology } from "@/entities/technology";
+
+import TechDetails from "./tech-details";
 
 type TechStackProps = {
   techs?: Array<Technology>;

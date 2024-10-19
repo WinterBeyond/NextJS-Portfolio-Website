@@ -1,14 +1,14 @@
 import Link from "next/link";
 import { Suspense } from "react";
 
-import Section from "@/components/section";
+import Age from "@/components/age";
+import ErrorBoundary from "@/components/error-boundary";
 import ExperienceGrid from "@/components/experience/experience-grid";
 import ProjectGrid from "@/components/project/project-grid";
+import TechStack from "@/components/project/tech-stack";
+import Section from "@/components/section";
 import SpotifySongGrid from "@/components/spotify/spotify-song-grid";
 import TypeAnimation from "@/components/type-animation";
-import TechStack from "@/components/project/tech-stack";
-import ErrorBoundary from "@/components/error-boundary";
-import Age from "@/components/age";
 
 export const dynamic = "force-dynamic";
 

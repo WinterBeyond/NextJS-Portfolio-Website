@@ -1,6 +1,7 @@
-import { ReactNode } from "react";
-import SpotifySongProvider from "./spotify-song-context";
 import { ThemeProvider } from "next-themes";
+import { ReactNode } from "react";
+
+import SpotifySongProvider from "./spotify-song-context";
 
 type ProvidersProps = {
   children: ReactNode;

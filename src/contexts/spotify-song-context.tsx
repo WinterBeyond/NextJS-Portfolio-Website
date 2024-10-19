@@ -1,18 +1,19 @@
 "use client";
 
-import { AudioState } from "@/entities/audio-state";
-import { Song } from "@/entities/song";
 import {
+  createContext,
   Dispatch,
   ReactNode,
   SetStateAction,
-  createContext,
   useCallback,
   useContext,
   useEffect,
   useMemo,
   useState,
 } from "react";
+
+import { AudioState } from "@/entities/audio-state";
+import { Song } from "@/entities/song";
 
 type StatefulSong = Song & {
   state: AudioState;

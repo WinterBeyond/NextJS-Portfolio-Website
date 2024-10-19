@@ -1,14 +1,15 @@
 "use client";
 
-import { MouseEvent, useCallback, useEffect, useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { MouseEvent, useCallback, useEffect, useMemo } from "react";
 
-import { Song } from "@/entities/song";
 import PauseIcon from "@/components/icons/pause-icon";
 import PlayIcon from "@/components/icons/play-icon";
 import { useSpotifySongContext } from "@/contexts/spotify-song-context";
+import { Song } from "@/entities/song";
 import { cn } from "@/lib/common";
+
 import {
   Tooltip,
   TooltipContent,

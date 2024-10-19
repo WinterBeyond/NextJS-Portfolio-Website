@@ -1,5 +1,5 @@
-import { getTechnologyDetails } from "@/data-layer/technology";
 import { technologies } from "@/constants/technologies";
+import { getTechnologyDetails } from "@/data-layer/technology";
 import { Technology } from "@/entities/technology";
 
 describe("technologies constant", () => {

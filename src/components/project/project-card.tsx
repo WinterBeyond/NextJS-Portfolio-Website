@@ -1,6 +1,8 @@
-import CodeIcon from "@/components/icons/code-icon";
 import Link from "next/link";
-import { type Project } from "@/entities/project";
+
+import CodeIcon from "@/components/icons/code-icon";
+import { Project } from "@/entities/project";
+
 import TechDetails from "./tech-details";
 
 type ProjectCardProps = {

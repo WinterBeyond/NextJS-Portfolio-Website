@@ -1,19 +1,20 @@
 "use client";
 
+import Link from "next/link";
+import { useCallback, useRef, useState } from "react";
+
 import {
   CharacterNamesToUnicodes,
   CharacterTuple,
   CharacterUnicode,
-  MAX_HEIGHT,
-  MAX_WIDTH,
-  STRETCHED_MAX_WIDTH,
   generateGridRow,
   generateGridTemplate,
   generateGridTemplateFromClipboard,
   generateText,
+  MAX_HEIGHT,
+  MAX_WIDTH,
+  STRETCHED_MAX_WIDTH,
 } from "@/lib/ascii";
-import Link from "next/link";
-import { useRef, useState, useCallback } from "react";
 
 export default function ValorantChatPage() {
   const [grid, setGrid] = useState(generateGridTemplate(MAX_HEIGHT));

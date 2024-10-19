@@ -1,9 +1,11 @@
 "use client";
 
-import { useSpotifySongContext } from "@/contexts/spotify-song-context";
-import SpotifySong from "./spotify-song";
 import { useEffect, useMemo, useState } from "react";
+
+import { useSpotifySongContext } from "@/contexts/spotify-song-context";
 import { cn } from "@/lib/common";
+
+import SpotifySong from "./spotify-song";
 
 export default function CurrentSpotifySong() {
   const [isInitial, setIsInitial] = useState(false);
