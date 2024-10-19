@@ -7,7 +7,7 @@ import Link from "next/link";
 import { Song } from "@/entities/song";
 import PauseIcon from "@/components/icons/pause-icon";
 import PlayIcon from "@/components/icons/play-icon";
-import { useSpotifySongContext } from "@/providers/spotify-song-provider";
+import { useSpotifySongContext } from "@/contexts/spotify-song-context";
 import { cn } from "@/lib/common";
 import {
   Tooltip,

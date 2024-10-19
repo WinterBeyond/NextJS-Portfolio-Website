@@ -1,6 +1,6 @@
 "use client";
 
-import { useSpotifySongContext } from "@/providers/spotify-song-provider";
+import { useSpotifySongContext } from "@/contexts/spotify-song-context";
 import SpotifySong from "./spotify-song";
 import { useEffect, useMemo, useState } from "react";
 import { cn } from "@/lib/common";

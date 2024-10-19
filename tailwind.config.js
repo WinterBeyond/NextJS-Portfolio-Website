@@ -1,19 +1,22 @@
-// eslint-disable-next-line @typescript-eslint/no-require-imports
-const tailwindCssAnimate = require("tailwindcss-animate");
+/* eslint-disable @typescript-eslint/no-require-imports */
+const tailwindAnimate = require("tailwindcss-animate");
+const {
+  default: tailwindFluid,
+  extract,
+  screens,
+  fontSize,
+} = require("fluid-tailwind");
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: ["class"],
-  content: ["./src/**/*.{ts,tsx}"],
-  prefix: "",
+  content: {
+    files: ["./src/**/*.{ts,tsx}"],
+    extract,
+  },
   theme: {
-    container: {
-      center: true,
-      padding: "2rem",
-      screens: {
-        "2xl": "1400px",
-      },
-    },
+    screens,
+    fontSize,
     extend: {
       colors: {
         border: "hsl(var(--border))",
@@ -82,5 +85,5 @@ module.exports = {
       },
     },
   },
-  plugins: [tailwindCssAnimate],
+  plugins: [tailwindFluid, tailwindAnimate],
 };
