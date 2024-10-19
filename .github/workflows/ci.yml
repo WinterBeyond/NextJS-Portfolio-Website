@@ -27,7 +27,7 @@ jobs:
           node-version: ${{ env.NODE_VERSION }}
 
       - name: Install Dependencies
-        run: npm install
+        run: npm install --force
 
       - name: Build Application
         run: npm run build
@@ -46,7 +46,7 @@ jobs:
           node-version: ${{ env.NODE_VERSION }}
 
       - name: Install Dependencies
-        run: npm install
+        run: npm install --force
 
       - name: Run Tests
         run: npm test

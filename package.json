@@ -15,7 +15,7 @@
     "cypress:run:headless": "cypress run",
     "lint": "next lint",
     "lint:fix": "prettier --write './src/**/*.{js,jsx,mjs,cjs,ts,tsx,json}'",
-    "upgrade": "ncu -u -x eslint && npm install"
+    "upgrade": "ncu -u && npm install --force"
   },
   "dependencies": {
     "@fluid-tailwind/tailwind-merge": "^0.0.3",
@@ -43,7 +43,7 @@
     "@typescript-eslint/parser": "^8.10.0",
     "autoprefixer": "^10.4.20",
     "cypress": "^13.15.0",
-    "eslint": "^8.57.0",
+    "eslint": "^9.13.0",
     "eslint-config-next": "15.0.0-rc.1",
     "eslint-config-prettier": "^9.1.0",
     "eslint-import-resolver-typescript": "^3.6.3",
