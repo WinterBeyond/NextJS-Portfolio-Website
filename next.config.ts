@@ -1,10 +1,11 @@
-// eslint-disable-next-line @typescript-eslint/no-require-imports
-const createJiti = require("jiti");
-const jiti = createJiti(__dirname);
+import { NextConfig } from "next";
 
-jiti("./src/env/server");
-jiti("./src/env/client");
-jiti("./src/env/shared");
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { clientEnv } from "@/env/client";
+import { serverEnv } from "@/env/server";
+import { sharedEnv } from "@/env/shared";
+
+/* eslint-enable @typescript-eslint/no-unused-vars */
 
 const cspHeader = `
   default-src 'self';
@@ -21,8 +22,7 @@ const cspHeader = `
   upgrade-insecure-requests;
 `;
 
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
       {
@@ -41,6 +41,7 @@ const nextConfig = {
   logging: {
     fetches: {
       fullUrl: true,
+      hmrRefreshes: true,
     },
   },
   poweredByHeader: false,
@@ -101,4 +102,4 @@ const nextConfig = {
   },
 };
 
-module.exports = nextConfig;
+export default nextConfig;

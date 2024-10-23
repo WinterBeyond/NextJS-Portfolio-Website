@@ -1,14 +1,8 @@
-/* eslint-disable @typescript-eslint/no-require-imports */
-const tailwindAnimate = require("tailwindcss-animate");
-const {
-  default: tailwindFluid,
-  extract,
-  screens,
-  fontSize,
-} = require("fluid-tailwind");
+import * as tailwindAnimate from "tailwindcss-animate";
+import tailwindFluid, { extract, screens, fontSize } from "fluid-tailwind";
 
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+const tailwindConfig = {
   darkMode: ["class"],
   content: {
     files: ["./src/**/*.{ts,tsx}"],
@@ -87,3 +81,5 @@ module.exports = {
   },
   plugins: [tailwindFluid, tailwindAnimate],
 };
+
+export default tailwindConfig;

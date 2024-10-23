@@ -10,8 +10,6 @@ import Section from "@/components/section";
 import SpotifySongGrid from "@/components/spotify/spotify-song-grid";
 import TypeAnimation from "@/components/type-animation";
 
-export const dynamic = "force-dynamic";
-
 export default function LandingPage() {
   return (
     <>
@@ -101,11 +99,11 @@ export default function LandingPage() {
         <ErrorBoundary
           fallback={
             <span className="text-lg font-bold text-red-500">
-              Unable to fetch songs!
+              Something went wrong while loading songs!
             </span>
           }
         >
-          <Suspense fallback={<>Loading...</>}>
+          <Suspense fallback={<span className="text-lg font-bold">Loading songs...</span>}>
             <SpotifySongGrid />
           </Suspense>
         </ErrorBoundary>

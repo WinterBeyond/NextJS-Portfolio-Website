@@ -1,10 +1,7 @@
 "use server";
 
 import { Song } from "@/entities/song";
-import {
-  SpotifyAccessTokenResponse,
-  SpotifyTopSongsResponse,
-} from "@/entities/spotify";
+import { SpotifyAccessTokenResponse, SpotifyTopSongsResponse } from "@/entities/spotify";
 import { serverEnv } from "@/env/server";
 import fetcher from "@/lib/fetcher";
 
