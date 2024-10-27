@@ -31,7 +31,7 @@ jobs:
         run: npm run build
 
       - name: Archive Production Artifacts
-        run: tar -czvf app.tar.gz .next public src/env *.js *.mjs *.ts *.json
+        run: tar -czvf app.tar.gz .next public src/env *.mjs *.ts *.json
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v3
