@@ -29,6 +29,6 @@
     "node_modules",
     "cypress.config.ts",
     "cypress",
-    "ecosystem.config.js"
+    "ecosystem.config.cjs"
   ]
 }
