@@ -1,4 +1,4 @@
-module.exports = {
+const ecosystemConfig = {
   apps: [
     {
       name: "personal-portfolio",
@@ -10,3 +10,5 @@ module.exports = {
     },
   ],
 };
+
+export default ecosystemConfig;

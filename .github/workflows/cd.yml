@@ -31,7 +31,7 @@ jobs:
         run: npm run build
 
       - name: Archive Production Artifacts
-        run: tar -czvf app.tar.gz .next public src/env *.js *.ts *.json
+        run: tar -czvf app.tar.gz .next public src/env *.js *.mjs *.ts *.json
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v3
@@ -73,4 +73,4 @@ jobs:
             tar -xzvf ~/maxwiggedal.dev/app.tar.gz -C ~/maxwiggedal.dev
             cd ~/maxwiggedal.dev
             npm install
-            pm2 restart ecosystem.config.js
+            pm2 restart ecosystem.config.mjs
