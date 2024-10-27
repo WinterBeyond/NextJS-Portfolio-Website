@@ -10,6 +10,7 @@ import {
   generateGridRow,
   generateGridTemplate,
   generateGridTemplateFromClipboard,
+  generateGridTemplateFromText,
   generateText,
   MAX_HEIGHT,
   MAX_WIDTH,
@@ -20,6 +21,7 @@ export default function ValorantChatPage() {
   const [grid, setGrid] = useState(generateGridTemplate(MAX_HEIGHT));
   const [isMouseDown, setIsMouseDown] = useState(false);
   const [isStretched, setIsStretched] = useState(false);
+  const [isLoadingClipboard, setIsLoadingClipboard] = useState(false);
   const [promptText, setPromptText] = useState("");
   const promptTextModalRef = useRef<HTMLDialogElement>(null);
   const [height, setHeight] = useState(MAX_HEIGHT);
@@ -91,15 +93,25 @@ export default function ValorantChatPage() {
 
         if (!text) return;
 
+        setIsLoadingClipboard(false);
         promptTextModalRef.current?.close();
         setPromptText("");
         setGrid(generateGridTemplateFromClipboard(text, height, isStretched));
       } catch (error) {
         console.error(error);
+        setIsLoadingClipboard(true);
         promptTextModalRef.current?.showModal();
       }
     },
     [height, isStretched, promptText],
+  );
+
+  const writeText = useCallback(
+    (text: string) => {
+      setGrid(generateGridTemplateFromText(text, height, isStretched));
+      promptTextModalRef.current?.close();
+    },
+    [height, isStretched],
   );
 
   const increaseHeight = () => {
@@ -190,6 +202,12 @@ export default function ValorantChatPage() {
           </button>
           <button
             className="rounded-lg bg-gray-200 p-2 text-lg text-black hover:bg-gray-300"
+            onClick={() => promptTextModalRef.current?.showModal()}
+          >
+            Write Text
+          </button>
+          <button
+            className="rounded-lg bg-gray-200 p-2 text-lg text-black hover:bg-gray-300"
             onClick={() => loadClipboardContent(false)}
           >
             Load Clipboard
@@ -254,9 +272,13 @@ export default function ValorantChatPage() {
           <div className="flex items-center justify-center gap-2">
             <button
               className="rounded-lg bg-gray-200 px-4 py-2 text-lg text-black hover:bg-gray-300"
-              onClick={() => loadClipboardContent(true)}
+              onClick={() =>
+                isLoadingClipboard
+                  ? loadClipboardContent(true)
+                  : writeText(promptText)
+              }
             >
-              Load Clipboard
+              {isLoadingClipboard ? "Load Clipboard" : "Write Text"}
             </button>
             <button
               className="rounded-lg bg-red-500 px-4 py-2 text-lg text-white hover:bg-red-600"
