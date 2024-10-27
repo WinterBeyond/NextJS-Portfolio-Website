@@ -262,7 +262,11 @@ export default function ValorantChatPage() {
       <p className="font-bold text-red-500 lg:hidden">
         Sorry, Canvas is only available on desktop!
       </p>
-      <dialog ref={promptTextModalRef} className="w-1/4 bg-transparent">
+      <dialog
+        ref={promptTextModalRef}
+        onClose={() => setIsLoadingClipboard(false)}
+        className="w-1/4 bg-transparent"
+      >
         <div className="hidden flex-col gap-2 rounded-lg bg-neutral-800 p-4 lg:flex">
           <textarea
             className="h-80 resize-none rounded-lg border border-gray-500 bg-neutral-600 px-4 py-2 text-base text-white outline-none focus:border-blue-500"
