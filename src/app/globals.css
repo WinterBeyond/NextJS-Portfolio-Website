@@ -233,6 +233,7 @@ select {
   100% {
     transform: translateX(-50%) translateY(100%);
     opacity: 0;
+    pointer-events: none;
   }
 }
 

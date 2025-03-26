@@ -45,7 +45,6 @@ export default function CurrentSpotifySong() {
         isInitial && "slide-up",
         isInactive && "slide-down",
         !currentSong && "pointer-events-none opacity-0",
-        currentSong?.state.paused && "pointer-events-none",
       )}
     >
       <SpotifySong song={currentSong} extended />
