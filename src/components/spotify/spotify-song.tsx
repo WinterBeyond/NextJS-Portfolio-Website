@@ -80,13 +80,15 @@ export default function SpotifySong({ song, extended }: SpotifySongProps) {
     [currentSong?.id, currentSong?.state.paused, song?.id],
   );
 
+  if (!song) return null;
+
   return (
     <Link
       className={cn(
         "group/song flex flex-col justify-center rounded-xl border border-neutral-700 bg-neutral-900 bg-opacity-30 bg-clip-padding p-3 backdrop-blur-lg backdrop-filter hover:z-50 hover:border-green-500",
         extended && "w-full gap-y-4",
       )}
-      href={`https://open.spotify.com/track/${song?.id}`}
+      href={`https://open.spotify.com/track/${song.id}`}
       target="_blank"
       prefetch={false}
     >
@@ -96,7 +98,7 @@ export default function SpotifySong({ song, extended }: SpotifySongProps) {
           extended && "flex-col md:flex-row",
         )}
       >
-        {song?.image && (
+        {song.image && (
           <Image
             src={song.image}
             alt={`${song.name} preview`}
@@ -114,10 +116,10 @@ export default function SpotifySong({ song, extended }: SpotifySongProps) {
         >
           <div className="flex flex-col">
             <label className="font-bold text-white group-hover/song:text-green-500">
-              {song?.name}
+              {song.name}
             </label>
             <span className="text-sm font-semibold text-gray-200">
-              {listFormat.format(song?.artists ?? [])}
+              {listFormat.format(song.artists)}
             </span>
           </div>
           {extended && (
@@ -127,16 +129,16 @@ export default function SpotifySong({ song, extended }: SpotifySongProps) {
               </span>
               <div
                 className="h-1 w-48 rounded-md bg-gray-200 md:w-96"
-                key={`playback-time-${song?.id}`}
+                key={`playback-time-${song.id}`}
               >
                 <div
                   className={cn(
                     "h-1 rounded-md bg-green-500",
-                    (timePlayed?.[song?.id ?? ""] ?? 0) >= 1 &&
+                    (timePlayed?.[song.id] ?? 0) >= 1 &&
                       "transition-all duration-1000 ease-linear",
                   )}
                   style={{
-                    width: `${timePlayed?.[song?.id ?? ""] ?? 0}%`,
+                    width: `${timePlayed?.[song.id] ?? 0}%`,
                   }}
                 />
               </div>
@@ -153,7 +155,7 @@ export default function SpotifySong({ song, extended }: SpotifySongProps) {
                   onClick={togglePreviewAudio}
                   aria-label={`${
                     isPaused ? "Play Audio Preview" : "Pause Audio Preview"
-                  } for ${song?.name}`}
+                  } for ${song.name}`}
                 >
                   {isPaused ? <PlayIcon /> : <PauseIcon />}
                 </button>

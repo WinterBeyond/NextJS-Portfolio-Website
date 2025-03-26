@@ -3,7 +3,7 @@ import tailwindFluid, { extract, screens, fontSize } from "fluid-tailwind";
 
 /** @type {import('tailwindcss').Config} */
 const tailwindConfig = {
-  darkMode: ["class"],
+  darkMode: "selector",
   content: {
     files: ["./src/**/*.{ts,tsx}"],
     extract,

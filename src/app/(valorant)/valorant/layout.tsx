@@ -9,12 +9,12 @@ import { cn } from "@/lib/common";
 
 const rubikFont = RubikFont({ subsets: ["latin"], variable: "--font-rubik" });
 
-const title = "Valorant ASCII Chat Art";
+const title = "Personal Valorant Tools";
 const description = "Create ASCII art for Valorant chat!";
 const url =
   sharedEnv.NODE_ENV === "development"
-    ? "http://localhost:3000/valorant-chat"
-    : "https://maxwiggedal.dev/valorant-chat";
+    ? "http://localhost:3000/valorant"
+    : "https://maxwiggedal.dev/valorant";
 
 export const metadata: Metadata = {
   metadataBase: new URL(url),
