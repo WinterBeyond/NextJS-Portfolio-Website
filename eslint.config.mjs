@@ -20,7 +20,6 @@ const eslintConfig = [
     "next/core-web-vitals",
     "plugin:@typescript-eslint/recommended",
     "plugin:react/jsx-runtime",
-    "plugin:tailwindcss/recommended",
     "prettier",
   ),
   {
@@ -50,8 +49,6 @@ const eslintConfig = [
     rules: {
       "react/react-in-jsx-scope": "off",
       "react/jsx-uses-react": "off",
-      "tailwindcss/classnames-order": "off",
-      "tailwindcss/no-custom-classname": "off",
       "@typescript-eslint/no-unused-vars": "warn",
     },
   },
