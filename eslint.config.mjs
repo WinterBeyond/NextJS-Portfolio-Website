@@ -1,6 +1,5 @@
 import typescriptEslint from "@typescript-eslint/eslint-plugin";
 import react from "eslint-plugin-react";
-import reactCompiler from "eslint-plugin-react-compiler";
 import tsParser from "@typescript-eslint/parser";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -28,7 +27,6 @@ const eslintConfig = [
     plugins: {
       "@typescript-eslint": typescriptEslint,
       react,
-      "react-compiler": reactCompiler,
     },
 
     languageOptions: {
@@ -50,7 +48,6 @@ const eslintConfig = [
     },
 
     rules: {
-      "react-compiler/react-compiler": "error",
       "react/react-in-jsx-scope": "off",
       "react/jsx-uses-react": "off",
       "tailwindcss/classnames-order": "off",

@@ -1,7 +1,12 @@
 "use server";
 
+import { load as loadCheerio } from "cheerio";
+
 import { Song } from "@/entities/song";
-import { SpotifyAccessTokenResponse, SpotifyTopSongsResponse } from "@/entities/spotify";
+import {
+  SpotifyAccessTokenResponse,
+  SpotifyTopSongsResponse,
+} from "@/entities/spotify";
 import { serverEnv } from "@/env/server";
 import fetcher from "@/lib/fetcher";
 
@@ -54,6 +59,39 @@ export async function refreshSpotifyAccessToken(
   );
 }
 
+async function getSpotifyPreviewUrls(
+  spotifyTrackUrls: Array<string>,
+): Promise<Record<string, string>> {
+  const responses = await Promise.allSettled(
+    spotifyTrackUrls.map((url) =>
+      fetcher<string>(url, {
+        next: {
+          revalidate: 3000,
+        },
+      }),
+    ),
+  );
+
+  const pages = responses
+    .filter((page) => page.status === "fulfilled")
+    .map((page) => (page as PromiseFulfilledResult<string>).value);
+
+  const previewUrlMap: Record<string, string> = {};
+
+  for (const page of pages) {
+    const $ = loadCheerio(page);
+    const audioUrl = $('meta[property="og:audio"]').attr("content");
+    const canonicalUrl = $('link[rel="canonical"]').attr("href");
+
+    if (audioUrl && canonicalUrl) {
+      const trackId = canonicalUrl.split("/").pop();
+      if (trackId) previewUrlMap[trackId] = audioUrl;
+    }
+  }
+
+  return previewUrlMap;
+}
+
 export async function getTopMonthlySongs(
   limit: number = 10,
   timeRange: "long_term" | "medium_term" | "short_term" = "medium_term",
@@ -79,13 +117,17 @@ export async function getTopMonthlySongs(
     },
   );
 
+  const previewUrls = await getSpotifyPreviewUrls(
+    data.items.map((entry) => entry.external_urls.spotify),
+  );
+
   return data.items.map((entry) => ({
     id: entry.id,
     name: entry.name.includes("(")
       ? entry.name.split("(")[0].trim()
       : entry.name,
     image: entry.album.images[1]?.url ?? entry.album.images[0]?.url, // Fallback to the first image if the second one is not available (Sorted by size)
-    previewUrl: entry.preview_url,
+    previewUrl: previewUrls[entry.id],
     artists: entry.artists.map((artist) => artist.name),
   }));
 }

@@ -41,10 +41,11 @@ export default function CurrentSpotifySong() {
   return (
     <div
       className={cn(
-        "fixed bottom-0 left-1/2 z-20 w-full max-w-5xl -translate-x-1/2 translate-y-full transform text-white md:bottom-10",
+        "slide-initial fixed bottom-0 left-1/2 z-20 w-full max-w-5xl text-white md:bottom-10",
         isInitial && "slide-up",
         isInactive && "slide-down",
         !currentSong && "pointer-events-none opacity-0",
+        currentSong?.state.paused && "pointer-events-none",
       )}
     >
       <SpotifySong song={currentSong} extended />

@@ -1,4 +1,4 @@
-import "@/styles/globals.css";
+import "@/app/globals.css";
 
 import { Metadata } from "next";
 import { Rubik as RubikFont } from "next/font/google";

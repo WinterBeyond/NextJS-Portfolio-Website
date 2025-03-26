@@ -51,8 +51,12 @@ export default function SpotifySongProvider({
   const registerSong = useCallback(
     (newSong: Song) =>
       setSongs((previousSongs) => {
-        if (previousSongs.some((song) => song.id === newSong.id))
+        if (
+          !newSong.previewUrl ||
+          previousSongs.some((song) => song.id === newSong.id)
+        )
           return previousSongs;
+
         return [
           ...previousSongs,
           {

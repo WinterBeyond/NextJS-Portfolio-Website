@@ -16,6 +16,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "../ui/tooltip";
+import SpotifySongSkeleton from "./spotify-song-skeleton";
 
 type SpotifySongProps = {
   song?: Song;
@@ -80,12 +81,12 @@ export default function SpotifySong({ song, extended }: SpotifySongProps) {
     [currentSong?.id, currentSong?.state.paused, song?.id],
   );
 
-  if (!song) return null;
+  if (!song) return <SpotifySongSkeleton />;
 
   return (
     <Link
       className={cn(
-        "group/song flex flex-col justify-center rounded-xl border border-neutral-700 bg-neutral-900 bg-opacity-30 bg-clip-padding p-3 backdrop-blur-lg backdrop-filter hover:z-50 hover:border-green-500",
+        "group/song bg-opacity-30 flex flex-col justify-center rounded-xl border border-neutral-700 bg-neutral-900 bg-clip-padding p-3 backdrop-blur-lg backdrop-filter hover:z-50 hover:border-green-500",
         extended && "w-full gap-y-4",
       )}
       href={`https://open.spotify.com/track/${song.id}`}
@@ -115,7 +116,7 @@ export default function SpotifySong({ song, extended }: SpotifySongProps) {
           )}
         >
           <div className="flex flex-col">
-            <label className="font-bold text-white group-hover/song:text-green-500">
+            <label className="cursor-pointer font-bold text-white group-hover/song:text-green-500">
               {song.name}
             </label>
             <span className="text-sm font-semibold text-gray-200">
@@ -147,24 +148,28 @@ export default function SpotifySong({ song, extended }: SpotifySongProps) {
               </span>
             </div>
           )}
-          <TooltipProvider>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <button
-                  className="group/audiopreview relative"
-                  onClick={togglePreviewAudio}
-                  aria-label={`${
-                    isPaused ? "Play Audio Preview" : "Pause Audio Preview"
-                  } for ${song.name}`}
-                >
-                  {isPaused ? <PlayIcon /> : <PauseIcon />}
-                </button>
-              </TooltipTrigger>
-              <TooltipContent>
-                <p>{isPaused ? "Play Audio Preview" : "Pause Audio Preview"}</p>
-              </TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
+          {song.previewUrl && (
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <button
+                    className="group/audiopreview relative cursor-pointer"
+                    onClick={togglePreviewAudio}
+                    aria-label={`${
+                      isPaused ? "Play Audio Preview" : "Pause Audio Preview"
+                    } for ${song.name}`}
+                  >
+                    {isPaused ? <PlayIcon /> : <PauseIcon />}
+                  </button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>
+                    {isPaused ? "Play Audio Preview" : "Pause Audio Preview"}
+                  </p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+          )}
         </div>
       </div>
     </Link>

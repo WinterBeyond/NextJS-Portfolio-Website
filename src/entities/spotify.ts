@@ -46,6 +46,7 @@ export type SpotifySong = {
   preview_url?: string;
   album: SpotifyAlbum;
   artists: Array<SpotifyArtist>;
+  external_urls: Record<string, string>;
 };
 
 export type SpotifyTopSongsResponse = SpotifyPaginatedResponse<SpotifySong>;

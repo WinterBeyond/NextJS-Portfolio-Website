@@ -269,7 +269,7 @@ export default function ValorantChatPage() {
       >
         <div className="hidden flex-col gap-2 rounded-lg bg-neutral-800 p-4 lg:flex">
           <textarea
-            className="h-80 resize-none rounded-lg border border-gray-500 bg-neutral-600 px-4 py-2 text-base text-white outline-none focus:border-blue-500"
+            className="h-80 resize-none rounded-lg border border-gray-500 bg-neutral-600 px-4 py-2 text-base text-white outline-hidden focus:border-blue-500"
             value={promptText}
             onChange={(e) => setPromptText(e.target.value)}
           />

@@ -2,9 +2,7 @@ import { ClassValue, clsx } from "clsx";
 import crypto from "crypto";
 import { extendTailwindMerge } from "tailwind-merge";
 
-import { withFluid } from "@fluid-tailwind/tailwind-merge";
-
-const twMerge = extendTailwindMerge({}, withFluid);
+const twMerge = extendTailwindMerge({});
 
 export function cn(...classNames: ClassValue[]) {
   return twMerge(clsx(...classNames));

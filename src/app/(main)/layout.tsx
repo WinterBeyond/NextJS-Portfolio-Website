@@ -1,4 +1,4 @@
-import "@/styles/globals.css";
+import "@/app/globals.css";
 
 import { Rubik as RubikFont } from "next/font/google";
 import { ReactNode } from "react";
@@ -22,7 +22,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <html lang="en" suppressHydrationWarning>
       <body
         className={cn(
-          "bg-gradient-to-br from-gray-800 to-black antialiased",
+          "bg-linear-to-br from-gray-800 to-black antialiased",
           rubikFont.variable,
         )}
       >
