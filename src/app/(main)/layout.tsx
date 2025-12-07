@@ -1,7 +1,6 @@
 import "@/app/globals.css";
 
 import { Rubik as RubikFont } from "next/font/google";
-import { ReactNode } from "react";
 
 import Footer from "@/components/footer";
 import CurrentSpotifySong from "@/components/spotify/current-spotify-song";
@@ -13,11 +12,7 @@ const rubikFont = RubikFont({ subsets: ["latin"], variable: "--font-rubik" });
 
 export const metadata = meta;
 
-type RootLayoutProps = {
-  children: ReactNode;
-};
-
-export default function RootLayout({ children }: RootLayoutProps) {
+export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body
