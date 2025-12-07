@@ -1,13 +1,6 @@
 {
   "compilerOptions": {
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
-    "types": [
-      "sst"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "target": "ESNext",
     "allowJs": true,
     "skipLibCheck": true,
@@ -27,15 +20,10 @@
       }
     ],
     "paths": {
-      "@/*": [
-        "./src/*"
-      ]
+      "@/*": ["./src/*"]
     }
   },
-  "types": [
-    "jest",
-    "node"
-  ],
+  "types": ["jest", "node"],
   "include": [
     "next-env.d.ts",
     ".next/types/**/*.ts",
