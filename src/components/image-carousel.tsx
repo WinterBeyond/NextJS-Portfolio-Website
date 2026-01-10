@@ -6,6 +6,7 @@ import { ReactNode, useCallback, useEffect, useId, useMemo, useRef, useState } f
 
 import { StoryblokAsset, StoryblokRichtext } from "@/storyblok";
 
+import { MotionImage } from "./motion-image";
 import RichText from "./richtext";
 import { Badge } from "./ui/badge";
 
@@ -34,6 +35,14 @@ export function ImageCarousel({ slides, autoplay = false, autoplayDelay = 5000 }
   const tablistId = useId();
 
   const slideCount = slides.length;
+
+  const createValidId = (title: string, prefix: string) => {
+    return `${prefix}-${title
+      .toLowerCase()
+      .replace(/[^a-z0-9]/g, "-")
+      .replace(/-+/g, "-")
+      .replace(/^-|-$/g, "")}`;
+  };
 
   const clearTimer = () => {
     if (timerRef.current) {
@@ -146,9 +155,8 @@ export function ImageCarousel({ slides, autoplay = false, autoplayDelay = 5000 }
       <div className="relative h-96 bg-muted overflow-hidden">
         {slides[currentIndex]?.image?.filename && (
           <AnimatePresence initial={false} mode="wait">
-            <motion.img
+            <MotionImage
               key={currentIndex}
-              src={slides[currentIndex].image.filename}
               variants={imageVariants}
               initial="enter"
               animate="center"
@@ -157,8 +165,11 @@ export function ImageCarousel({ slides, autoplay = false, autoplayDelay = 5000 }
                 duration: shouldReduceMotion ? 0 : 0.35,
                 ease: "easeInOut",
               }}
+              src={slides[currentIndex]?.image?.filename || ""}
+              alt={slides[currentIndex]?.image?.alt || slides[currentIndex]?.title || ""}
+              width={800}
+              height={400}
               className="absolute inset-0 w-full h-full object-cover focus-visible:outline-none"
-              alt={slides[currentIndex].image.alt || slides[currentIndex].title}
               role="img"
               aria-describedby={descriptionId}
               aria-labelledby={headingId}
@@ -188,7 +199,7 @@ export function ImageCarousel({ slides, autoplay = false, autoplayDelay = 5000 }
         </span>
       </div>
 
-      <div className="p-8 border-t border-border" role="tablist" aria-label="Slide navigation" id={tablistId}>
+      <div className="p-8 border-t border-border">
         <AnimatePresence mode="wait" initial={false}>
           <motion.div
             key={currentIndex}
@@ -197,8 +208,9 @@ export function ImageCarousel({ slides, autoplay = false, autoplayDelay = 5000 }
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: shouldReduceMotion ? 0 : 0.3 }}
             role="tabpanel"
-            aria-labelledby={headingId}
-            id={`slide-panel-${slides[currentIndex]?.title ?? "unknown"}`}
+            aria-labelledby={createValidId(slides[currentIndex]?.title ?? "unknown", "slide-tab")}
+            id={createValidId(slides[currentIndex]?.title ?? "unknown", "slide-panel")}
+            tabIndex={0}
           >
             <h2 id={headingId} className="text-2xl font-semibold text-foreground mb-2">
               {slides[currentIndex]?.title}
@@ -233,7 +245,7 @@ export function ImageCarousel({ slides, autoplay = false, autoplayDelay = 5000 }
           </motion.div>
         </AnimatePresence>
 
-        <div className="flex items-center gap-2 mt-6">
+        <div className="flex items-center gap-2 mt-6" role="tablist" aria-label="Slide navigation" id={tablistId}>
           {slides.map((slide, index) => {
             const isActive = index === currentIndex;
             return (
@@ -247,9 +259,9 @@ export function ImageCarousel({ slides, autoplay = false, autoplayDelay = 5000 }
                 aria-label={`Go to slide ${index + 1}`}
                 role="tab"
                 aria-selected={isActive}
-                aria-controls={`slide-panel-${slide.title}`}
+                aria-controls={createValidId(slide.title, "slide-panel")}
                 tabIndex={isActive ? 0 : -1}
-                id={`slide-tab-${slide.title}`}
+                id={createValidId(slide.title, "slide-tab")}
               >
                 <span className="sr-only">
                   {slide.title} ({index + 1} of {slideCount})

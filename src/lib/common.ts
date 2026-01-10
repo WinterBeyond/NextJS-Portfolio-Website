@@ -37,6 +37,15 @@ export function getDimensionsFromUrl(url?: string | null) {
   };
 }
 
+export function getYoutubeVideoId(url: string | undefined): string | null {
+  if (!url) return null;
+
+  const standard = url.match(/v=([^&]+)/);
+  const short = url.match(/youtu\.be\/([^?]+)/);
+
+  return (standard && standard[1]) || (short && short[1]);
+}
+
 export function getClientIp(headers: Headers): string | null {
   const xff = headers.get("x-forwarded-for");
   if (xff) return xff.split(",")[0].trim();

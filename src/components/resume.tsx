@@ -3,17 +3,14 @@
 import { motion, Variants } from "framer-motion";
 import { Briefcase, Building2, Code2, Download, Globe, Languages, Mail, MapPin } from "lucide-react";
 import Link from "next/link";
-import { useState } from "react";
 
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { useSiteConfig } from "@/contexts/site-config-provider";
 import { cn } from "@/lib/common";
 import { StoryblokExperience, StoryblokProject, StoryblokResume, StoryblokSkills } from "@/storyblok-components";
-import { AvatarImage } from "@radix-ui/react-avatar";
 import { ISbStoryData } from "@storyblok/react/rsc";
 
 import ClientDate from "./client-date";
@@ -32,26 +29,6 @@ export default function Resume({ blok }: ResumeProps) {
   const projects = blok.projects as unknown as Array<ISbStoryData<StoryblokProject>>;
   const skills = blok.skills?.[0] as unknown as ISbStoryData<StoryblokSkills>;
   const languages = blok.languages;
-  const [emailCopied, setEmailCopied] = useState(false);
-  const [tooltipOpen, setTooltipOpen] = useState(false);
-
-  const handleEmailCopy = async () => {
-    if (!siteConfig?.story.content.email) return;
-
-    try {
-      await navigator.clipboard.writeText(siteConfig.story.content.email);
-
-      setEmailCopied(true);
-      setTooltipOpen(true);
-
-      setTimeout(() => {
-        setEmailCopied(false);
-        setTooltipOpen(false);
-      }, 2000);
-    } catch (error) {
-      console.error("Failed to copy email:", error);
-    }
-  };
 
   // Generate initials from name
   const initials =
@@ -99,7 +76,11 @@ export default function Resume({ blok }: ResumeProps) {
               {siteConfig?.story.content.logo?.filename && (
                 <AvatarImage
                   src={siteConfig.story.content.logo.filename}
+                  width={200}
+                  height={200}
                   className="w-max h-auto object-cover"
+                  loading="eager"
+                  fetchPriority="high"
                   alt={siteConfig.story.content.logo.alt || "Profile picture"}
                 />
               )}
@@ -124,27 +105,17 @@ export default function Resume({ blok }: ResumeProps) {
 
             <div className="flex flex-wrap justify-center md:justify-start gap-3 pt-2">
               {siteConfig?.story.content.email && (
-                <TooltipProvider>
-                  <Tooltip open={tooltipOpen} onOpenChange={setTooltipOpen}>
-                    <TooltipTrigger asChild>
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          handleEmailCopy();
-                        }}
-                        className="gap-2 h-9 rounded-full bg-background/50 backdrop-blur-sm hover:bg-primary/10 hover:text-primary hover:border-primary/50 transition-all duration-300 cursor-pointer"
-                      >
-                        <Mail className="size-3.5" />
-                        <span>{siteConfig?.story.content.email}</span>
-                      </Button>
-                    </TooltipTrigger>
-                    <TooltipContent>
-                      <p>{emailCopied ? "Email copied!" : "Click to copy"}</p>
-                    </TooltipContent>
-                  </Tooltip>
-                </TooltipProvider>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="gap-2 h-9 rounded-full bg-background/50 backdrop-blur-sm hover:bg-primary/10 hover:text-primary hover:border-primary/50 transition-all duration-300 cursor-pointer"
+                  asChild
+                >
+                  <Link href={`mailto:${siteConfig.story.content.email}`}>
+                    <Mail className="size-3.5" />
+                    <span>{siteConfig.story.content.email}</span>
+                  </Link>
+                </Button>
               )}
 
               {siteConfig?.story.content.location && (
@@ -270,9 +241,11 @@ export default function Resume({ blok }: ResumeProps) {
                       <Building2 className="size-3.5" />
                       <span>{job.content.company_name}</span>
                     </div>
-                    <ul className="list-disc list-outside ml-4 space-y-2 text-sm text-muted-foreground/90 leading-relaxed">
-                      <RichText richText={job.content.description} />
-                    </ul>
+
+                    <RichText
+                      richText={job.content.description}
+                      className="list-disc list-outside ml-4 space-y-2 text-sm text-muted-foreground/90 leading-relaxed"
+                    />
                   </div>
                 ))}
               </div>

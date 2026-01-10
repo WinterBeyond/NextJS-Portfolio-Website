@@ -58,6 +58,19 @@ export interface StoryblokLanguage {
 }
 
 export interface StoryblokMedia {
+  desktop_asset?: StoryblokAsset;
+  mobile_asset?: StoryblokAsset;
+  alt_text?: string;
+  mobile_alt_text?: string;
+  desktop_max_height?: string;
+  mobile_max_height?: string;
+  position: "left" | "center" | "right";
+  ignore_width_restriction?: boolean;
+  autoplay_video?: boolean;
+  loop_video?: boolean;
+  hide_video_controls?: boolean;
+  seconds_passed?: string;
+  youtube_link?: string;
   component: "media";
   _uid: string;
 }

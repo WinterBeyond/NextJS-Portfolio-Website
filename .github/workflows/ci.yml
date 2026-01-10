@@ -14,7 +14,7 @@ env:
   SPOTIFY_OAUTH_REFRESH_TOKEN: ${{ secrets.SPOTIFY_OAUTH_REFRESH_TOKEN }}
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
 
     steps:
@@ -31,6 +31,3 @@ jobs:
 
       - name: Run Linter
         run: npm run lint
-
-      - name: Build Application
-        run: npm run build

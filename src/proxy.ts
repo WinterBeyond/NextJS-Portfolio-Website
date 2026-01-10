@@ -4,11 +4,13 @@ import { sharedEnv } from "@/env/shared";
 
 export async function proxy(req: NextRequest) {
   const nonce = Buffer.from(crypto.randomUUID()).toString("base64");
+  const isDevelopment = sharedEnv.NODE_ENV === "development";
+
   const cspHeader = `
     default-src 'self';
-    script-src 'self' 'nonce-${nonce}' 'strict-dynamic' app.storyblok.com ${sharedEnv.NODE_ENV === "development" ? "'unsafe-eval'" : ""};
-    connect-src 'self';
+    script-src 'nonce-${nonce}' 'strict-dynamic' ${isDevelopment ? "'unsafe-eval'" : ""};
     style-src 'self' 'unsafe-inline' app.storyblok.com;
+    connect-src 'self';
     img-src 'self' blob: data: a.storyblok.com;
     media-src 'self' a.storyblok.com p.scdn.co media.valorant-api.com;
     font-src 'self';
@@ -16,6 +18,9 @@ export async function proxy(req: NextRequest) {
     base-uri 'self';
     form-action 'self';
     frame-ancestors 'self' https://app.storyblok.com;
+    frame-src 'self' https://app.storyblok.com;
+    require-trusted-types-for 'script';
+    trusted-types 'allow-duplicates';
     upgrade-insecure-requests;
   `;
 
