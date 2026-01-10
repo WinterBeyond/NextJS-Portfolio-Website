@@ -169,6 +169,9 @@ export function ImageCarousel({ slides, autoplay = false, autoplayDelay = 5000 }
               alt={slides[currentIndex]?.image?.alt || slides[currentIndex]?.title || ""}
               width={800}
               height={400}
+              loading={currentIndex === 0 ? "eager" : "lazy"}
+              fetchPriority={currentIndex === 0 ? "high" : "auto"}
+              priority={currentIndex === 0}
               className="absolute inset-0 w-full h-full object-cover focus-visible:outline-none"
               role="img"
               aria-describedby={descriptionId}

@@ -7,7 +7,7 @@
     "dev": "next dev",
     "dev:https": "next dev --experimental-https",
     "debug": "next dev --inspect",
-    "build": "next build --debug-prerender",
+    "build": "next build",
     "start": "next start",
     "next:upgrade": "next upgrade",
     "analyze": "next experimental-analyze",

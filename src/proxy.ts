@@ -19,8 +19,7 @@ export async function proxy(req: NextRequest) {
     form-action 'self';
     frame-ancestors 'self' https://app.storyblok.com;
     frame-src 'self' https://app.storyblok.com;
-    require-trusted-types-for 'script';
-    trusted-types 'allow-duplicates';
+    trusted-types goog#html default 'allow-duplicates';
     upgrade-insecure-requests;
   `;
 
