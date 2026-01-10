@@ -40,3 +40,8 @@ cypress/screenshots/
 cypress/videos/
 cypress/downloads/
 cypress/reports/
+
+# storyblok
+.storyblok/logs/
+
+certificates

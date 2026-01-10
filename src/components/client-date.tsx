@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useMemo } from "react";
 
-type RenderMode = "date" | "time" | "datetime" | "year";
+type RenderMode = "date" | "time" | "datetime" | "year" | "month";
 
 type ClientProps = {
   date: Date | string | number;
@@ -11,23 +11,14 @@ type ClientProps = {
   mode?: RenderMode;
 };
 
-export default function ClientDate({
-  date,
-  locale,
-  options,
-  mode = "datetime",
-}: ClientProps) {
-  const [dateString, setDateString] = useState("");
-
-  useEffect(() => {
+export default function ClientDate({ date, locale, options, mode = "datetime" }: ClientProps) {
+  const dateString = useMemo(() => {
     const parsedDate = new Date(date);
-    if (mode === "time")
-      setDateString(parsedDate.toLocaleTimeString(locale, options));
-    else if (mode === "date")
-      setDateString(parsedDate.toLocaleDateString(locale, options));
-    else if (mode === "year")
-      setDateString(parsedDate.getFullYear().toString());
-    else setDateString(parsedDate.toLocaleString(locale, options));
+    if (mode === "time") return parsedDate.toLocaleTimeString(locale, options);
+    else if (mode === "date") return parsedDate.toLocaleDateString(locale, options);
+    else if (mode === "year") return parsedDate.getFullYear().toString();
+    else if (mode === "month") return parsedDate.toLocaleString(locale, { month: "short", year: "numeric" });
+    else return parsedDate.toLocaleString(locale, options);
   }, [date, locale, options, mode]);
 
   return dateString;

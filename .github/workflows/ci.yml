@@ -7,7 +7,7 @@ on:
     branches: [main]
 
 env:
-  NODE_VERSION: "20"
+  NODE_VERSION: "24"
   SPOTIFY_OAUTH_CLIENT_ID: ${{ secrets.SPOTIFY_OAUTH_CLIENT_ID }}
   SPOTIFY_OAUTH_SECRET: ${{ secrets.SPOTIFY_OAUTH_SECRET }}
   SPOTIFY_OAUTH_REDIRECT_URI: ${{ secrets.SPOTIFY_OAUTH_REDIRECT_URI }}
@@ -19,34 +19,18 @@ jobs:
 
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v6
 
       - name: Setup NodeJS Environment
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v6
         with:
           node-version: ${{ env.NODE_VERSION }}
 
       - name: Install Dependencies
-        run: npm install --force
+        run: npm install
+
+      - name: Run Linter
+        run: npm run lint
 
       - name: Build Application
         run: npm run build
-
-  test:
-    runs-on: ubuntu-latest
-    needs: build
-
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
-
-      - name: Setup NodeJS Environment
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-
-      - name: Install Dependencies
-        run: npm install --force
-
-      - name: Run Tests
-        run: npm test

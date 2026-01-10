@@ -1,12 +1,20 @@
-import ClientDate from "./client-date";
+import Link from "next/link";
+import { ISbComponentType, ISbLinkURLObject } from "storyblok-js-client";
 
-export default function Footer() {
-  return (
-    <footer className="flex flex-col justify-between gap-y-2 md:flex-row">
-      <span className="text-gray-300">
-        &copy; <ClientDate date={new Date()} mode="year" /> Max Wiggedal. All
-        Rights Reserved.
-      </span>
-    </footer>
-  );
+import { StoryblokSiteConfig } from "@/storyblok-components";
+import { ISbStoryData } from "@storyblok/react/rsc";
+
+type FooterProps = {
+  locale: string;
+  siteConfig?: {
+    cv: number;
+    links: (ISbStoryData | ISbLinkURLObject)[];
+    rels: ISbStoryData[];
+    story: ISbStoryData<ISbComponentType<string> & StoryblokSiteConfig>;
+  } | null;
+  isPreview?: boolean;
+};
+
+export default function Footer({ locale, siteConfig, isPreview }: FooterProps) {
+  return <footer className="flex flex-col justify-between gap-y-2 md:flex-row"></footer>;
 }

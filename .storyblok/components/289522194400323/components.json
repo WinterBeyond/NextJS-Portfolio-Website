@@ -1,0 +1,918 @@
+[
+  {
+    "name": "age",
+    "display_name": null,
+    "description": "",
+    "created_at": "2026-01-10T04:56:28.779Z",
+    "updated_at": "2026-01-10T04:56:28.779Z",
+    "id": 132429368448553,
+    "schema": {},
+    "image": null,
+    "preview_field": null,
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "age",
+    "component_group_uuid": null,
+    "color": null,
+    "icon": null,
+    "internal_tags_list": [],
+    "internal_tag_ids": [],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
+    "name": "button",
+    "display_name": null,
+    "description": "",
+    "created_at": "2026-01-10T01:43:49.394Z",
+    "updated_at": "2026-01-10T01:43:49.394Z",
+    "id": 132382021211622,
+    "schema": {},
+    "image": null,
+    "preview_field": null,
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "button",
+    "component_group_uuid": null,
+    "color": null,
+    "icon": null,
+    "internal_tags_list": [],
+    "internal_tag_ids": [],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
+    "name": "education",
+    "display_name": null,
+    "description": "",
+    "created_at": "2026-01-10T02:12:56.541Z",
+    "updated_at": "2026-01-10T02:16:29.718Z",
+    "id": 132389177525739,
+    "schema": {
+      "school": {
+        "type": "text",
+        "pos": 0,
+        "required": true,
+        "id": "IN1JHsI6QJG-SFe6M3vcmQ"
+      },
+      "start_date": {
+        "type": "datetime",
+        "pos": 2,
+        "required": true,
+        "disable_time": true,
+        "id": "IKFevENURFCXFVGEVtjNZw"
+      },
+      "end_date": {
+        "type": "datetime",
+        "pos": 3,
+        "disable_time": true,
+        "required": true,
+        "id": "hMhw4O8WTXex38bI_8-_fw"
+      }
+    },
+    "image": null,
+    "preview_field": null,
+    "is_root": true,
+    "preview_tmpl": null,
+    "is_nestable": false,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "education",
+    "component_group_uuid": null,
+    "color": null,
+    "icon": null,
+    "internal_tags_list": [],
+    "internal_tag_ids": [],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
+    "name": "experience",
+    "display_name": null,
+    "description": "",
+    "created_at": "2026-01-10T01:56:31.388Z",
+    "updated_at": "2026-01-10T03:50:16.194Z",
+    "id": 132385142330858,
+    "schema": {
+      "company_name": {
+        "type": "text",
+        "pos": 0,
+        "required": true,
+        "id": "3Z7348XPSwiZETjLt6fXIQ"
+      },
+      "position": {
+        "type": "text",
+        "pos": 1,
+        "required": true,
+        "translatable": true,
+        "id": "QZw-kHFBSliiCOO4KGAlDA"
+      },
+      "start_date": {
+        "type": "datetime",
+        "pos": 2,
+        "required": true,
+        "id": "1RXN3PnrQUesZDQVUCxINw",
+        "disable_time": true
+      },
+      "end_date": {
+        "type": "datetime",
+        "pos": 3,
+        "id": "VVePrt1rQ_6ECnl7LKb50Q",
+        "disable_time": true
+      },
+      "description": {
+        "type": "richtext",
+        "pos": 4,
+        "translatable": true,
+        "customize_toolbar": true,
+        "toolbar": [
+          "bold",
+          "list",
+          "link",
+          "underline"
+        ],
+        "allow_target_blank": true,
+        "id": "U5Tb-ezuRMmgltBLggCOiA"
+      },
+      "tags": {
+        "type": "options",
+        "pos": 5,
+        "options": [
+          {
+            "_uid": "3e2703fa-e973-406e-932d-2f024d6a80f5",
+            "name": "Startup",
+            "value": "Startup"
+          },
+          {
+            "_uid": "7c69cccd-e626-4e28-8e60-a644ad12b8e8",
+            "value": "Volunteer",
+            "name": "Volunteer"
+          },
+          {
+            "_uid": "62724ba2-4a12-4846-befb-689ed5835beb",
+            "value": "Freelance",
+            "name": "Freelance"
+          }
+        ],
+        "exclude_empty_option": true,
+        "id": "tgpPMfUmQrSGZWpEWigLJA"
+      }
+    },
+    "image": null,
+    "preview_field": null,
+    "is_root": true,
+    "preview_tmpl": null,
+    "is_nestable": false,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "experience",
+    "component_group_uuid": null,
+    "color": null,
+    "icon": null,
+    "internal_tags_list": [],
+    "internal_tag_ids": [],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
+    "name": "grid",
+    "display_name": null,
+    "description": null,
+    "created_at": "2025-12-30T19:47:24.188Z",
+    "updated_at": "2026-01-04T18:44:56.012Z",
+    "id": 128755483398946,
+    "schema": {
+      "columns": {
+        "type": "bloks",
+        "id": "91ZGjLrpTEifKd9DUXP4yQ"
+      }
+    },
+    "image": null,
+    "preview_field": null,
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "grid",
+    "component_group_uuid": null,
+    "color": null,
+    "icon": null,
+    "internal_tags_list": [
+      {
+        "id": 130509214418031,
+        "name": "Page nestable"
+      }
+    ],
+    "internal_tag_ids": [
+      "130509214418031"
+    ],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
+    "name": "language",
+    "display_name": null,
+    "description": "",
+    "created_at": "2026-01-10T02:29:11.431Z",
+    "updated_at": "2026-01-10T02:37:03.492Z",
+    "id": 132393170666990,
+    "schema": {
+      "name": {
+        "type": "text",
+        "pos": 0,
+        "required": true,
+        "translatable": true,
+        "id": "d7QKG3DsR7Wmds1-MFRiKA"
+      },
+      "level": {
+        "type": "option",
+        "pos": 1,
+        "use_uuid": true,
+        "exclude_empty_option": true,
+        "options": [
+          {
+            "_uid": "80323b66-2ad6-4bd5-8929-b6caed42cd29",
+            "name": "Native",
+            "value": "Native"
+          },
+          {
+            "_uid": "e0030693-3374-4491-aa13-ae96c675ab0f",
+            "value": "Professional",
+            "name": "Professional"
+          },
+          {
+            "_uid": "4fa30f2d-0b73-4358-ad24-4a5a97d4eaee",
+            "value": "Fluent",
+            "name": "Fluent"
+          }
+        ],
+        "id": "IQSxETiPTayFP_R3v4mQ3A",
+        "required": true,
+        "translatable": true
+      }
+    },
+    "image": null,
+    "preview_field": null,
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "language",
+    "component_group_uuid": null,
+    "color": null,
+    "icon": null,
+    "internal_tags_list": [],
+    "internal_tag_ids": [],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
+    "name": "media",
+    "display_name": null,
+    "description": "",
+    "created_at": "2026-01-10T01:45:38.421Z",
+    "updated_at": "2026-01-10T02:13:11.356Z",
+    "id": 132382467778023,
+    "schema": {},
+    "image": null,
+    "preview_field": null,
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "media",
+    "component_group_uuid": null,
+    "color": null,
+    "icon": null,
+    "internal_tags_list": [
+      {
+        "id": 130509214418031,
+        "name": "Page nestable"
+      }
+    ],
+    "internal_tag_ids": [
+      "130509214418031"
+    ],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
+    "name": "page",
+    "display_name": null,
+    "description": "",
+    "created_at": "2026-01-04T18:42:38.034Z",
+    "updated_at": "2026-01-04T22:07:10.667Z",
+    "id": 130509037712414,
+    "schema": {
+      "body": {
+        "type": "bloks",
+        "pos": 0,
+        "restrict_type": "tags",
+        "restrict_components": true,
+        "component_whitelist": [],
+        "component_denylist": [],
+        "component_group_whitelist": [],
+        "component_group_denylist": [],
+        "component_tag_whitelist": [
+          130509214418031
+        ],
+        "component_tag_denylist": [],
+        "id": "6SPxSIh0SiCLHAuyh_0VRg"
+      },
+      "tab-ad8f6c22-85a6-48eb-b006-2c30e98a48b2": {
+        "display_name": "Meta",
+        "keys": [
+          "meta_title",
+          "meta_description"
+        ],
+        "pos": 0,
+        "type": "tab",
+        "id": "rY9sIoWmSOuwBiww6YpIsg"
+      },
+      "type": {
+        "type": "option",
+        "pos": 1,
+        "required": true,
+        "use_uuid": true,
+        "exclude_empty_option": true,
+        "options": [
+          {
+            "_uid": "38bbdde6-0647-44eb-9c5b-7cea1fa23f05",
+            "name": "Website",
+            "value": "website"
+          },
+          {
+            "_uid": "d310f1dc-6860-4edc-bf56-68ee6ef382da",
+            "value": "article",
+            "name": "Article"
+          }
+        ],
+        "default_value": "website",
+        "id": "uX3zslnQQW2Nh5X4tPUe8A"
+      },
+      "meta_title": {
+        "type": "text",
+        "pos": 3,
+        "translatable": true,
+        "id": "ejxyksi4TDqcH2EO3apB_A"
+      },
+      "meta_description": {
+        "type": "text",
+        "pos": 4,
+        "id": "wnfnqmfTRxK_SgcyW8zAwQ",
+        "translatable": true
+      }
+    },
+    "image": null,
+    "preview_field": null,
+    "is_root": true,
+    "preview_tmpl": null,
+    "is_nestable": false,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "page",
+    "component_group_uuid": null,
+    "color": null,
+    "icon": null,
+    "internal_tags_list": [],
+    "internal_tag_ids": [],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
+    "name": "project",
+    "display_name": null,
+    "description": "",
+    "created_at": "2026-01-10T01:46:34.738Z",
+    "updated_at": "2026-01-10T04:15:27.057Z",
+    "id": 132382698452456,
+    "schema": {
+      "name": {
+        "type": "text",
+        "pos": 0,
+        "required": true,
+        "id": "ie2uAcCKTUWnzhe7pElqYg"
+      },
+      "description": {
+        "type": "richtext",
+        "pos": 1,
+        "translatable": true,
+        "allow_target_blank": true,
+        "customize_toolbar": true,
+        "toolbar": [
+          "bold",
+          "link",
+          "underline"
+        ],
+        "id": "IILzGCcWRICKhMJo9sJ3Ug",
+        "required": true
+      },
+      "tech_stack": {
+        "type": "bloks",
+        "pos": 2,
+        "restrict_type": "",
+        "restrict_components": true,
+        "id": "AE6pMQyhQ5KETihXzswZag",
+        "component_whitelist": [
+          "skills"
+        ],
+        "component_denylist": [],
+        "maximum": 1
+      },
+      "github_url": {
+        "type": "multilink",
+        "pos": 3,
+        "allow_target_blank": true,
+        "id": "PvY6BCsbTh2rqcUGwrG9sA"
+      },
+      "live_url": {
+        "type": "multilink",
+        "pos": 4,
+        "allow_target_blank": true,
+        "id": "kAUBT9RfSAq2YOig5T0TZg"
+      },
+      "is_featured": {
+        "type": "boolean",
+        "pos": 5,
+        "id": "0xNy7txISAeLQ6xeWkfS_Q"
+      },
+      "open_source": {
+        "type": "boolean",
+        "pos": 6,
+        "id": "QhJGfj16Sau26N8cPKQVrQ"
+      },
+      "image": {
+        "type": "asset",
+        "pos": 7,
+        "filetypes": [
+          "images"
+        ],
+        "id": "xu27bGkZRvO4XoUbzuBDEA"
+      }
+    },
+    "image": null,
+    "preview_field": null,
+    "is_root": true,
+    "preview_tmpl": null,
+    "is_nestable": false,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "project",
+    "component_group_uuid": null,
+    "color": null,
+    "icon": null,
+    "internal_tags_list": [],
+    "internal_tag_ids": [],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
+    "name": "resume",
+    "display_name": null,
+    "description": "",
+    "created_at": "2026-01-10T02:23:58.460Z",
+    "updated_at": "2026-01-10T02:32:11.158Z",
+    "id": 132391888737773,
+    "schema": {
+      "experience": {
+        "type": "options",
+        "pos": 0,
+        "is_reference_type": true,
+        "source": "internal_stories",
+        "entry_appearance": "card",
+        "allow_advanced_search": true,
+        "id": "aS25vKeVRHGpnViGrBr3kQ",
+        "filter_content_type": [
+          "experience"
+        ]
+      },
+      "projects": {
+        "type": "options",
+        "pos": 1,
+        "is_reference_type": true,
+        "source": "internal_stories",
+        "entry_appearance": "card",
+        "allow_advanced_search": true,
+        "id": "5aprG03fS4KF6-Jn9KTPwg",
+        "filter_content_type": [
+          "project"
+        ]
+      },
+      "education": {
+        "type": "options",
+        "pos": 2,
+        "is_reference_type": true,
+        "source": "internal_stories",
+        "entry_appearance": "card",
+        "allow_advanced_search": true,
+        "id": "ivxGWOAiR5qr3bNcl7_Pqg",
+        "filter_content_type": [
+          "education"
+        ]
+      },
+      "skills": {
+        "type": "options",
+        "pos": 3,
+        "is_reference_type": true,
+        "source": "internal_stories",
+        "entry_appearance": "card",
+        "allow_advanced_search": true,
+        "max_options": 1,
+        "filter_content_type": [
+          "skills"
+        ],
+        "id": "VyenowFjRuq0gxBB6IstBw"
+      },
+      "languages": {
+        "type": "bloks",
+        "pos": 4,
+        "restrict_type": "",
+        "restrict_components": true,
+        "component_whitelist": [
+          "language"
+        ],
+        "component_denylist": [],
+        "id": "LQ_vzXGOQMyqPoKU9RonpQ"
+      }
+    },
+    "image": null,
+    "preview_field": null,
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "resume",
+    "component_group_uuid": null,
+    "color": null,
+    "icon": null,
+    "internal_tags_list": [
+      {
+        "id": 130509214418031,
+        "name": "Page nestable"
+      }
+    ],
+    "internal_tag_ids": [
+      "130509214418031"
+    ],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
+    "name": "site-config",
+    "display_name": null,
+    "description": "",
+    "created_at": "2026-01-04T18:48:01.845Z",
+    "updated_at": "2026-01-10T04:57:02.030Z",
+    "id": 130510364042308,
+    "schema": {
+      "site_name": {
+        "type": "text",
+        "pos": 0,
+        "required": true,
+        "id": "xbL-M43eShuZsQHPIQWuJg"
+      },
+      "email": {
+        "type": "text",
+        "pos": 1,
+        "id": "hKB1fijbSHO5xylw0OT1_w"
+      },
+      "location": {
+        "type": "text",
+        "pos": 2,
+        "translatable": true,
+        "id": "CuCjrZePQHuwLieAw-1Vuw"
+      },
+      "title": {
+        "type": "text",
+        "pos": 3,
+        "translatable": true,
+        "id": "uAvOSAPbRCmnCihHAPe3-g"
+      },
+      "summary": {
+        "type": "richtext",
+        "pos": 4,
+        "translatable": true,
+        "allow_target_blank": true,
+        "customize_toolbar": true,
+        "toolbar": [
+          "list",
+          "bold",
+          "hrule",
+          "link",
+          "underline",
+          "blok"
+        ],
+        "id": "h-214H69TGCSLpNTAL5PTg",
+        "restrict_type": "",
+        "restrict_components": true,
+        "component_whitelist": [
+          "age",
+          "button"
+        ],
+        "component_denylist": []
+      },
+      "github": {
+        "type": "multilink",
+        "pos": 5,
+        "allow_target_blank": true,
+        "id": "JjlowBHUSHukB9zFpbfnVw"
+      },
+      "linkedin": {
+        "type": "multilink",
+        "pos": 6,
+        "allow_target_blank": true,
+        "id": "U_i_TWsAThKBmUj5BhcAig"
+      },
+      "logo": {
+        "type": "asset",
+        "pos": 7,
+        "filetypes": [
+          "images"
+        ],
+        "id": "XSsAOGlWT4aKdSpCty9iTw"
+      },
+      "download_cv_text": {
+        "type": "text",
+        "pos": 8,
+        "translatable": true,
+        "id": "0a8R3CfzQLCIpZqeCDuF0g"
+      },
+      "cv_file": {
+        "type": "asset",
+        "pos": 9,
+        "id": "z1jVkq1UQZynX_VNQOqFBQ"
+      },
+      "tab-f15cc759-19f2-478c-811e-326c922a11e0": {
+        "display_name": "Header",
+        "keys": [
+          "header_navigation"
+        ],
+        "pos": 10,
+        "type": "tab",
+        "id": "8VzHWRnyR4yBHjJskioR4A"
+      },
+      "tab-4de26d53-3227-4f12-9373-f35157092fc8": {
+        "display_name": "Footer",
+        "keys": [
+          "footer_navigation"
+        ],
+        "pos": 11,
+        "type": "tab",
+        "id": "TeJtUzInTxKTc_NRVwkvyA"
+      },
+      "tab-b1c65c9e-4b63-4292-a4a5-0eb3f6378f22": {
+        "display_name": "Cookie Consent",
+        "keys": [
+          "cookie_consent_text",
+          "cookie_consent_prompt_text",
+          "cookie_consent_accept_label",
+          "cookie_consent_decline_label",
+          "hide_blocks_that_require_cookie_consent"
+        ],
+        "pos": 12,
+        "type": "tab",
+        "id": "scZcnktjQpKkpQ6z9jePIg"
+      },
+      "header_navigation": {
+        "type": "bloks",
+        "pos": 13,
+        "id": "vgcbhF4pR2WEZ5X2Uqi64A"
+      },
+      "footer_navigation": {
+        "type": "bloks",
+        "pos": 14,
+        "id": "f3O6J-spRCm_RpLDY6Rkxw"
+      },
+      "cookie_consent_text": {
+        "type": "richtext",
+        "pos": 15,
+        "translatable": true,
+        "id": "mi2En-gbRsav-2K-hhX0PA",
+        "customize_toolbar": true,
+        "toolbar": [
+          "bold",
+          "link",
+          "underline"
+        ],
+        "allow_target_blank": true,
+        "allow_custom_attributes": false,
+        "restrict_type": "",
+        "restrict_components": false
+      },
+      "cookie_consent_prompt_text": {
+        "type": "richtext",
+        "pos": 16,
+        "id": "PCz-1ZmZSVui_MOW8d0HBQ",
+        "required": false,
+        "translatable": true,
+        "customize_toolbar": true,
+        "toolbar": [
+          "bold",
+          "blok",
+          "link",
+          "underline"
+        ],
+        "allow_target_blank": true
+      },
+      "cookie_consent_accept_label": {
+        "type": "text",
+        "pos": 17,
+        "id": "SWzdoWcMR32a2yIyKt3YWA",
+        "translatable": true
+      },
+      "cookie_consent_decline_label": {
+        "type": "text",
+        "pos": 18,
+        "id": "W12aJcU_QH634psnsPJTHg",
+        "translatable": true
+      },
+      "hide_blocks_that_require_cookie_consent": {
+        "type": "boolean",
+        "pos": 19,
+        "id": "9WEp0KToTkiDjb7TYjAZvw"
+      }
+    },
+    "image": null,
+    "preview_field": null,
+    "is_root": true,
+    "preview_tmpl": null,
+    "is_nestable": false,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "site-config",
+    "component_group_uuid": null,
+    "color": null,
+    "icon": null,
+    "internal_tags_list": [],
+    "internal_tag_ids": [],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
+    "name": "skills",
+    "display_name": null,
+    "description": "",
+    "created_at": "2026-01-10T02:14:05.915Z",
+    "updated_at": "2026-01-10T03:04:32.109Z",
+    "id": 132389461677548,
+    "schema": {
+      "frontend": {
+        "type": "options",
+        "pos": 0,
+        "translatable": true,
+        "exclude_empty_option": true,
+        "id": "W0wBb5AeSs27YWYPOmGkJg",
+        "options": [
+          {
+            "_uid": "8648a444-c98d-424b-9bc2-b048760d8f00",
+            "name": "React",
+            "value": "React"
+          },
+          {
+            "_uid": "057c9077-bbd5-4449-b4ea-6382e3fa09d5",
+            "value": "Next.js",
+            "name": "Next.js"
+          },
+          {
+            "_uid": "01920e11-f762-448c-bb87-f6c024f4a425",
+            "value": "Vue",
+            "name": "Vue"
+          },
+          {
+            "_uid": "6fb5d651-b4da-494e-abd0-67b52f156c10",
+            "value": "JavaScript",
+            "name": "JavaScript"
+          },
+          {
+            "_uid": "7455b30a-768c-49d8-9091-873522bb4118",
+            "value": "TypeScript",
+            "name": "TypeScript"
+          },
+          {
+            "_uid": "a156ea31-aefa-4aa8-b9f4-ea3fb55af07b",
+            "value": "TailwindCSS",
+            "name": "TailwindCSS"
+          }
+        ]
+      },
+      "backend": {
+        "type": "options",
+        "pos": 1,
+        "translatable": true,
+        "exclude_empty_option": true,
+        "id": "2g7h3MeTQ9qrYanCNoiuog",
+        "options": [
+          {
+            "_uid": "f33faf07-ba0d-46f7-a3d8-431f2ff187dc",
+            "name": "Node.js",
+            "value": "Node.js"
+          },
+          {
+            "_uid": "17e0c397-ed5f-4648-a1dd-9e1b714bb38e",
+            "value": "C# (.NET)",
+            "name": "C# (.NET)"
+          },
+          {
+            "_uid": "6a534d39-259c-4b49-8c68-a5a766213654",
+            "value": "Java",
+            "name": "Java"
+          },
+          {
+            "_uid": "d36d2f1e-85e8-41a3-bc05-782957481ced",
+            "value": "NestJS",
+            "name": "NestJS"
+          },
+          {
+            "_uid": "54e09f90-b4f1-419c-b1e6-b85066a3ddf0",
+            "value": "MongoDB",
+            "name": "MongoDB"
+          },
+          {
+            "_uid": "dff48681-1606-416d-8e32-70fda58b74b6",
+            "value": "PostgreSQL",
+            "name": "PostgreSQL"
+          },
+          {
+            "_uid": "c709be2e-2c8a-49d0-b787-11dfc342fd82",
+            "value": "GraphQL",
+            "name": "GraphQL"
+          },
+          {
+            "_uid": "88da40fd-e8d2-4e3b-9ea1-4d9f5ff9982a",
+            "value": "Redis",
+            "name": "Redis"
+          }
+        ]
+      },
+      "tools": {
+        "type": "options",
+        "pos": 2,
+        "exclude_empty_option": true,
+        "translatable": true,
+        "id": "DKxilwRhR1mDETHo7xmFlQ",
+        "options": [
+          {
+            "_uid": "d14bafd9-d386-41a1-9b95-9c5049fd6796",
+            "name": "Git",
+            "value": "Git"
+          },
+          {
+            "_uid": "843fda86-c9ef-40c4-b89d-4b69af2293c9",
+            "value": "Docker",
+            "name": "Docker"
+          },
+          {
+            "_uid": "86cfc18d-3838-470f-a1e7-628ac300bd7c",
+            "value": "Kubernetes",
+            "name": "Kubernetes"
+          },
+          {
+            "_uid": "6156ce64-9e59-45de-86a2-edde1d560dbc",
+            "value": "Linux",
+            "name": "Linux"
+          },
+          {
+            "_uid": "718dde15-27d7-46b1-8384-310fe8c4d0bd",
+            "value": "Nginx",
+            "name": "Nginx"
+          },
+          {
+            "_uid": "91425d23-883e-409d-98f9-65cf6a5ce4b2",
+            "value": "AWS",
+            "name": "AWS"
+          },
+          {
+            "_uid": "a1935e89-253f-46fd-8614-c4e93e60d77f",
+            "value": "Azure",
+            "name": "Azure"
+          }
+        ]
+      }
+    },
+    "image": null,
+    "preview_field": null,
+    "is_root": true,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "skills",
+    "component_group_uuid": null,
+    "color": null,
+    "icon": null,
+    "internal_tags_list": [],
+    "internal_tag_ids": [],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  }
+]

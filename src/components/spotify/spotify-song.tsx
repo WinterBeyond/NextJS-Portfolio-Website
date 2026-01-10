@@ -6,16 +6,11 @@ import { MouseEvent, useCallback, useEffect, useMemo } from "react";
 
 import PauseIcon from "@/components/icons/pause-icon";
 import PlayIcon from "@/components/icons/play-icon";
-import { useSpotifySongContext } from "@/contexts/spotify-song-context";
-import { Song } from "@/entities/song";
+import { useSpotifySongContext } from "@/contexts/spotify-song-provider";
 import { cn } from "@/lib/common";
+import { Song } from "@/types/song";
 
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "../ui/tooltip";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../ui/tooltip";
 import SpotifySongSkeleton from "./spotify-song-skeleton";
 
 type SpotifySongProps = {
@@ -32,8 +27,7 @@ function formatTime(timeInSeconds: number): string {
 const listFormat = new Intl.ListFormat();
 
 export default function SpotifySong({ song, extended }: SpotifySongProps) {
-  const { songs, registerSong, currentSong, timePlayed, setCurrentSongId } =
-    useSpotifySongContext();
+  const { songs, registerSong, currentSong, timePlayed, setCurrentSongId } = useSpotifySongContext();
 
   const togglePreviewAudio = useCallback(
     (e: MouseEvent<HTMLButtonElement>) => {
@@ -61,14 +55,7 @@ export default function SpotifySong({ song, extended }: SpotifySongProps) {
         else currentSong?.state.audio?.pause();
       }
     },
-    [
-      songs,
-      currentSong?.id,
-      currentSong?.state.paused,
-      currentSong?.state.audio,
-      setCurrentSongId,
-      song,
-    ],
+    [songs, currentSong?.id, currentSong?.state.paused, currentSong?.state.audio, setCurrentSongId, song],
   );
 
   useEffect(() => {
@@ -93,20 +80,9 @@ export default function SpotifySong({ song, extended }: SpotifySongProps) {
       target="_blank"
       prefetch={false}
     >
-      <div
-        className={cn(
-          "flex items-center justify-center gap-x-5",
-          extended && "flex-col md:flex-row",
-        )}
-      >
+      <div className={cn("flex items-center justify-center gap-x-5", extended && "flex-col md:flex-row")}>
         {song.image && (
-          <Image
-            src={song.image}
-            alt={`${song.name} preview`}
-            className="rounded-xl"
-            width={60}
-            height={60}
-          />
+          <Image src={song.image} alt={`${song.name} preview`} className="rounded-xl" width={60} height={60} />
         )}
         <div
           className={cn(
@@ -116,36 +92,24 @@ export default function SpotifySong({ song, extended }: SpotifySongProps) {
           )}
         >
           <div className="flex flex-col">
-            <label className="cursor-pointer font-bold text-white group-hover/song:text-green-500">
-              {song.name}
-            </label>
-            <span className="text-sm font-semibold text-gray-200">
-              {listFormat.format(song.artists)}
-            </span>
+            <label className="cursor-pointer font-bold text-white group-hover/song:text-green-500">{song.name}</label>
+            <span className="text-sm font-semibold text-gray-200">{listFormat.format(song.artists)}</span>
           </div>
           {extended && (
             <div className="flex items-center gap-2">
-              <span className="text-gray-400">
-                {formatTime(currentSong?.state.audio?.currentTime ?? 0)}
-              </span>
-              <div
-                className="h-1 w-48 rounded-md bg-gray-200 md:w-96"
-                key={`playback-time-${song.id}`}
-              >
+              <span className="text-gray-400">{formatTime(currentSong?.state.audio?.currentTime ?? 0)}</span>
+              <div className="h-1 w-48 rounded-md bg-gray-200 md:w-96" key={`playback-time-${song.id}`}>
                 <div
                   className={cn(
                     "h-1 rounded-md bg-green-500",
-                    (timePlayed?.[song.id] ?? 0) >= 1 &&
-                      "transition-all duration-1000 ease-linear",
+                    (timePlayed?.[song.id] ?? 0) >= 1 && "transition-all duration-1000 ease-linear",
                   )}
                   style={{
                     width: `${timePlayed?.[song.id] ?? 0}%`,
                   }}
                 />
               </div>
-              <span className="text-gray-400">
-                {formatTime(currentSong?.state.audio?.duration ?? 0)}
-              </span>
+              <span className="text-gray-400">{formatTime(currentSong?.state.audio?.duration ?? 0)}</span>
             </div>
           )}
           {song.previewUrl && (
@@ -155,17 +119,13 @@ export default function SpotifySong({ song, extended }: SpotifySongProps) {
                   <button
                     className="group/audiopreview relative cursor-pointer"
                     onClick={togglePreviewAudio}
-                    aria-label={`${
-                      isPaused ? "Play Audio Preview" : "Pause Audio Preview"
-                    } for ${song.name}`}
+                    aria-label={`${isPaused ? "Play Audio Preview" : "Pause Audio Preview"} for ${song.name}`}
                   >
                     {isPaused ? <PlayIcon /> : <PauseIcon />}
                   </button>
                 </TooltipTrigger>
                 <TooltipContent>
-                  <p>
-                    {isPaused ? "Play Audio Preview" : "Pause Audio Preview"}
-                  </p>
+                  <p>{isPaused ? "Play Audio Preview" : "Pause Audio Preview"}</p>
                 </TooltipContent>
               </Tooltip>
             </TooltipProvider>

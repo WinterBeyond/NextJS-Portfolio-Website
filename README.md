@@ -1,7 +1,6 @@
 # NextJS Portfolio Website
 
 [![Test](https://github.com/WinterBeyond/NextJS-Portfolio-Website/actions/workflows/ci.yml/badge.svg)](https://github.com/WinterBeyond/NextJS-Portfolio-Website/actions/workflows/ci.yml)
-[![Deploy](https://github.com/WinterBeyond/NextJS-Portfolio-Website/actions/workflows/cd.yml/badge.svg)](https://github.com/WinterBeyond/NextJS-Portfolio-Website/actions/workflows/cd.yml)
 
 ![Website Screenshot](https://github.com/WinterBeyond/NextJS-Portfolio-Website/blob/main/public/website.png)
 

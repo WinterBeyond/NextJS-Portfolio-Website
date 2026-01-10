@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 
-import { useSpotifySongContext } from "@/contexts/spotify-song-context";
+import { useSpotifySongContext } from "@/contexts/spotify-song-provider";
 import { cn } from "@/lib/common";
 
 import SpotifySong from "./spotify-song";
@@ -12,16 +12,17 @@ export default function CurrentSpotifySong() {
   const [isInactive, setIsInactive] = useState(false);
   const { currentSong } = useSpotifySongContext();
 
-  const isPaused = useMemo(
-    () => !!currentSong?.state.paused,
-    [currentSong?.state.paused],
-  );
+  const isPaused = useMemo(() => !!currentSong?.state.paused, [currentSong?.state.paused]);
 
   useEffect(() => {
     if (!currentSong) return;
     if (!isInitial && !isPaused) {
-      setIsInitial(true);
-      setIsInactive(false);
+      const timeoutId = setTimeout(() => {
+        setIsInitial(true);
+        setIsInactive(false);
+      }, 0);
+
+      return () => clearTimeout(timeoutId);
     }
   }, [currentSong, isInitial, isPaused]);
 

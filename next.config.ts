@@ -1,29 +1,14 @@
 import { NextConfig } from "next";
 
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { clientEnv } from "@/env/client";
 import { serverEnv } from "@/env/server";
 import { sharedEnv } from "@/env/shared";
 
-/* eslint-enable @typescript-eslint/no-unused-vars */
-
-const cspHeader = `
-  default-src 'self';
-  script-src 'self' ${process.env.NODE_ENV === "development" ? "'unsafe-eval' " : ""}'unsafe-inline' static.cloudflareinsights.com;
-  connect-src 'self' cloudflareinsights.com;
-  style-src 'self' 'unsafe-inline';
-  img-src 'self' blob: data:;
-  media-src 'self' p.scdn.co;
-  font-src 'self';
-  object-src 'none';
-  base-uri 'self';
-  form-action 'self';
-  frame-ancestors 'none';
-  upgrade-insecure-requests;
-`;
-
 const nextConfig: NextConfig = {
+  cacheComponents: true,
+  output: serverEnv.DEPLOYMENT_MODE,
   images: {
+    minimumCacheTTL: 3600, // 1 hour
     remotePatterns: [
       {
         protocol: "https",
@@ -33,15 +18,25 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "https",
+        hostname: "media.valorant-api.com",
+        port: "",
+      },
+      {
+        protocol: "https",
         hostname: "raw.githubusercontent.com",
         port: "",
+      },
+      {
+        protocol: "https",
+        hostname: "a.storyblok.com",
+        pathname: "/f/289522194400323/**",
       },
     ],
   },
   logging: {
     fetches: {
       fullUrl: true,
-      hmrRefreshes: true,
+      hmrRefreshes: false,
     },
   },
   poweredByHeader: false,
@@ -68,16 +63,8 @@ const nextConfig: NextConfig = {
         source: "/:path*",
         headers: [
           {
-            key: "Content-Security-Policy",
-            value: cspHeader.replace(/\n/g, ""),
-          },
-          {
             key: "Strict-Transport-Security",
             value: "max-age=63072000; includeSubDomains; preload",
-          },
-          {
-            key: "X-Frame-Options",
-            value: "SAMEORIGIN",
           },
           {
             key: "X-Content-Type-Options",
@@ -86,16 +73,28 @@ const nextConfig: NextConfig = {
           {
             key: "Permissions-Policy",
             value:
-              "camera=(), microphone=(), geolocation=(), browsing-topics=(), fullscreen=(self)",
+              'camera=(), microphone=(), geolocation=(), browsing-topics=(), fullscreen=(self), autoplay=(self "https://youtube.com")',
           },
           {
             key: "Referrer-Policy",
             value: "strict-origin-when-cross-origin",
           },
           {
+            key: "Cross-Origin-Opener-Policy",
+            value: "same-origin",
+          },
+          {
             key: "X-DNS-Prefetch-Control",
             value: "on",
           },
+          ...(process.env.DEPLOYMENT_MODE === "standalone"
+            ? [
+                {
+                  key: "X-Accel-Buffering",
+                  value: "no",
+                },
+              ]
+            : []),
         ],
       },
     ];
