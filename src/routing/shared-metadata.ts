@@ -29,7 +29,9 @@ export async function generateSharedMetadata({
 
   const page = data.story.content;
   const { meta_title: title, meta_description: description } = page;
-  const storySlug = data.story.slug === "home" ? locale || "" : data.story.full_slug;
+  let storySlug = data.story.slug === "home" ? locale || "" : data.story.full_slug;
+
+  if (storySlug.startsWith("pages")) storySlug = storySlug.replace("pages", "");
 
   let host = "";
   if (headerData) {
