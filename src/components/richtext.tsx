@@ -1,22 +1,79 @@
 import Image from "next/image";
-import Link from "next/link";
-import { createElement, ReactElement, useId } from "react";
+import { createElement } from "react";
 
 import { cn, getDimensionsFromUrl } from "@/lib/common";
 import { StoryblokRichtext } from "@/storyblok";
-import { BlockTypes, MarkTypes, StoryblokRichText, StoryblokRichTextNode } from "@storyblok/react";
+import { asTag, ComponentBlok, storyblokEditable, StoryblokRichText } from "@storyblok/react";
 import { StoryblokServerComponent } from "@storyblok/react/rsc";
+import Heading from "@tiptap/extension-heading";
+import HorizontalRule from "@tiptap/extension-horizontal-rule";
+import ImageExtension from "@tiptap/extension-image";
+import TipTapLink from "@tiptap/extension-link";
+import { BulletList, ListItem, OrderedList } from "@tiptap/extension-list";
+import Paragraph from "@tiptap/extension-paragraph";
 
 type RichTextProps = {
-  id?: string;
   richText?: StoryblokRichtext;
+  id?: string;
+  sectionTheme?: string;
+  headingColor?: string;
   className?: string;
+  sectionLevel?: number;
+  isInGrid?: boolean;
+  headlineIndex?: number;
 };
 
-export default function RichText({ id, richText, className, ...rest }: RichTextProps) {
-  const generatedId = useId();
+type RichTextNode = {
+  type?: string;
+  text?: string;
+  attrs?: Record<string, unknown>;
+  content?: Array<RichTextNode>;
+  [key: string]: unknown;
+};
 
+function isParagraphNodeEmpty(node: RichTextNode): boolean {
+  const content = node.content ?? [];
+  if (content.length === 0) return true;
+
+  return !content.some((child) => {
+    if (child.type === "text") return (child.text ?? "").trim() !== "";
+
+    // Keep explicit soft line breaks treated as visual spacing (empty paragraph).
+    if (child.type === "hard_break") return false;
+
+    return true;
+  });
+}
+
+function markEmptyParagraphs(node: RichTextNode): RichTextNode {
+  const nextContent = node.content?.map(markEmptyParagraphs);
+  const nextNode: RichTextNode = {
+    ...node,
+    ...(nextContent ? { content: nextContent } : {}),
+  };
+
+  if (nextNode.type === "paragraph" && isParagraphNodeEmpty(nextNode))
+    nextNode.attrs = {
+      ...(nextNode.attrs ?? {}),
+      "data-empty-paragraph": "true",
+    };
+
+  return nextNode;
+}
+
+export default function RichText({
+  richText,
+  id,
+  sectionTheme,
+  className,
+  sectionLevel = 1,
+  isInGrid,
+  headlineIndex,
+  ...rest
+}: RichTextProps) {
   if (!richText) return null;
+
+  const normalizedRichText = markEmptyParagraphs(richText as RichTextNode) as StoryblokRichtext;
 
   const headingClassNameMapping: Record<number, string> = {
     1: cn("text-4xl"),
@@ -27,155 +84,153 @@ export default function RichText({ id, richText, className, ...rest }: RichTextP
     6: cn("text-base"),
   };
 
-  // Process document to merge inline components with adjacent paragraphs
-  const processDoc = (doc: any) => {
-    if (!doc?.content) return doc;
+  const CustomBlok = ComponentBlok.configure({
+    renderComponent: (renderBlok: Record<string, unknown>, nodeId?: string) =>
+      createElement(StoryblokServerComponent, {
+        blok: renderBlok as any,
+        key: `${nodeId ?? "blok"}-${(renderBlok as any)?._uid ?? "0"}`,
+      }),
+  });
 
-    const processed = { ...doc };
-    processed.content = mergeInlineComponents(doc.content);
-    return processed;
-  };
+  const CustomHeading = Heading.extend({
+    renderHTML({ node }: { node: { attrs?: { level?: number } } }) {
+      const level = node.attrs?.level ?? 1;
+      const safeLevel = Math.min(6, Math.max(1, level));
 
-  const mergeInlineComponents = (content: any[]) => {
-    const merged: any[] = [];
-    let i = 0;
+      return [
+        `h${safeLevel}`,
+        {
+          className: headingClassNameMapping[safeLevel],
+        },
+        0,
+      ];
+    },
+  });
 
-    while (i < content.length) {
-      const current = content[i];
+  const CustomImage = ImageExtension.extend({
+    renderHTML({ HTMLAttributes }: { HTMLAttributes: Record<string, string> }) {
+      const src = HTMLAttributes?.src;
+      const alt = HTMLAttributes?.alt;
+      const dimensions = getDimensionsFromUrl(src ?? "");
 
-      // If current is paragraph, look ahead for components and following paragraphs
-      if (current.type === "paragraph") {
-        const paragraphContent = [...(current.content || [])];
-        let j = i + 1;
+      return [
+        asTag(Image),
+        {
+          src,
+          alt,
+          width: dimensions?.width ?? 1600,
+          height: dimensions?.height ?? 600,
+          className: "w-max h-auto max-h-[600px] object-left object-cover my-6",
+          loading: "lazy",
+        },
+      ];
+    },
+  });
 
-        // Collect consecutive components and paragraphs
-        while (j < content.length && (content[j].type === "blok" || content[j].type === "paragraph")) {
-          if (content[j].type === "blok") {
-            // Add component as inline content
-            paragraphContent.push(content[j]);
-          } else if (content[j].type === "paragraph") {
-            // Merge paragraph content
-            paragraphContent.push(...(content[j].content || []));
-          }
-          j++;
-        }
+  const CustomListItem = ListItem.extend({
+    name: "list_item",
+    renderHTML() {
+      return [
+        "li",
+        {
+          className: "not-first:mt-3",
+        },
+        0,
+      ];
+    },
+  });
 
-        // Create merged paragraph
-        merged.push({
-          ...current,
-          content: paragraphContent,
-        });
+  const CustomOrderedList = OrderedList.extend({
+    name: "ordered_list",
+    renderHTML() {
+      return [
+        "ol",
+        {
+          className: "list-decimal list-inside ml-2",
+        },
+        0,
+      ];
+    },
+  });
 
-        i = j;
-      } else {
-        merged.push(current);
-        i++;
+  const CustomBulletList = BulletList.extend({
+    name: "bullet_list",
+    renderHTML() {
+      return [
+        "ul",
+        {
+          className: "list-disc list-inside ml-2",
+        },
+        0,
+      ];
+    },
+  });
+
+  const CustomHorizontalRule = HorizontalRule.extend({
+    name: "horizontal_rule",
+    renderHTML() {
+      return [
+        "hr",
+        {
+          className: cn("my-0.5 border border-black"),
+        },
+      ];
+    },
+  });
+
+  const CustomParagraph = Paragraph.extend({
+    name: "paragraph",
+    renderHTML({ HTMLAttributes }: { HTMLAttributes: Record<string, unknown> }) {
+      const isEmpty = HTMLAttributes["data-empty-paragraph"] === "true";
+
+      // Preserve editor-intended spacing for empty paragraphs by rendering a line break.
+      if (isEmpty) return ["br"];
+
+      return ["p", {}, 0];
+    },
+  });
+
+  const CustomLink = TipTapLink.extend({
+    name: "link",
+    renderHTML({ HTMLAttributes }: { HTMLAttributes: Record<string, string> }) {
+      let href = HTMLAttributes?.linktype === "email" ? `mailto:${HTMLAttributes?.href}` : HTMLAttributes?.href;
+
+      if (href && !href.startsWith("http") && !href.startsWith("/") && HTMLAttributes?.linktype !== "email") {
+        href = `/${href}`;
       }
-    }
 
-    return merged;
+      return [
+        "a",
+        {
+          href,
+          target: HTMLAttributes?.target,
+          className: "border-inherit border-b-1 hover:border-b-2 transition-colors ease-linear duration-150",
+        },
+        0,
+      ];
+    },
+  });
+
+  const tiptapExtensions = {
+    blok: CustomBlok,
+    heading: CustomHeading,
+    image: CustomImage,
+    list_item: CustomListItem,
+    ordered_list: CustomOrderedList,
+    bullet_list: CustomBulletList,
+    horizontal_rule: CustomHorizontalRule,
+    paragraph: CustomParagraph,
+    link: CustomLink,
   };
 
   return (
-    <div id={id} className={cn("relative text-base richtext", className)} {...rest}>
-      <StoryblokRichText
-        doc={processDoc(richText) as any}
-        resolvers={{
-          [BlockTypes.COMPONENT]: (node) => {
-            const body = node?.attrs?.body;
-            const blok = Array.isArray(body) ? body[0] : undefined;
-            return <StoryblokServerComponent key={`${generatedId}-${blok?._uid}`} blok={blok} />;
-          },
-          [BlockTypes.HEADING]: (node: StoryblokRichTextNode<any>) => {
-            const level = node.attrs?.level ?? 0;
-            const child = (node.children as unknown as Array<ReactElement>)[0];
-
-            return createElement(
-              `h${level}`,
-              {
-                key: child.key,
-                className: headingClassNameMapping[level],
-              },
-              node.children,
-            );
-          },
-          [BlockTypes.PARAGRAPH]: (node: StoryblokRichTextNode<any>) => {
-            if (!node.children) return <br key={`${generatedId}-${Math.random()}`} />;
-
-            return (
-              <p
-                key={
-                  node.children[0]?.key ? `${generatedId}-${node.children[0]?.key}` : `${generatedId}-${Math.random()}`
-                }
-              >
-                {node.children}
-              </p>
-            );
-          },
-          [BlockTypes.IMAGE]: (node: StoryblokRichTextNode<ReactElement>) => {
-            const src = node.attrs?.src;
-            const alt = node.attrs?.alt;
-
-            const dimensions = getDimensionsFromUrl(src ?? "");
-
-            return (
-              <Image
-                src={src}
-                alt={alt}
-                width={dimensions?.width ?? 1600}
-                height={dimensions?.height ?? 600}
-                className="w-max h-auto max-h-150 object-left object-cover my-6"
-                loading="lazy"
-              />
-            );
-          },
-          [BlockTypes.LIST_ITEM]: (node: StoryblokRichTextNode<ReactElement>) => {
-            const key = (node.children as unknown as Array<ReactElement>)[0].key;
-            return (
-              <li key={key} className="not-first:mt-3">
-                {node.children}
-              </li>
-            );
-          },
-          [BlockTypes.OL_LIST]: (node: StoryblokRichTextNode<ReactElement>) => {
-            const child = (node.children as unknown as Array<ReactElement>)[0];
-            return (
-              <ol key={child.key} className="list-decimal list-inside ml-2">
-                {node.children}
-              </ol>
-            );
-          },
-          [BlockTypes.UL_LIST]: (node: StoryblokRichTextNode<ReactElement>) => {
-            const child = (node.children as unknown as Array<ReactElement>)[0];
-            return (
-              <ul key={child.key} className="list-disc list-inside ml-2">
-                {node.children}
-              </ul>
-            );
-          },
-          [BlockTypes.HR]: () => {
-            return <hr className={cn("my-0.5 border border-black")} />;
-          },
-          [MarkTypes.LINK]: (node: StoryblokRichTextNode<ReactElement>) => {
-            let href = node.attrs?.linktype === "email" ? `mailto:${node.attrs?.href}` : node.attrs?.href;
-            const target = node.attrs?.target;
-
-            if (!href.startsWith("http") && !href.startsWith("/") && node.attrs?.linktype !== "email")
-              href = `/${href}`;
-
-            return (
-              <Link
-                key={href}
-                href={href}
-                target={target}
-                className={cn("border-inherit border-b hover:border-b-2 transition-colors ease-linear duration-150")}
-              >
-                {(node as any).text.props.children}
-              </Link>
-            );
-          },
-        }}
-      />
+    <div
+      id={id}
+      className={cn("relative text-base richtext", (rest as any)["data-observe-visibility"] && "opacity-0", className)}
+      data-visibility-translate
+      {...rest}
+    >
+      <StoryblokRichText doc={normalizedRichText as any} tiptapExtensions={tiptapExtensions} />
     </div>
   );
 }
